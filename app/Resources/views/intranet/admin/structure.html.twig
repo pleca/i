@@ -1,0 +1,65 @@
+{% extends 'intranet/admin/admin.html.twig' %}
+{% block adminBlock %}
+    <div class="row">
+        <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / <a href="{{ path('Admin') }}">Admin</a> / {{ app.request.get('_route') }}</span></div>
+        <div class="col-sm-12">
+            {% include ('::flash-messages.html.twig') %}
+        </div>
+    </div>
+    {% if userType == 'ROLE_ADMIN' %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="text-right">
+                    <button class="btn btn-success addNews" id="addNews"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj</button>
+                </div>
+                <hr />
+            </div>
+        </div>
+    {% endif %}
+    <div class="form-group add-div hide">
+    {{ form_start(form) }}
+    {{ form_row(form.departmentName) }}
+    {{ form_end(form) }}
+
+    <div class="text-right cancel-div">
+        <button class="btn btn-danger cancelNews" id="cancelNews"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</button>
+    </div>
+
+    </div>
+    {% for el in departments %}
+        <div class="col-sm-12 structure">
+            <div class="structure-div text-left admin-text">
+                <a href="structure/{{ el.departmentName }}">
+                    <div class="admin-title col-sm-8">
+                        <h3>{{ el.departmentName }}</h3>
+                    </div>
+                </a>
+                {% if userType == 'ROLE_ADMIN' %}
+                    <div class="col-sm-4 text-right">
+                    <a href="department/edit/{{ el.departmentName }}" class="btn btn-info"><i class="fa fa-pencil" id="editDepartment" aria-hidden="true"></i> Edytuj</a>
+                    <button class="btn btn-danger deleteStructure" id="{{ el.departmentId }}"><i class="fa fa-close" aria-hidden="true"></i> Usuń</button>
+                    <div class="confirmation text-center">
+                        <h3>Uwaga!</h3>
+                        <hr />
+                        <p>Czy na pewno chcesz usunąć ten element?</p>
+                        <a href="#" class="btn btn-success delete"><i class="fa fa-check" aria-hidden="true"></i> Tak</a>
+                        <a class="btn btn-danger cancel" ><i class="fa fa-close" aria-hidden="true"></i> Anuluj</a>
+                    </div>
+                    <script>
+                        $( document ).ready(function() {
+                            $('#{{ el.departmentId }}').on('click', function () {
+                                var path = "{{ path('deleteDepartment', {'departmentId': el.departmentId })|raw}}";
+                                $('.confirmation').css('display', 'block');
+                                $('.confirmation > .delete').attr('href', path);
+                                $('.cancel').click(function () {
+                                    $('.confirmation').css('display', 'none');
+                                });
+                            });
+                        });
+                    </script>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+{% endblock %}

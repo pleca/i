@@ -1,0 +1,242 @@
+{% extends 'intranet/base.html.twig' %}
+
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}"/>
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
+    <div class="well well-sm"><span class="path"><a
+                    href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+
+    <section class="home_events">
+        <h2>Kalendarz wydarzeń</h2>
+        <div id="scheduler"></div>
+    </section>
+
+
+    <script>
+        kendo.culture("pl-PL");
+        $(function () {
+            $("#scheduler").kendoScheduler({
+                date: new Date(),
+                views: [
+                    "day", {type: "workWeek"},
+                    "week", {type: "week"},
+                    "month", {type: "month", selected: true}
+                ],
+
+                {% if is_granted('ROLE_ADMIN') %}
+                editable: {
+                    confirmation: true,
+                    create: true,
+                    destroy: true,
+                    move: true,
+                    resize: true,
+                    template: $("#customEditorTemplate").html()
+                    {% else %}
+                    editable: {
+                        confirmation: false,
+                        create: false,
+                        destroy: false,
+                        move: false,
+                        resize: false,
+                        template: $("#userEditorTemplate").html()
+                        {% endif %}
+                    },
+                    dataSource: {
+                        batch: true,
+                        transport: {
+                            read: {
+                                url: "{{ path('geteventss') }}",
+                                type: "post",
+                                dataType: "json"
+                            },
+                            {% if is_granted('ROLE_ADMIN') %}
+                            update: {
+                                url: "{{ path('eventsupdate') }}",
+                                type: "post",
+                                dataType: "json"
+                            },
+                            create: {
+                                url: "{{ path('eventsadd') }}",
+                                type: "post",
+                                dataType: "json"
+                            },
+                            destroy: {
+                                url: "{{ path('eventsdelete') }}",
+                                type: "post",
+                                dataType: "json"
+                            },
+                            {% endif %}
+                            parameterMap: function (options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        }
+                    },
+                    {% if is_granted('ROLE_ADMIN') %}
+
+                    {% else %}
+                    edit: function (e) {
+                        var buttonsContainer = e.container.find(".k-edit-buttons");
+                        var cancelButton = buttonsContainer.find(".k-button");
+                        cancelButton.hide();
+                    },
+                    {% endif %}
+                    schema: {
+                        timezone: "Europe/Warsaw",
+                        model: {
+                            id: "id",
+                            fields: {
+                                id: {from: "id", type: "number"},
+                                title: {
+                                    type: "string",
+                                    from: "title",
+                                    defaultValue: "No title",
+                                    validation: {required: true}
+                                },
+                                start: {type: "date", from: "start"},
+                                end: {type: "date", from: "end"},
+                                status: {type: "number", from: "status"},
+                                description: {type: "string", from: "description"},
+                                user: {type: "number", from: "user"},
+                                isAllDay: {type: "boolean", from: "allday"}
+                            }
+                        }
+                    },
+
+                    resources: [
+                        {
+                            field: "status",
+                            title: "Kolor",
+                            dataSource: [
+                                {
+                                    text: "Pomarańcz",
+                                    value: 1,
+                                    color: "#ff7d04"
+                                },
+                                {
+                                    text: "Niebieski",
+                                    value: 2,
+                                    color: "#3087c4"
+                                },
+                                {
+                                    text: "Czerwony",
+                                    value: 3,
+                                    color: "#c4282f"
+                                },
+                                {
+                                    text: "Zielony",
+                                    value: 4,
+                                    color: "#29c43a"
+                                },
+                                {
+                                    text: "Zółty",
+                                    value: 5,
+                                    color: "#ebea03"
+                                },
+                                {
+                                    text: "Fiolet",
+                                    value: 6,
+                                    color: "#9328eb"
+                                }
+                            ]
+                        }
+                    ],
+                    "messages": {
+                        "today": "Dziś",
+                        "save": "Zapisz",
+                        "cancel": "Anuluj",
+                        "views": {
+                            "day": "Dzień",
+                            "week": "Tydzień",
+                            "month": "Miesiąc",
+                            "workWeek": "Tydzień Roboczy"
+                        },
+                        "editor": {
+                            "editorTitle": "Urlop"
+                        }
+                    }
+                });
+        });
+    </script>
+
+
+    <script id="customEditorTemplate" type="text/x-kendo-template">
+        <div class="k-edit-label"><label for="title">Tytuł</label></div>
+        <div data-container-for="title" class="k-edit-field">
+            <input type="text" class="k-input k-textbox" name="title" data-bind="value:title">
+        </div>
+        <div class="k-edit-label">
+            <label for="start">Data od: </label>
+        </div>
+        <div data-container-for="start" class="k-edit-field">
+            <input type="text"
+                   data-role="datetimepicker"
+                   data-interval="15"
+                   data-type="date"
+                   data-bind="value:start,invisible:allday"
+                   name="start"/>
+            <input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:allday"
+                   name="start"/>
+            <span data-bind="text: startTimezone"></span>
+            <span data-for="start" class="k-invalid-msg" style="display: none;"></span>
+        </div>
+        <div class="k-edit-label"><label for="end">Data do: </label></div>
+        <div data-container-for="end" class="k-edit-field">
+            <input type="text" data-type="date" data-role="datetimepicker" data-bind="value:end,invisible:allday"
+                   name="end" data-datecompare-msg="End date should be greater than or equal to the start date"/>
+            <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:allday" name="end"
+                   data-datecompare-msg="End date should be greater than or equal to the start date"/>
+            <span data-bind="text: endTimezone"></span>
+            <span data-bind="text: startTimezone, invisible: endTimezone"></span>
+            <span data-for="end" class="k-invalid-msg" style="display: none;"></span>
+        </div>
+        <div class="k-edit-label"><label for="allday">Cay dzień</label></div>
+        <div data-container-for="allday" class="k-edit-field">
+            <input type="checkbox" name="allday" data-type="boolean" data-bind="checked:allday">
+        </div>
+        <div class="k-edit-label"><label for="description"></label></div>
+        <div data-container-for="description" class="k-edit-field">
+            <textarea name="description" class="k-textbox" data-bind="value:description"></textarea>
+        </div>
+
+
+        <div class="k-edit-label"><label for="status">Kolor</label></div>
+        <div data-container-for="status" class="k-edit-field">
+            <select id="status" data-bind="value:status" data-role="dropdownlist"
+                    data-value-field="value" data-text-field="text">
+                <option value="1">Pomarańcz</option>
+                <option value="2">Niebieski</option>
+                <option value="3">Czerwony</option>
+                <option value="4">Zielony</option>
+                <option value="5">Żólty</option>
+                <option value="6">Fiolet</option>
+            </select>
+        </div>
+    </script>
+
+
+
+
+
+
+
+
+
+    <script id="userEditorTemplate" type="text/x-kendo-template">
+        <div style="padding: 20px;">#=description#</div>
+    </script>
+
+
+
+{% endblock %}

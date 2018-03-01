@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraDepartment" table="intra_department">
+    <id name="departmentId" type="integer" column="department_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="departmentName" type="string" column="department_name" length="127" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="departmentDirectorUid" type="integer" column="department_director_uid" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="departmentStatus" type="boolean" column="department_status" nullable="false"/>
+  </entity>
+</doctrine-mapping>

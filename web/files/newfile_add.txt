@@ -1,0 +1,17 @@
+Array
+(
+    [0] => Array
+        (
+            [id] => 0
+            [title] => 
+            [start] => 2017-10-01T22:00:00.000Z
+            [startTimezone] => 
+            [end] => 2017-10-25T22:00:00.000Z
+            [endTimezone] => 
+            [recurrenceRule] => 
+            [recurrenceException] => 
+            [isAllDay] => 1
+            [description] => 
+        )
+
+)

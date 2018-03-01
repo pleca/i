@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraAlbum" table="intra_album">
+    <id name="albumId" type="integer" column="album_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="albumName" type="string" column="album_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="albumDesc" type="string" column="album_desc" length="1023" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="albumImage" type="string" column="album_image" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="albumDateAdd" type="datetime" column="album_date_add" nullable="false"/>
+    <field name="albumDateMod" type="datetime" column="album_date_mod" nullable="false"/>
+    <field name="albumCreatorId" type="integer" column="album_creator_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="albumModId" type="integer" column="album_mod_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,38 @@
+{% extends 'intranet/admin/admin.html.twig' %}
+{% block adminBlock %}
+
+    {#<?php#}
+    {#require_once('controllers/singleNewsController.php');#}
+    {#$array = getSingleNews($id, $db_user, $db_password);#}
+    {#?>#}
+    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / <a href="{{ path('Admin') }}">Admin</a> / <a href="{{ path('Struktura') }}">Struktura</a> / <a href="{{ path('Departament',{'departmentName': parent})}}">{{ parent }}</a> / {{ division.divisionName }}(edycja)</span></div>
+    <div class="row text-center news-row">
+        <div class="col-xs-12">
+            <div class="news-title">
+                <h1>{{ division.divisionName }}</h1>
+            </div>
+        </div>
+    </div>
+    <div class="form-group edit-div">
+        <form id="edit_division_form" role="form" action="{{ path('edytuj dział', {'divisionName': division.divisionName })|raw }}" method="post">`
+            <div class="panel-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="name" class="control-label">Nazwa</label>
+                        <input type="text" class="form-control" id="name" name="division" placeholder="Nazwa działu" value="{{ division.divisionName }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="department" class="control-label">Departament</label>
+                        <select name="department" class="form-control" id="department">
+                            <option value="{{ parent }}" selected >{{ parent }}</option>
+                        {% for el in departments %}
+                            <option value="{{ el.departmentId }}">{{ el.departmentName }}</option>
+                        {% endfor %}
+                        </select>
+                    </div>
+                </fieldset>
+            </div>
+            <div class=" clearfix text-center"><button type="submit" class="btn btn-default">Zapisz</button></div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends 'intranet/base.html.twig' %}
+
+
+{% block body %}
+
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}"/>
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
+    <div class="well well-sm"><span class="path"><a
+                    href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+
+    <section class="home_events">
+        <h2>Urlopy</h2><hr>
+        <section class="urlopy_header">
+            <div class="urlopy_block">
+            <h4>Urlop planowany</h4>
+            Przyznany urlop: <span id="vfull">#</span>, wykorzystany: <span id="vused">#</span>,
+            pozostało: <span id="vrem">#</span>
+                </div>
+            <div class="urlopy_block">
+            <h4>Urlop zatwierdzony</h4>
+            Przyznany urlop: <span id="vfull">{{ vfull }}</span>, wykorzystany: <span id="vused">{{ vused }}</span>,
+            pozostało: <span id="vrem">{{ vrem }}</span>
+            </div><div class="clearfix"></div>
+        </section>
+        <div id="scheduler"></div>
+    </section>
+
+
+    <script>
+        kendo.culture("pl-PL");
+        $(function () {
+            $("#scheduler").kendoScheduler({
+                date: new Date(),
+                views: [
+                    "day", {type: "workWeek"},
+                    "week", {type: "week"},
+                    "month", {type: "month", selected: true}
+                ],
+                editable: {
+                    confirmation: true,
+                    create: true,
+                    destroy: false,
+                    move: true,
+                    resize: true,
+                    template: $("#customEditorTemplate").html()
+                },
+                dataSource: {
+                    batch: true,
+                    transport: {
+                        read: {
+                            url: "{{ path('vacation_get_data') }}",
+                            type: "post",
+                            dataType: "json"
+                        },
+                        update: {
+                            url: "{{ path('vacation_update') }}",
+                            type: "post",
+                            dataType: "json"
+                        },
+                        create: {
+                            url: "{{ path('vacation_add') }}",
+                            type: "post",
+                            dataType: "json"
+                        },
+                        destroy: {
+                            url: "{{ path('eventsdelete') }}",
+                            type: "post",
+                            dataType: "json"
+                        },
+                        parameterMap: function (options, operation) {
+                            if (operation !== "read" && options.models) {
+                               return {models: kendo.stringify(options.models)};
+                            }
+                            // vupdate();
+
+                        }
+                    }
+            {% if vcheck %}
+                    ,
+                    error: function (e) {
+                       yalert("" + e.errors.join(" "));
+                        var scheduler = $("#scheduler").data("kendoScheduler");
+                        scheduler.dataSource.read();
+                        scheduler.view(scheduler.view().name)
+
+                    }
+            {% endif %}
+
+                },
+                dataBound: function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: "{{ path('UrlopyUser') }}",
+                        data: {get_param: 'value'},
+                        success: function (data) {
+                            a = JSON.parse(data);
+                                $("#vfull").html(a["vfull"]);
+                                $("#vused").html(a["vused"]);
+                                $("#vrem").html(a["vrem"]);
+                        }
+                    });
+                },
+                schema: {
+                    model: {
+                        id: "id",
+                        fields: {
+                            id: {from: "id", type: "number", editable: false, nullable: true},
+                            title: {from: "title", defaultValue: "No title"},
+                            start: {type: "date", from: "start"},
+                            end: {type: "date", from: "end"},
+                            status: {type: "number", from: "status", defaultValue: "1"},
+                            description: {type: "string", from: "description"},
+                            user: {type: "number", from: "user"},
+                            isAllDay: {type: "number", from: "allday"}
+                        }
+                    }
+                },
+                resources: [
+                    {
+                        field: "status",
+                        title: "Akceptacja",
+                        dataSource: [
+                            {
+                                text: "---",
+                                value: 0,
+                                color: "#ececec"
+                            },
+                            {
+                                text: "Tak",
+                                value: 1,
+                                color: "#5bff44"
+                            },
+                            {
+                                text: "Nie",
+                                value: 2,
+                                color: "#ec1739"
+                            }
+                        ]
+                    }
+                ],
+                "messages": {
+                    "today": "Dziś",
+                    "save": "Zapisz",
+                    "cancel": "Anuluj",
+                    "views": {
+                        "day": "Dzień",
+                        "week": "Tydzień",
+                        "month": "Miesiąc",
+                        "workWeek": "Tydzień Roboczy"
+                    },
+                    "editor": {
+                        "editorTitle": "Urlop"
+                    }
+                }
+            });
+        });
+
+        function yalert(content) {
+            $("<div></div>").kendoAlert({
+                title: "Błąd",
+                content: content
+            }).data("kendoAlert").open();
+        }
+
+        // function vupdate() {
+
+        // }
+
+    </script>
+
+
+
+
+
+
+    <script id="customEditorTemplate" type="text/x-kendo-template">
+        <div class="k-edit-label">
+            <label for="start">Data od: </label>
+        </div>
+        <div data-container-for="start" class="k-edit-field">
+            <input type="text"
+                   data-role="datepicker"
+                   data-interval="15"
+                   data-type="date"
+                   data-bind="value:start,invisible:allday"
+                   name="start"/>
+            <input type="text" data-type="date" data-role="datepicker" data-bind="value:start,visible:allday"
+                   name="start"/>
+            <span data-bind="text: startTimezone"></span>
+            <span data-for="start" class="k-invalid-msg" style="display: none;"></span>
+        </div>
+        <div class="k-edit-label"><label for="end">Data do: </label></div>
+        <div data-container-for="end" class="k-edit-field">
+            <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,invisible:allday"
+                   name="end" data-datecompare-msg="End date should be greater than or equal to the start date"/>
+            <input type="text" data-type="date" data-role="datepicker" data-bind="value:end,visible:allday" name="end"
+                   data-datecompare-msg="End date should be greater than or equal to the start date"/>
+            <span data-bind="text: endTimezone"></span>
+            <span data-bind="text: startTimezone, invisible: endTimezone"></span>
+            <span data-for="end" class="k-invalid-msg" style="display: none;"></span>
+        </div>
+        <div class="k-edit-label"><label for="description">Uwagi</label></div>
+        <div data-container-for="description" class="k-edit-field">
+            <textarea name="description" class="k-textbox" data-bind="value:description"></textarea>
+        </div>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="k-edit-label"><label for="status">Akceptacja</label></div>
+            <div data-container-for="status" class="k-edit-field">
+                <select id="status" data-bind="value:status" data-role="dropdownlist"
+                        data-value-field="value" data-text-field="text">
+                    <option value="0">----</option>
+                    <option value="1">Tak</option>
+                    <option value="2">Nie</option>
+                </select>
+            </div>
+        {% endif %}
+
+        <div class="k-edit-label"><label for="type">Rodzaj urlopu</label></div>
+        <div data-container-for="type" class="k-edit-field">
+
+
+            <select id="type" multiple="multiple" name="type"
+                    data-role="dropdownlist"
+                    data-val="true"
+                    data-bind="value:type"
+                    data-source='[{"text":"Płatny","value":1,"selected":true},{"text":"Bezpłatny","value":2}]'
+                    data-text-field="text"
+                    data-value-field="value"
+                    data-value-primitive="true"
+            ></select>
+
+
+        </div>
+
+        <div class="k-edit-label"><a href="{{ path('gen_pdfs') }}/#= id #" target="_blank">Generuj wniosek</a></div>
+
+    </script>
+
+{% endblock %}

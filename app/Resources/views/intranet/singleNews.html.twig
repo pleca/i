@@ -1,0 +1,24 @@
+{% extends 'intranet/base.html.twig' %}
+
+{#<?php#}
+{#require_once('controllers/singleNewsController.php');#}
+{#$array = getSingleNews($id, $db_user, $db_password);#}
+{#?>#}
+{%  block body %}
+    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> <a href="{{ path('Aktualności') }}">/ Aktualności</a> / {{ news.newsTitle }}</span></div>
+    <div class="row text-center news-row">
+        <div class="col-xs-12">
+            <div class="news-title">
+                <h1>{{ news.newsTitle }}</h1>
+            </div>
+            <div class="col-sm-12 news-content">
+                <figure>
+                    <img src="{{ asset(imagepath ~ news.newsImage) }}" alt="Example"/>
+                </figure>
+                <div>
+                    {{ news.newsText | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

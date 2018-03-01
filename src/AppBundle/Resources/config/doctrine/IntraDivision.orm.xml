@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraDivision" table="intra_division">
+    <id name="divisionId" type="integer" column="division_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="divisionName" type="string" column="division_name" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="divisionStatus" type="boolean" column="division_status" nullable="false"/>
+  </entity>
+</doctrine-mapping>

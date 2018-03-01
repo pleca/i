@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraGallery" table="intra_gallery">
+    <id name="galleryId" type="integer" column="gallery_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="albumId" type="integer" column="album_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="galleryImages" type="string" column="gallery_images" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="galleryDateAdd" type="datetime" column="gallery_date_add" nullable="false"/>
+    <field name="galleryDateMod" type="datetime" column="gallery_date_mod" nullable="false"/>
+    <field name="galleryCreatorId" type="integer" column="gallery_creator_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="galleryModId" type="integer" column="gallery_mod_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,79 @@
+{% extends 'intranet/base.html.twig' %}
+
+{#<?php#}
+{#require_once('controllers/singleNewsController.php');#}
+{#$array = getSingleNews($id, $db_user, $db_password);#}
+{#?>#}
+{%  block body %}
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}" />
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
+    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> <a href="{{ path('Aktualności') }}">/ Aktualności</a> / {{ news.newsTitle }} (edycja)</span></div>
+    <div class="row text-center news-row">
+        <div class="col-xs-12">
+            <div class="news-title">
+                <h1>{{ news.newsTitle }}</h1>
+            </div>
+            <div class="col-sm-12 news-content">
+                <figure>
+                    <img src="{{ asset(imagepath ~ news.newsImage) }}" alt="Example"/>
+                </figure>
+                <div>
+                    {{ news.newsText | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group add-div">
+        {{ form_start(form) }}
+        {{ form_row(form.newsTitle) }}
+        {{ form_row(form.newsShortText) }}
+        {{ form_row(form.newsText) | raw }}
+        {{ form_row(form.newsImage) }}
+        {{ form_end(form) }}
+
+        <script>
+            $("#edit_news_newsText").kendoEditor({
+                tools: [
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strikethrough",
+                    "justifyLeft",
+                    "justifyCenter",
+                    "justifyRight",
+                    "justifyFull",
+                    "insertUnorderedList",
+                    "insertOrderedList",
+                    "indent",
+                    "outdent",
+                    "createLink",
+                    "unlink",
+                    "insertImage",
+                    "subscript",
+                    "superscript",
+                    "addRowAbove",
+                    "addRowBelow",
+                    "addColumnLeft",
+                    "addColumnRight",
+                    "deleteRow",
+                    "deleteColumn",
+                    "viewHtml",
+                    "formatting",
+                    "cleanFormatting",
+                    "fontSize",
+                    "foreColor"
+                ],
+                encoded: false
+            });
+        </script>
+        {#<div class="text-right cancel-div">#}
+            {#<button class="btn btn-danger cancelNews" id="cancelNews"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</button>#}
+        {#</div>#}
+    </div>
+{% endblock %}

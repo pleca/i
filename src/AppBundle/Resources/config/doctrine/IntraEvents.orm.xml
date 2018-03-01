@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraEvents" table="intra_events">
+    <id name="newsId" type="integer" column="news_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="newsDateAdd" type="datetime" column="news_date_add" nullable="false"/>
+    <field name="newsDateMod" type="datetime" column="news_date_mod" nullable="false"/>
+    <field name="newsUrl" type="string" column="news_url" length="127" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsTitle" type="string" column="news_title" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsCreatorId" type="integer" column="news_creator_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="newsUserId" type="integer" column="news_user_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="newsText" type="text" column="news_text" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsShortText" type="string" column="news_short_text" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsImage" type="string" column="news_image" length="127" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="newsStart" type="datetime" column="news_start" nullable="false"/>
+    <field name="newsEnd" type="datetime" column="news_end" nullable="false"/>
+    <field name="newsType" type="boolean" column="news_type" nullable="false">
+      <options>
+        <option name="comment">1-news, 2-wydarzenie, 3-urlop</option>
+        <option name="default">1</option>
+      </options>
+    </field>
+    <field name="newsStatus" type="smallint" column="news_status" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="newsVacationType" type="integer" column="news_vacation_type" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="newsAllday" type="boolean" column="news_allday" nullable="true">
+      <options>
+        <option name="default">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

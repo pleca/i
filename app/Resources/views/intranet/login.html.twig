@@ -1,0 +1,38 @@
+{% extends 'intranet/base.html.twig' %}
+
+{#<?php#}
+{#require_once('controllers/singleNewsController.php');#}
+{#$array = getSingleNews($id, $db_user, $db_password);#}
+{#?>#}
+{%  block body %}
+    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+    <div class="row text-center">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3>Zaloguj się</h3>
+                </div>
+                <div class="panel-body">
+                    {% if errors %}
+                        <div class="alert alert-danger">
+                           {{ errors.messageKey }}
+                        </div>
+                    {% endif %}
+                    <form action="{{ path('login') }}" method="post">
+                        <div class="form-group">
+                            <label for="username">Nazwa użytkownika:</label>
+                            <input type="text" name="_username" id="username" class="form-control" value="{{ lastusername }}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Hasło:</label>
+                            <input type="password" name="_password" id="password" class="form-control" />
+                        </div>
+                        <button class="btn btn-info pull-right">Zaloguj</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'intranet/base.html.twig' %}
+
+{#<?php#}
+{#require_once('controllers/singleNewsController.php');#}
+{#$array = getSingleNews($id, $db_user, $db_password);#}
+{#?>#}
+{%  block body %}
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}" />
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
+    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> <a href="{{ path('Galeria') }}">/ Galeria</a> / {{ album.albumName }} (edycja)</span></div>
+    <div class="row text-center news-row">
+        <div class="col-xs-12">
+            <div class="news-title">
+                <h1>{{ album.albumName }}</h1>
+            </div>
+            <div class="col-sm-12 news-content">
+                <figure>
+                    <img src="{{ asset(imagepath ~ album.albumImage) }}" alt="Example"/>
+                </figure>
+                <div>
+                    {{ album.albumDesc |convert_encoding('UTF-8', 'HTML-ENTITIES') | raw }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group edit-div">
+        {{ form_start(editForm) }}
+        {{ form_row(editForm.albumName) }}
+        {{ form_row(editForm.albumDesc) }}
+        {{ form_row(editForm.albumImage) }}
+        {{ form_end(editForm) }}
+    </div>
+{% endblock %}

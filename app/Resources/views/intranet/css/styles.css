@@ -1,0 +1,7 @@
+.gallery-image{
+    float:left;
+    max-width: 100px
+}
+.gallery-image img{
+    width: 100%;
+}

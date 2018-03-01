@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="AppBundle\Entity\IntraDocuments" table="intra_documents">
+    <id name="documentId" type="integer" column="document_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="documentFile" type="string" column="document_file" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="documentFileTitle" type="string" column="document_file_title" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="documentDateAdd" type="datetime" column="document_date_add" nullable="false"/>
+    <field name="documentDateMod" type="datetime" column="document_date_mod" nullable="false"/>
+    <field name="documentType" type="string" column="document_type" length="127" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="documentDesc" type="text" column="document_desc" length="65535" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="documentCreatorId" type="integer" column="document_creator_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+    <field name="documentUserId" type="integer" column="document_user_id" nullable="false">
+      <options>
+        <option name="unsigned">1</option>
+      </options>
+    </field>
+  </entity>
+</doctrine-mapping>

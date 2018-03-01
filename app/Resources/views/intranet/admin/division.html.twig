@@ -1,0 +1,146 @@
+{% extends 'intranet/admin/admin.html.twig' %}
+{% block adminBlock %}
+    <div class="row">
+        <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / <a href="{{ path('Admin') }}">Admin</a> / <a href="{{ path('Struktura') }}">Struktura</a> / <a href="{{ path('Departament',{'departmentName': departmentName})}}">{{ departmentName }}</a> / {{ divisionName }}</span></div>
+        <div class="col-sm-12">
+            {% include ('::flash-messages.html.twig') %}
+        </div>
+    </div>
+    <div class="row">
+        {% if userType == 'ROLE_ADMIN' %}
+            <div class="row">
+                <div class="col-xs-12 admin-text">
+                    <div class="col-xs-6 text-left">
+                        <button class="btn btn-success addNews" id="addNews"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj stanowisko</button>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        {% endif %}
+        <div class="form-group add-div hide">
+            <form id="add_position_form" role="form" action="{{ path('dodaj stanowisko', {'divisionId': divisionId, 'divisionName': divisionName, 'departmentName': departmentName }) }}" method="post">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Nazwa stanowiska</label>
+                            <input type="text" class="form-control" id="name" name="position" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-xs-6 text-right">
+                            <div class=" clearfix"><button type="submit" class="btn btn-default">Dodaj</button></div>
+                        </div>
+                        <div class="text-left col-xs-6">
+                            <button class="btn btn-danger cancelNews" id="cancelNews"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="example">
+        <div id="grid"></div>
+
+        <script>
+            $(document).ready(function () {
+                var crudServiceBaseUrl = "https://demos.telerik.com/kendo-ui/service",
+                    dataSource = new kendo.data.DataSource({
+                        autoSync: true,
+                        transport: {
+                            read:  {
+                                url: "{{ path('getDivisionUsers',{'divisionName': divisionName}) }}",
+                                dataType: "json",
+                                cache: false
+                            },
+                            update: {
+                                url: "{{ path('updateDivisionUsers',{'divisionName': divisionName}) }}",
+                                dataType: "json",
+                                cache: false
+                            },
+                            destroy: {
+                                url: "{{ path('deleteDivisionUsers') }}",
+                                dataType: "json"
+                            },
+                            create: {
+                                url: "{{ path('addDivisionUsers',{'divisionName': divisionName}) }}",
+                                dataType: "jsonp"
+                            },
+                            parameterMap: function(options, operation) {
+                                if (operation !== "read" && options.models) {
+                                    return {models: kendo.stringify(options.models)};
+                                }
+                            }
+                        },
+                        batch: true,
+                        pageSize: 20,
+                        schema: {
+                            errors: function(response) {
+                                return response.error;
+                            },
+                            model: {
+                                id: "id",
+                                fields: {
+                                    userId: { editable: false  , nullable: true },
+                                    positionName: { validation: { required: true } },
+                                    Nazwisko: { validation: { required: true } },
+                                    Imie: { validation: { required: true } }
+                                }
+                            }
+                        },
+                        error: function(e) {
+                            console.log(e.errors);
+                        }
+                    });
+
+
+                $("#grid").kendoGrid({
+                    dataSource: dataSource,
+
+                    pageable: true,
+                    height: 550,
+                    columns: [
+                        "Nazwisko",
+                        { field: "Imie", title: "Imie", width: "180px"},
+                        { field: "positionName", title: "Stanowisko", width: "180px", editor: categoryDropDownEditor, template:"#=positionName#"},
+                        { command: ["edit", "destroy"], title: "&nbsp;", width: "250px" }],
+                    editable: "inline",
+                    save: function(){
+                        this.dataSource.read();
+                    }
+                });
+//                var grid = $("#grid").data("kendoGrid");
+//                grid.editRow($("#grid tr:eq(1)"));
+
+            });
+            function categoryDropDownEditor(container, options) {
+                $('<input required name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        autoBind: true,
+                        optionLabel: "Wybierz stanowisko...",
+                        dataTextField: "positionName",
+                        dataValueField: "positionId",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    url: "{{ path('getDivisionPositions',{'divisionName': divisionName}) }}",
+                                    dataType: "json"
+                                }
+                            }
+                        }
+                    });
+            }
+
+            function customBoolEditor(container, options) {
+                $('<input class="k-checkbox" type="checkbox" name="Discontinued" data-type="boolean" data-bind="checked:Discontinued">').appendTo(container);
+                $('<label class="k-checkbox-label">&#8203;</label>').appendTo(container);
+            }
+            $('.k-grid-update').click(function(){
+                console.log(location.href);
+            })
+        </script>
+    </div>
+
+{% endblock %}

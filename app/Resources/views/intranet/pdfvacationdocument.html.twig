@@ -1,0 +1,65 @@
+<div class="podanie_o_urlop">
+    <div class="header"></div>
+    <h1>PODANIE O URLOP</h1>
+    <br><br><br>
+    <p>
+        Nazwisko i imię: <b>{{ name }}</b><br>
+        Stanowisko: {{ positionName }}<br>
+        Departament: {{ departmentName }}<br>
+        Dział: {{ divisionName }}
+    </p>
+    <p>w dniu: {{ date }}r. wnosi o urlop: <b>wypoczynkowy</b></p>
+    <br><br><br>
+    <p>Zastępować go będzie:</p>
+
+    <p class="right">
+        _____________________________________________________<br>
+        podpis Pracownika
+    </p>
+
+    <br><br>
+    <p class="right">
+        _____________________________________________________<br>
+        podpis Kierownika
+    </p>
+    <br><br><br>
+
+    <p>
+        Stwierdzono, że przysługuje {{ vfull }} dni urlopu,</p>
+    <p>Wykorzystano {{ vused }} dni, pozostało {{ vrem }} dni urlopu.
+    </p>
+
+    <p class="right">
+        _____________________________________________________<br>
+        podpis pracownika d/s osobowych
+    </p>
+    <br><br>
+    <p class="right">
+        _____________________________________________________<br>
+        Decyzja i podpis Dyrektora, Kierownika Departamentu
+    </p>
+
+
+    Wrocław, dnia {{ currentdate }}r.
+</div>
+<style>
+    .podanie_o_urlop {
+        font-family: Arial;
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .podanie_o_urlop .header {
+        float: right;
+        margin: 40px;
+    }
+
+    .podanie_o_urlop h1 {
+        text-align: center;
+    }
+
+    .podanie_o_urlop .right {
+        text-align: right;
+    }
+
+</style>

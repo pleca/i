@@ -1,0 +1,274 @@
+{% extends 'intranet/admin/admin.html.twig' %}
+{% block adminBlock %}
+    <div class="row">
+        <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> /  Zarządzanie użytkownikami</span></div>
+        <div class="col-sm-12">
+            {% include ('::flash-messages.html.twig') %}
+        </div>
+    </div>
+    {% if userType == 'ROLE_ADMIN' %}
+        <div class="row">
+            <div class="col-xs-12 admin-text">
+                <div class="col-xs-12 text-right">
+                    <button class="btn btn-success addNews" id="addNews"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj</button>
+                </div>
+            </div>
+            <hr />
+        </div>
+    {% endif %}
+    <div class="form-group add-div hide row">
+        <form id="user_management_form" role="form" action="{{ path('dodaj użytkownika') }}" method="post">
+            <div class="col-xs-12">
+                <fieldset class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Imię</label>
+                        <input type="text" class="form-control" id="name" name="user_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="control-label">Nazwisko</label>
+                        <input type="text" class="form-control" id="lastname" name="user_lastname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_login" class="control-label">Login</label>
+                        <input type="text" class="form-control" id="user_login" name="user_login" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="control-label">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="user_email" required>
+                    </div>
+                </fieldset>
+                <fieldset class="col-sm-6">
+                    <div class="form-group">
+                        <label for="password" class="control-label">Hasło</label>
+                        <input type="password" class="form-control" id="password" name="user_password" required>
+                        <span id="password_check" class="check_password"><i class="fa fa-close" ></i></span>
+                        <span class="form_password_message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="rpt_password" class="control-label">Powtórz hasło</label>
+                        <input type="password" class="form-control" id="rpt_password" name="rpt_user_password" required />
+                        <span id="rpt_password_check" class="check_password"><i class="fa fa-close" ></i></span>
+                        <span class="form_password_message"></span>
+                    </div>
+                    <script language='javascript' type='text/javascript'>
+                        var rpt_password = document.getElementById("rpt_password");
+                        var password = document.getElementById("password");
+                        $('#rpt_password').on('change', function(){
+                            if (password.value != rpt_password.value) {
+                                $('.form_password_message').text('Hasła muszą być identyczne!')
+                                $('#password_check > i').removeClass('fa-check').addClass('fa-close');
+                                $('#rpt_password_check > i').removeClass('fa-check').addClass('fa-close');
+                            }else{
+                                $('.form_password_message').empty();
+                                $('#password_check > i').removeClass('fa-close').addClass('fa-check');
+                                $('#rpt_password_check > i').removeClass('fa-close').addClass('fa-check');
+                            }
+                        });
+                        $('#password').on('change', function(){
+                            if (password.value != rpt_password.value) {
+                                $('.form_password_message').text('Hasła muszą być identyczne!')
+                                $('#password_check > i').removeClass('fa-check').addClass('fa-close');
+                                $('#rpt_password_check > i').removeClass('fa-check').addClass('fa-close');
+                            }else{
+                                $('.form_password_message').empty();
+                                $('#password_check > i').removeClass('fa-close').addClass('fa-check');
+                                $('#rpt_password_check > i').removeClass('fa-close').addClass('fa-check');
+                            }
+                        });
+                    </script>
+                    <div class="form-group">
+                        <label for="vacation" class="control-label">Dni urlopowe</label>
+                        <input type="number" class="form-control" id="vacation" name="user_vacation">
+                    </div>
+                    <label for="department" class="control-label">Wybierz departament</label>
+                    <select name="department" class="form-control" id="department">
+                        <option value="default" selected disabled>Wybierz departament</option>
+                        {% for el in departments %}
+                            <option value="{{ el.departmentId }}">{{ el.departmentName }}</option>
+                        {% endfor %}
+                    </select>
+                    <script>
+
+                        $('#department').on('change', function() {
+                                var department = document.getElementById("department");
+                                $.ajax('{{ path('pobierz działy') }}', {
+                                    type: "POST",
+                                    dataType: "json",
+                                    data: {
+                                        "department": department.value
+                                    },
+                                    success: function(data) {
+                                        var division = document.getElementById("division");
+                                        $('#division').empty();
+                                        var opt = document.createElement('option');
+                                        opt.value = 'default';
+                                        opt.innerHTML = 'Wybierz dział';
+                                        division.appendChild(opt);
+                                        for (var x = 0; x<=data.length-1; x++){
+                                            var opt = document.createElement('option');
+                                            opt.value = data[x][0]['divisionId'];
+                                            opt.innerHTML = data[x][0]['divisionName'];
+                                            division.appendChild(opt);
+                                        }
+                                    },
+                                    error: function() {
+                                        console.log('fail');
+                                    }
+                                });
+                        });
+                    </script>
+                    <label for="division" class="control-label">Wybierz dział</label>
+                    <select name="division" class="form-control" id="division">
+                        <option value="default" selected disabled>Wybierz dział</option>
+                    </select>
+                    <script>
+
+                        $('#division').on('change', function() {
+                            var division = document.getElementById("division");
+                            $.ajax('{{ path('pobierz pozycje') }}', {
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    "division": division.value
+                                },
+                                success: function(data) {
+                                    var position = document.getElementById("position");
+                                    $('#position').empty();
+                                    var opt = document.createElement('option');
+                                    opt.value = 'default';
+                                    opt.innerHTML = 'Wybierz stanowisko';
+                                    position.appendChild(opt);
+
+                                    for (var x = 0; x<=data.length-1; x++){
+                                        var opt = document.createElement('option');
+                                        opt.value = data[x][0]['positionId'];
+                                        opt.innerHTML = data[x][0]['positionName'];
+                                        position.appendChild(opt);
+                                    }
+                                },
+                                error: function() {
+                                    console.log('fail');
+                                }
+                            });
+                        });
+                    </script>
+                    <label for="position" class="control-label">Wybierz stanowisko</label>
+                    <select name="position" class="form-control" id="position">
+                        <option value="default" selected disabled>Wybierz stanowisko</option>
+                    </select>
+                </fieldset>
+            </div>
+                <div class="col-xs-12">
+                    <div class=" clearfix text-left col-xs-6"><button type="submit" class="btn btn-default">Dodaj</button></div>
+
+                    <script>
+
+                    </script>
+
+                    <div class="text-right cancel-div col-xs-6 margin-0">
+                        <button class="btn btn-danger cancelNews" id="cancelNews"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</button>
+                    </div>
+                </div>
+        </form>
+        </div>
+    <div id="example">
+        <table id="myTable" class="table table-striped">
+            <tr>
+                <th onclick="sortTable(0)">Nazwisko</th>
+                <th onclick="sortTable(1)">Imie</th>
+                <th onclick="sortTable(2)">Login</th>
+                <th onclick="sortTable(3)">E-mail</th>
+                <th onclick="sortTable(4)">Data dodania</th>
+                <th>Edytuj</th>
+                <th>Usuń</th>
+            </tr>
+            {% for el in users %}
+            <tr>
+                <td>{{ el.Nazwisko }}</td>
+                <td>{{ el.Imie }}</td>
+                <td>{{ el.Login }}</td>
+                <td>{{ el.Email }}</td>
+                <td>{{ el.Dodany }}</td>
+                <td><a href="edit_user/{{ el.id }}" class="btn btn-info"><i class="fa fa-pencil" id="editUser" aria-hidden="true"></i> Edytuj</a></td>
+                <td><button class="btn btn-danger" id="{{ el.id }}">Usuń</button></td>
+                <div class="confirmation text-center">
+                    <h3>Uwaga!</h3>
+                    <hr />
+                    <p>Czy na pewno chcesz usunąć ten element?</p>
+                    <a href="#" class="btn btn-success delete"><i class="fa fa-check" aria-hidden="true"></i> Tak</a>
+                    <a class="btn btn-danger cancel" ><i class="fa fa-close" aria-hidden="true"></i> Anuluj</a>
+                </div>
+                <script>
+                    $( document ).ready(function() {
+                        $('#{{ el.id }}').on('click', function () {
+                            var path = "{{ path('deleteUser', {'userId': el.id })|raw}}";
+                            $('.confirmation').css('display', 'block');
+                            $('.confirmation > .delete').attr('href', path);
+                            $('.cancel').click(function () {
+                                $('.confirmation').css('display', 'none');
+                            });
+                        });
+                    });
+                </script>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+    <script>
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("myTable");
+            switching = true;
+            //Set the sorting direction to ascending:
+            dir = "asc";
+            /*Make a loop that will continue until
+            no switching has been done:*/
+            while (switching) {
+                //start by saying: no switching is done:
+                switching = false;
+                rows = table.getElementsByTagName("TR");
+                /*Loop through all table rows (except the
+                first, which contains table headers):*/
+                for (i = 1; i < (rows.length - 1); i++) {
+                    //start by saying there should be no switching:
+                    shouldSwitch = false;
+                    /*Get the two elements you want to compare,
+                    one from current row and one from the next:*/
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    /*check if the two rows should switch place,
+                    based on the direction, asc or desc:*/
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch= true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            //if so, mark as a switch and break the loop:
+                            shouldSwitch= true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    /*If a switch has been marked, make the switch
+                    and mark that a switch has been done:*/
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    //Each time a switch is done, increase this count by 1:
+                    switchcount ++;
+                } else {
+                    /*If no switching has been done AND the direction is "asc",
+                    set the direction to "desc" and run the while loop again.*/
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock %}

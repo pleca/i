@@ -1,0 +1,120 @@
+{% extends 'intranet/base.html.twig' %}
+
+
+{%  block body %}
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}" />
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
+    <div class="">
+        <div class="col-sm-12">
+            <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {% include ('::flash-messages.html.twig') %}
+                </div>
+            </div>
+            {% if userType == 'ROLE_ADMIN' %}
+                <div class="text-left">
+                    <button class="btn btn-success addNews" id="addNews"><i class="fa fa-plus" aria-hidden="true"></i> Dodaj</button>
+                </div>
+            {% endif %}
+            <div class="form-group add-div hide">
+                {{ form_start(form) }}
+                {{ form_row(form.newsTitle) }}
+                {{ form_row(form.newsShortText) }}
+                {{ form_row(form.newsText) }}
+                {{ form_row(form.newsImage) }}
+                {{ form_end(form) }}
+
+                <script>
+                    $("#add_news_newsText").kendoEditor({
+                        tools: [
+                            "bold",
+                            "italic",
+                            "underline",
+                            "strikethrough",
+                            "justifyLeft",
+                            "justifyCenter",
+                            "justifyRight",
+                            "justifyFull",
+                            "insertUnorderedList",
+                            "insertOrderedList",
+                            "indent",
+                            "outdent",
+                            "createLink",
+                            "unlink",
+                            "insertImage",
+                            "subscript",
+                            "superscript",
+                            "addRowAbove",
+                            "addRowBelow",
+                            "addColumnLeft",
+                            "addColumnRight",
+                            "deleteRow",
+                            "deleteColumn",
+                            "viewHtml",
+                            "formatting",
+                            "cleanFormatting",
+                            "fontSize",
+                            "foreColor"
+                        ]
+                    });
+                </script>
+                <div class="text-right cancel-div">
+                    <button class="btn btn-danger cancelNews" id="cancelNews"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-12 news-row">
+            {% for el in news %}
+                <div class="col-sm-3 news">
+                    <div class="news-div">
+                        <a href="news/{{ el.newsTitle }}">
+                            <div class="news-image-div">
+                                <div style="display: table-cell;vertical-align: middle;">
+                                    <img src="{{ asset(imagepath ~ el.newsImage) }}" alt="Example"/>
+                                </div>
+                            </div>
+
+                            <div class="news-text">
+                                <h3>{{ el.newsTitle }}</h3>
+                                <p>{{ el.newsShortText }}</p>
+                            </div>
+                        </a>
+                        {% if userType == 'ROLE_ADMIN' %}
+                            <a href="news/edit/{{ el.newsTitle }}" class="btn btn-info"><i class="fa fa-pencil" id="editNews" aria-hidden="true"></i> Edytuj</a>
+                            <button class="btn btn-danger deleteNews" id="{{ el.newsId }}"><i class="fa fa-close" aria-hidden="true"></i> Usuń</button>
+                                <div class="confirmation">
+                                    <h3>Uwaga!</h3>
+                                    <hr />
+                                    <p>Czy na pewno chcesz usunąć ten element?</p>
+                                    <a href="#" class="btn btn-success delete"><i class="fa fa-check" aria-hidden="true"></i> Tak</a>
+                                    <a class="btn btn-danger cancel" ><i class="fa fa-close" aria-hidden="true"></i> Anuluj</a>
+                                </div>
+                            <script>
+                                $( document ).ready(function() {
+                                    $('#{{ el.newsId }}').on('click', function () {
+                                        var path = "{{ path('deleteNews', {'newsId': el.newsId })|raw}}";
+                                        $('.confirmation').css('display', 'block');
+                                        $('.confirmation > .delete').attr('href', path);
+                                        $('.cancel').click(function () {
+                                            $('.confirmation').css('display', 'none');
+                                        });
+                                    });
+                                });
+                            </script>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

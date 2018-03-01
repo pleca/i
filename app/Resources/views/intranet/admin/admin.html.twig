@@ -1,0 +1,41 @@
+{% extends 'intranet/base.html.twig' %}
+
+{#<?php#}
+{#require_once('controllers/singleNewsController.php');#}
+{#$array = getSingleNews($id, $db_user, $db_password);#}
+{#?>#}
+{%  block body %}
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}" />
+    <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+    <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}" />
+    <div class="row">
+        <div class="col-sm-12">
+
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-sm-2">
+            <nav class="admin-nav">
+                <ul>
+                    <a href="{{ path('Struktura') }}"><li>Struktura pracownicza</li></a>
+                    <a href="{{ path('Zarządzanie użytkownikami') }}"><li>Zarządzanie użytkownikami</li></a>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-sm-10 admin-block">
+            {% block adminBlock %}
+                <div class="row">
+                    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / <span>Admin</span></span></div>
+                    </div>
+                </div>
+                <h1>Panel Administratora</h1>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

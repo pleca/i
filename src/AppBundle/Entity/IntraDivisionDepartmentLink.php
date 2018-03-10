@@ -4,11 +4,19 @@ namespace AppBundle\Entity;
 
 /**
  * IntraDivisionDepartmentLink
+ *
+ * @ORM\Table(name="intra_album")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDivisionDepartmentLink
 {
     /**
-     * @var integer
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", unique=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * todo: w xml: strategy="IDENTITY"
      */
     private $id;
     /**

@@ -4,23 +4,33 @@ namespace AppBundle\Entity;
 
 /**
  * IntraDivision
+ *
+ * @ORM\Table(name="intra_album")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDivision
 {
     /**
+     * @var int
+     *
+     * @ORM\Column(name="division_id", type="integer", unique=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * todo: w xml: strategy="IDENTITY"
+     */
+    private $divisionId;
+
+    /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $divisionName;
 
     /**
-     * @var boolean
+     * @var integer
+     * @ORM\Column(type="integer")
      */
     private $divisionStatus;
-
-    /**
-     * @var integer
-     */
-    private $divisionId;
 
     /**
      * Set divisionName

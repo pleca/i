@@ -4,6 +4,9 @@ namespace AppBundle\Entity;
 
 /**
  * IntraVacation
+ *
+ * @ORM\Table(name="intra_album")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraVacation
 {

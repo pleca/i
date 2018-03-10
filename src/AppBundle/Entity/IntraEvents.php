@@ -15,16 +15,10 @@ class IntraEvents
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="news_id", type="integer", unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="news_id", type="integer")
+     * todo: w xml: strategy="IDENTITY"
      */
     private $newsId;
 

@@ -15,16 +15,10 @@ class IntraGallery
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="gallery_id", type="integer", unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="gallery_id", type="integer", unique=true)
+     * todo: w xml: strategy="IDENTITY"
      */
     private $galleryId;
 

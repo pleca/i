@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -11,6 +12,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class IntraUser implements UserInterface
 {
+
+    /**
+     * @var integer
+     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $userId;
+
     /**
      * @var string
      * @ORM\Column(name="user_login", type="string", length=255, unique=true)
@@ -46,19 +56,10 @@ class IntraUser implements UserInterface
      * @var \DateTime
      */
     private $userDateAdd;
-
     /**
      * @var \DateTime
      */
     private $userDateLastlogin;
-
-    /**
-     * @var integer
-     * @ORM\Column(name="user_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $userId;
 
 
     /**

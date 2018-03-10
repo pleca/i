@@ -4,9 +4,22 @@ namespace AppBundle\Entity;
 
 /**
  * IntraDocuments
+ *
+ * @ORM\Table(name="intra_album")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDocuments
 {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="document_id", type="integer", unique=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * todo: w xml: strategy="IDENTITY"
+     */
+    private $documentId;
+
     /**
      * @var string
      */
@@ -41,16 +54,10 @@ class IntraDocuments
      * @var integer
      */
     private $documentCreatorId;
-
     /**
      * @var integer
      */
     private $documentUserId;
-
-    /**
-     * @var integer
-     */
-    private $documentId;
 
 
     /**

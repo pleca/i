@@ -1,30 +1,41 @@
 <?php
 
 namespace AppBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * IntraDepartment
+ *
+ * @ORM\Table(name="intra_album")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDepartment
 {
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="department_id", type="integer", unique=true)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * todo: w xml: strategy="IDENTITY"
+     */
+    private $departmentId;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $departmentName;
 
     /**
-     * @var boolean
+     * @var string
+     * @ORM\Column(type="string")
      */
     private $departmentStatus;
 
     /**
      * @var integer
-     */
-    private $departmentId;
-
-    /**
-     * @var integer
+     * @ORM\Column(type="integer")
      */
     private $departmentDirectorUid;
 

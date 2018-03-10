@@ -12,7 +12,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class IntraUser implements UserInterface
 {
-
     /**
      * @var integer
      * @ORM\Column(name="user_id", type="integer")
@@ -29,38 +28,59 @@ class IntraUser implements UserInterface
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="user_name", type="string", length=127)
      */
     private $userName;
 
     /**
      * @var string
+     * @ORM\Column(name="user_lastname", type="string", length=127)
+     */
+    private $userLastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="user_email", type="string", length=127)
      */
     private $userEmail;
 
     /**
      * @var string
+     * @ORM\Column(name="user_password", type="string", length=127)
      */
     private $userPassword;
 
     /**
-     * @var boolean
+     * @var string
+     * @ORM\Column(name="user_type", type="string", length=127)
      */
     private $userType;
 
     /**
-     * @var boolean
+     * @var integer
+     * @ORM\Column(name="user_active", type="integer")
      */
     private $userActive;
 
     /**
      * @var \DateTime
+     * @ORM\Column(name="user_date_add", type="datetime")
      */
     private $userDateAdd;
+
     /**
      * @var \DateTime
+     * @ORM\Column(name="user_date_last_login", type="datetime")
      */
     private $userDateLastlogin;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="user_vacation_days", type="integer")
+     */
+    private $userVacationDays;
 
     /**
      * Set userLogin
@@ -264,10 +284,6 @@ class IntraUser implements UserInterface
         return $this->userId;
     }
 
-
-
-
-
     public function getRoles()
     {
         return array($this->userType);
@@ -285,14 +301,6 @@ class IntraUser implements UserInterface
     {
         return $this->userId;
     }
-
-
-
-    /**
-     * @var string
-     */
-    private $userLastname;
-
 
     /**
      * Set userLastname
@@ -317,11 +325,6 @@ class IntraUser implements UserInterface
     {
         return $this->userLastname;
     }
-    /**
-     * @var integer
-     */
-    private $userVacationDays;
-
 
     /**
      * Set userVacationDays

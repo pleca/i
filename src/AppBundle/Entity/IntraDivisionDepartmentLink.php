@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 /**
  * IntraDivisionDepartmentLink
  *
- * @ORM\Table(name="intra_album")
+ * @ORM\Table(name="intra_division_department_link")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDivisionDepartmentLink

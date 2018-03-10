@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 /**
  * IntraUserPositionLink
  *
- * @ORM\Table(name="intra_album")
+ * @ORM\Table(name="intra_user_position_link")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraUserPositionLink

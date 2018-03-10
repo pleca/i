@@ -29,6 +29,13 @@ class IntraDivisionPositionLink
      */
     private $divisionPositionLinkDid;
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     /**
      * Set divisionPositionLinkPid

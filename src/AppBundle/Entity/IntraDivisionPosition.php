@@ -22,10 +22,13 @@ class IntraDivisionPosition
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $positionName;
+
     /**
-     * @var boolean
+     * @var integer
+     * @ORM\Column(type="integer")
      */
     private $positionStatus;
 

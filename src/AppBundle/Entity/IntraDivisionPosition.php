@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 /**
  * IntraDivisionPosition
  *
- * @ORM\Table(name="intra_album")
+ * @ORM\Table(name="intra_division_position")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDivisionPosition

@@ -19,16 +19,26 @@ class IntraDivisionDepartmentLink
      * todo: w xml: strategy="IDENTITY"
      */
     private $id;
+
     /**
      * @var integer
+     * @ORM\Column(type="integer")
      */
     private $divisionDepartmentLinkDepartmentId;
 
     /**
      * @var integer
+     * @ORM\Column(type="integer")
      */
     private $divisionDepartmentLinkDivisionId;
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     /**
      * Set divisionDepartmentLinkDepartmentId

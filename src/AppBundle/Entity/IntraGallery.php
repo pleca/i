@@ -32,7 +32,7 @@ class IntraGallery
     /**
      * @var string
      *
-     * @ORM\Column(name="gallery_name", type="string", length=255)
+     * @ORM\Column(name="gallery_images", type="string", length=255)
      */
     public $galleryImages;
 
@@ -63,17 +63,6 @@ class IntraGallery
      * @ORM\Column(name="gallery_mod_id", type="integer")
      */
     private $galleryModId;
-
-
-    /**
-     * Get id
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 
     /**
      * Set galleryId

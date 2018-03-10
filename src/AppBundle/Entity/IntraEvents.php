@@ -15,7 +15,7 @@ class IntraEvents
     /**
      * @var int
      *
-     * @ORM\Column(name="news_id", type="integer", unique=true)
+     * @ORM\Column(name="news_id", type="integer", unique=true, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
@@ -39,7 +39,7 @@ class IntraEvents
     /**
      * @var string
      *
-     * @ORM\Column(name="news_url", type="string", length=127)
+     * @ORM\Column(name="news_url", type="string", length=127, options={"default":NULL}, nullable=true)
      */
     private $newsUrl;
 
@@ -53,14 +53,14 @@ class IntraEvents
     /**
      * @var int
      *
-     * @ORM\Column(name="news_creator_id", type="integer")
+     * @ORM\Column(name="news_creator_id", type="integer", options={"unsigned":true})
      */
     private $newsCreatorId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="news_user_id", type="integer")
+     * @ORM\Column(name="news_user_id", type="integer", options={"unsigned":true})
      */
     private $newsUserId;
 
@@ -102,26 +102,26 @@ class IntraEvents
     /**
      * @var string
      *
-     * @ORM\Column(name="news_type", type="string", length=255)
+     * @ORM\Column(name="news_type", type="string", length=255, options={"comment":"1-news, 2-wydarzenie, 3-urlop", "default":"1"})
      */
     private $newsType;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="news_status", type="integer")
+     * @ORM\Column(name="news_status", type="smallint", length=6, nullable=true, options={"default":NULL})
      */
     private $newsStatus;
 
     /**
      * @var integer
-     * @ORM\Column(name="news_vacation_type", type="integer")
+     * @ORM\Column(name="news_vacation_type", type="integer", nullable=true)
      */
     private $newsVacationType;
 
     /**
      * @var boolean
-     * @ORM\Column(name="news_allday", type="integer", "default":1}
+     * @ORM\Column(name="news_allday", type="integer", options={"default":"1"})
      */
     private $newsAllday = '1';
 

@@ -1,8 +1,10 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * IntraUser
@@ -14,7 +16,7 @@ class IntraUser implements UserInterface
 {
     /**
      * @var integer
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="user_id", type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -54,7 +56,7 @@ class IntraUser implements UserInterface
 
     /**
      * @var string
-     * @ORM\Column(name="user_type", type="string", length=127)
+     * @ORM\Column(name="user_type", type="text")
      */
     private $userType;
 
@@ -72,13 +74,13 @@ class IntraUser implements UserInterface
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="user_date_last_login", type="datetime")
+     * @ORM\Column(name="user_date_lastlogin", type="datetime")
      */
     private $userDateLastlogin;
 
     /**
      * @var integer
-     * @ORM\Column(name="user_vacation_days", type="integer")
+     * @ORM\Column(name="user_vacation_days", type="integer", length=11, options={"default":"NULL"}, nullable=true)
      */
     private $userVacationDays;
 

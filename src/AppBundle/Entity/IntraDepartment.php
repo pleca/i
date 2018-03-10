@@ -1,6 +1,7 @@
 <?php
 
 namespace AppBundle\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,7 +15,7 @@ class IntraDepartment
     /**
      * @var int
      *
-     * @ORM\Column(name="department_id", type="integer", unique=true)
+     * @ORM\Column(name="department_id", type="integer", unique=true, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
@@ -23,7 +24,7 @@ class IntraDepartment
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=127)
      */
     private $departmentName;
 
@@ -35,7 +36,7 @@ class IntraDepartment
 
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $departmentDirectorUid;
 

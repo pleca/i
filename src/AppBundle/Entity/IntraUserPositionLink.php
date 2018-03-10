@@ -2,10 +2,13 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IntraUserPositionLink
  *
- * @ORM\Table(name="intra_user_position_link")
+ * @ORM\Table(name="intra_user_position_link",
+ *     indexes={@ORM\Index(name="user_position_idx", columns={"id"})})
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraUserPositionLink
@@ -22,13 +25,13 @@ class IntraUserPositionLink
 
     /**
      * @var integer
-     * @ORM\Column(name="division_link_uid", type="integer")
+     * @ORM\Column(name="division_link_uid", type="integer", options={"unsigned":true})
      */
     private $divisionLinkUid;
 
     /**
      * @var integer
-     * @ORM\Column(name="division_link_pid", type="integer")
+     * @ORM\Column(name="division_link_pid", type="integer", options={"unsigned":true})
      */
     private $divisionLinkPid;
 

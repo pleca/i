@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IntraDivisionPosition
  *
@@ -13,7 +15,7 @@ class IntraDivisionPosition
     /**
      * @var int
      *
-     * @ORM\Column(name="position_id", type="integer", unique=true)
+     * @ORM\Column(name="position_id", type="integer", unique=true, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"

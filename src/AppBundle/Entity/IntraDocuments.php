@@ -19,7 +19,6 @@ class IntraDocuments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
-     * @ORM\Column(type="integer")
      */
     private $documentId;
 
@@ -49,7 +48,7 @@ class IntraDocuments
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=127)
      */
     private $documentType;
 
@@ -61,13 +60,13 @@ class IntraDocuments
 
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $documentCreatorId;
 
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $documentUserId;
 

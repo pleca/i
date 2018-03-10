@@ -15,7 +15,7 @@ class IntraGallery
     /**
      * @var int
      *
-     * @ORM\Column(name="gallery_id", type="integer", unique=true)
+     * @ORM\Column(name="gallery_id", type="integer", unique=true, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
@@ -25,7 +25,7 @@ class IntraGallery
     /**
      * @var int
      *
-     * @ORM\Column(name="album_id", type="integer")
+     * @ORM\Column(name="album_id", type="integer", options={"unsigned":true})
      */
     private $albumId;
 
@@ -46,21 +46,21 @@ class IntraGallery
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="gallery_mod_add", type="datetime")
+     * @ORM\Column(name="gallery_date_mod", type="datetime")
      */
     private $galleryDateMod;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gallery_creator_id", type="integer")
+     * @ORM\Column(name="gallery_creator_id", type="integer", options={"unsigned":true})
      */
     private $galleryCreatorId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="gallery_mod_id", type="integer")
+     * @ORM\Column(name="gallery_mod_id", type="integer", options={"unsigned":true})
      */
     private $galleryModId;
 

@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IntraDivisionDepartmentLink
  *
@@ -13,7 +15,7 @@ class IntraDivisionDepartmentLink
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer", unique=true)
+     * @ORM\Column(name="id", type="integer", unique=true, options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
@@ -22,13 +24,13 @@ class IntraDivisionDepartmentLink
 
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $divisionDepartmentLinkDepartmentId;
 
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $divisionDepartmentLinkDivisionId;
 

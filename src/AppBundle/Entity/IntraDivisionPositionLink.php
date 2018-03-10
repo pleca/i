@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IntraDivisionPositionLink
  *
@@ -19,13 +21,16 @@ class IntraDivisionPositionLink
      * todo: w xml: strategy="IDENTITY"
      */
     private $id;
+
     /**
      * @var integer
+     * @ORM\Column(name="division_position_link_pid", type="integer", options={"unsigned":true})
      */
     private $divisionPositionLinkPid;
 
     /**
      * @var integer
+     * @ORM\Column(name="division_position_link_did", type="integer", options={"unsigned":true})
      */
     private $divisionPositionLinkDid;
 

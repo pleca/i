@@ -15,13 +15,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class documentsController extends Controller
 {
-
-    private function get_json_array() {
-
+    private function get_json_array()
+    {
         $ems = $this->getDoctrine()->getManager()->createQueryBuilder()
             ->from('AppBundle:IntraDocuments', 'd')
             ->select("d.documentId, d.documentFile, d.documentFileTitle, d.documentDateAdd, d.documentDateMod, d.documentDesc, u.userName, u.userLastname")
@@ -31,26 +31,23 @@ class documentsController extends Controller
             ->getQuery();
         $data = $ems->getArrayResult();
 
-                     foreach ($data as $key => $row) {
-                        $arr[] =
-                            array(
-                                "documentId" => $row["documentId"],
-                                "documentFile" => $row["documentFile"],
-                                "documentFileTitle" => $row["documentFileTitle"],
-                                "documentDateAdd" => $row["documentDateAdd"]->format('Y-m-d H:i:s'),
-                                "documentDateMod" => $row["documentDateMod"]->format('Y-m-d H:i:s'),
-                                "documentDesc" => $row["documentDesc"],
-                                "user" => $row["userName"].' '.$row["userLastname"]
+        foreach ($data as $key => $row) {
+            $arr[] =
+                array(
+                    "documentId" => $row["documentId"],
+                    "documentFile" => $row["documentFile"],
+                    "documentFileTitle" => $row["documentFileTitle"],
+                    "documentDateAdd" => $row["documentDateAdd"]->format('Y-m-d H:i:s'),
+                    "documentDateMod" => $row["documentDateMod"]->format('Y-m-d H:i:s'),
+                    "documentDesc" => $row["documentDesc"],
+                    "user" => $row["userName"] . ' ' . $row["userLastname"]
 
-                            );
-                    }
-                    if (isset($arr)){
-                        return $arr;
-                    }
-
-
+                );
+        }
+        if (isset($arr)) {
+            return $arr;
+        }
     }
-
 
     /**
      * @Route("/documents", name="Dokumenty")
@@ -65,7 +62,7 @@ class documentsController extends Controller
 
             /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
             $file = $docf->getDocumentFile();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
             $file->move(
                 $this->getParameter('docs_directory'),
@@ -93,11 +90,6 @@ class documentsController extends Controller
         return $this->render('intranet/docs.html.twig', array('docs_json' => json_encode($arr), 'form' => $form->createView()));
     }
 
-
-
-
-
-
     /**
      * @Route("/documents/get_docs", name="getjsondocs")
      */
@@ -107,22 +99,19 @@ class documentsController extends Controller
         return new Response(json_encode($arr), 200);
     }
 
-
-
-
     /**
      * @Route("/documents/delete", name="deletedoc")
      */
     public function deleteAction(Request $request)
     {
-
         $filePath = $this->getParameter('docs_directory');
         $req = $request->request->all();
         $req = $req["models"];
         $out = "";
+
         foreach ($req as $key => $row) {
 
-            if ($row["documentId"] > 0 ) {
+            if ($row["documentId"] > 0) {
                 $out = " DELETE FROM AppBundle:IntraDocuments c WHERE c.documentId = " . $row["documentId"];
 
                 if (isset($out)) {
@@ -131,8 +120,8 @@ class documentsController extends Controller
                     $numDeleted = $em->execute();
                 }
 
-                if (file_exists($filePath.$row["documentFile"])) {
-                    unlink($filePath.$row["documentFile"]);
+                if (file_exists($filePath . $row["documentFile"])) {
+                    unlink($filePath . $row["documentFile"]);
                 }
             }
         }
@@ -143,14 +132,48 @@ class documentsController extends Controller
         return new Response(json_encode($req, true), 200);
     }
 
+    /**
+     * @Route("/documents/update", name="updatedoc")
+     */
+    public function updateAction(Request $request)
+    {
+        $data = $request->request->all();
 
+        if (!$data) {
+            return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
+        }
 
+        if (!$data["documentId"]) {
+            return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
+        }
 
+        $em = $this->getDoctrine()->getManager();
+        $document = $em->getRepository('AppBundle:IntraDocuments')->find($data["documentId"]);
 
+        $document->setDocumentDesc($data["documentDesc"]);
 
+        if ($_FILES['files']) {
+            $file = new UploadedFile(
+                $_FILES['files']['tmp_name'],
+                $_FILES['files']['name'],
+                $_FILES['files']['type'],
+                $_FILES['files']['size'],
+                $_FILES['files']['error']
+            );
+            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+            $file->move($this->getParameter('docs_directory'), $fileName);
+            $document->setDocumentFile($fileName);
+            $document->setDocumentFileTitle($file->getClientOriginalName());
+            $document->setDocumentType($file->getClientMimeType());
+        }
 
+        $userId = $this->getUser()->getUserId();
+        $document->setDocumentDateMod(new \DateTime(date("Y-m-d H:i:s")));
+        $document->setDocumentUserId($userId);
+        $document->setDocumentCreatorId($userId);
+        $em->persist($document);
+        $em->flush();
 
-
-
-
+        return $this->redirect($this->generateUrl('Dokumenty'));
+    }
 }

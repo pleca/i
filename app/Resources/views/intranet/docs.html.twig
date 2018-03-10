@@ -1,49 +1,56 @@
 {% extends 'intranet/base.html.twig' %}
 
 
-{%  block body %}
+{% block body %}
 
-    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.rtl.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('telerik/styles/kendo.default.mobile.min.css') }}"/>
     <script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
     <script src="{{ asset('telerik/js/jszip.min.js') }}"></script>
     <script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
     <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
     <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
     <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
-    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+    <div class="well well-sm"><span class="path"><a
+                    href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
 
-        <section class="home_grid">
-            <h2>Dokumenty</h2>
-            <div id="grid"></div>
-        </section>
+    <section class="home_grid">
+        <h2>Dokumenty</h2>
+        <div id="grid"></div>
+    </section>
 
     <hr>
 
     {% if is_granted('ROLE_ADMIN') %}
-    <section class="docs_form">
-        <h3>Dodaj plik</h3>
-    {{ form_start(form) }}
+        <section class="docs_form">
+            <h3>Dodaj plik</h3>
+            {{ form_start(form) }}
 
-    {{ form_row(form.DocumentFile) }}
-    {{ form_row(form.documentDesc) }}
+            {{ form_row(form.DocumentFile) }}
+            {{ form_row(form.documentDesc) }}
 
-    {{ form_end(form) }}
-    </section>
+            {{ form_end(form) }}
+        </section>
     {% endif %}
 
 
     <script>
         kendo.culture("pl-PL");
         $(document).ready(function () {
+            var debug_url = '?XDEBUG_SESSION_START=PHPSTORM';
             var
                 dataSource = new kendo.data.DataSource({
 
                     transport: {
-                        read:  {
+                        read: {
                             url: "{{ path('getjsondocs') }}",
+                            dataType: "json"
+                        },
+                        update: {
+                            url: "{{ path('updatedoc') }}",
+                            type: "post",
                             dataType: "json"
                         },
                         destroy: {
@@ -58,11 +65,11 @@
                         model: {
                             id: "documentId",
                             fields: {
-                                documentId: { editable: false },
-                                documentDesc: { editable: false },
-                                documentFile: { editable: false },
-                                documentDateAdd: { editable: false },
-                                documentDateMod: { editable: false }
+                                documentId: {editable: false},
+                                documentDesc: {editable: true},
+                                documentFile: {editable: true},
+                                documentDateAdd: {editable: false},
+                                documentDateMod: {editable: false}
                             }
                         }
                     }
@@ -94,17 +101,110 @@
                     }
                     {% if is_granted('ROLE_ADMIN') %}
                     ,
-                    { command: "destroy",
+                    {
+                        command: ["edit", "destroy"],
                         title: "&nbsp;",
-                        width: 100
+                        width: 200
                     }
                     {% endif %}
                 ],
-                editable: "inline"
+                editable: {
+                    mode: "popup",
+                    confirmation: true,
+                    // update: true,
+                    template: $("#popup_editor").html()
+                }
+                // ,
+                // to skopiowane z http://jsfiddle.net/BCBzS/1302/
+                // edit: function(e) {
+                //     $(e.contariner)
+                //         .find("input[name='FirstName']")
+                //         .data("kendoAutoComplete")
+                //         .bind("change", function(e) {
+                //             console.log("auto complete changed");
+                //         });
+                // },
+
             });
         });
     </script>
 
+    <script id="popup_editor" type="text/x-kendo-template">
+        <form method="post" action="{{ path('updatedoc') }}" enctype="multipart/form-data">
+            <div class="k-edit-label">
+                <label for="documentFile">Plik</label>
+            </div>
+            {#<div data-container-for="documentFile" class="k-edit-field">#}
+                <input name="files" id="files" type="file" aria-label="files" />
 
+                <input name="documentId" id="documentId" type="text" data-bind="value:documentId" style="display: none;"/>
+
+            <div class="k-edit-label">
+                <label for="documentDateAdd">Data Dodania</label>
+            </div>
+            <div class="k-edit-field">
+                <input type="text" class="k-input k-textbox k-state-disabled" name="documentDateAdd" data-bind="value:documentDateAdd" disabled>
+            </div>
+
+            <div data-container-for="documentDesc" class="k-edit-field">
+                <div class="k-edit-label">
+                    <label for="documentDesc">Opis</label>
+                </div>
+                <textarea name="documentDesc" class="k-textbox" data-bind="value:documentDesc"></textarea>
+            </div>
+
+            <div class="k-edit-label">
+                <label for="user">Twórca</label>
+                </div>
+                <div data-container-for="user" class="k-edit-field">
+                <input type="text" class="k-input k-textbox k-state-disabled" name="user" data-bind="value:user" disabled>
+            </div>
+
+            <button type="submit" class="k-button k-primary">Submit</button>
+        </form>
+                {#<input type="file"#}
+                {#class="k-input k-textbox"#}
+                {#name="documentFile"#}
+                {#kendo-upload#}
+                {#k-options="gridUploadOptions"#}
+                {#data-bind="value:documentFile"#}
+                {#>#}
+            {#</div>#}
+            {#<p style="padding-top: 1em; text-align: right">#}
+
+            {#<input name="files" id="files" type="file" aria-label="files" />#}
+            {#</p>#}
+
+{#Data Dodania#}
+            {#<div class="k-edit-label">#}
+                {#<label for="documentDateAdd">Data Dodania</label>#}
+            {#</div>#}
+            {#<div class="k-edit-field">#}
+                {#<input type="text" class="k-input k-textbox" name="documentDateAdd" data-bind="value:documentDateAdd">#}
+            {#</div>#}
+
+{#Opis#}
+            {#<div class="k-edit-label">#}
+                {#<label for="documentDesc">Opis</label>#}
+            {#</div>#}
+            {#<div data-container-for="documentDesc" class="k-edit-field">#}
+                {#<input type="text" class="k-input k-textbox" name="documentDesc"#}
+                       {#data-bind="value:documentDesc">#}
+                {#<textarea name="documentDesc" class="k-textbox" data-bind="value:documentDesc"></textarea>#}
+            {#</div>#}
+
+{#Twórca#}
+            {#<div class="k-edit-label">#}
+                {#<label for="user">Twórca</label>#}
+            {#</div>#}
+            {#<div data-container-for="user" class="k-edit-field">#}
+                {#<input type="text" class="k-input k-textbox" name="user" data-bind="value:user">#}
+            {#</div>#}
+
+            {#<button type="submit" class="k-button k-primary">Submit</button>#}
+        {#</form>#}
+    </script>
 
 {% endblock %}
+
+

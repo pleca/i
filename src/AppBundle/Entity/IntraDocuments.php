@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * IntraDocuments
  *
@@ -17,48 +19,57 @@ class IntraDocuments
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * todo: w xml: strategy="IDENTITY"
+     * @ORM\Column(type="integer")
      */
     private $documentId;
 
     /**
      * @var string
+     * @ORM\Column(type="string", length=255)
      */
     private $documentFile;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $documentFileTitle;
 
     /**
      * @var \DateTime
+     * @ORM\Column(type="datetime")
      */
     private $documentDateAdd;
 
     /**
      * @var \DateTime
+     * @ORM\Column(type="datetime")
      */
     private $documentDateMod;
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $documentType;
 
     /**
      * @var string
+     * @ORM\Column(type="text")
      */
     private $documentDesc;
 
     /**
      * @var integer
+     * @ORM\Column(type="integer")
      */
     private $documentCreatorId;
+
     /**
      * @var integer
+     * @ORM\Column(type="integer")
      */
     private $documentUserId;
-
 
     /**
      * Set documentFile

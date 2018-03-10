@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * IntraDocuments
  *
- * @ORM\Table(name="intra_album")
+ * @ORM\Table(name="intra_documents")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraAlbumRepository")
  */
 class IntraDocuments

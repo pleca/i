@@ -22,11 +22,13 @@ class IntraUserPositionLink
 
     /**
      * @var integer
+     * @ORM\Column(name="division_link_uid", type="integer")
      */
     private $divisionLinkUid;
 
     /**
      * @var integer
+     * @ORM\Column(name="division_link_pid", type="integer")
      */
     private $divisionLinkPid;
 

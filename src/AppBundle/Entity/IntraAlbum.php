@@ -15,16 +15,10 @@ class IntraAlbum
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="album_id", type="integer", unique=true)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="album_id", type="integer", unique=true)
+     * todo: w xml: strategy="IDENTITY"
      */
     private $albumId;
 
@@ -66,14 +60,14 @@ class IntraAlbum
     /**
      * @var int
      *
-     * @ORM\Column(name="album_creator_id", type="integer")
+     * @ORM\Column(name="album_creator_id", type="integer", options={"unsigned":true})
      */
     private $albumCreatorId;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="album_mod_id", type="integer")
+     * @ORM\Column(name="album_mod_id", type="integer", options={"unsigned":true})
      */
     private $albumModId;
 

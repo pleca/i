@@ -39,6 +39,13 @@ class IntraEvents
     /**
      * @var string
      *
+     * @ORM\Column(name="news_url", type="string", length=127)
+     */
+    private $newsUrl;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="news_title", type="string", length=255)
      */
     private $newsTitle;
@@ -106,16 +113,17 @@ class IntraEvents
      */
     private $newsStatus;
 
+    /**
+     * @var integer
+     * @ORM\Column(name="news_vacation_type", type="integer")
+     */
+    private $newsVacationType;
 
     /**
-     * Get id
-     *
-     * @return int
+     * @var boolean
+     * @ORM\Column(name="news_allday", type="integer", "default":1}
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $newsAllday = '1';
 
     /**
      * Set newsId
@@ -428,16 +436,6 @@ class IntraEvents
     {
         return $this->newsStatus;
     }
-    /**
-     * @var integer
-     */
-    private $newsVacationType;
-
-    /**
-     * @var boolean
-     */
-    private $newsAllday = '1';
-
 
     /**
      * Set newsVacationType
@@ -486,11 +484,6 @@ class IntraEvents
     {
         return $this->newsAllday;
     }
-    /**
-     * @var string
-     */
-    private $newsUrl;
-
 
     /**
      * Set newsUrl

@@ -22,19 +22,22 @@
     </section>
 
     <hr>
-
+{#<div class="container">#}
     {% if is_granted('ROLE_ADMIN') %}
         <section class="docs_form">
             <h3>Dodaj plik</h3>
-            {{ form_start(form) }}
+                {{ form_start(form) }}
 
-            {{ form_row(form.DocumentFile) }}
-            {{ form_row(form.documentDesc) }}
-
+                {{ form_row(form.DocumentFile) }}
+                {{ form_row(form.documentDesc) }}
+                {#<div class="col-xs-4">#}
+                {{ form_row(form.category) }}
+                <a href="{{ path('new_document_category') }}" class="btn btn-default">Dodaj Nową Kategorię</a>
+            {#</div>#}
             {{ form_end(form) }}
         </section>
     {% endif %}
-
+{#</div>#}
 
     <script>
         kendo.culture("pl-PL");

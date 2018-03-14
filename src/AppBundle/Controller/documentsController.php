@@ -191,9 +191,9 @@ class documentsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $mainCheckbox = $form->get('mainCheckbox')->getData();
             $parentId = $documentCategory->getParentId();
-            if (!$parentId and $mainCheckbox ) {
+            if (!$parentId and $mainCheckbox) {
                 $documentCategory->setParentId(0);
-            }else{
+            } else {
                 $documentCategory->setParentId($documentCategory->getParentId());
             }
             $em = $this->getDoctrine()->getManager();

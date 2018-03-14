@@ -24,12 +24,17 @@ class docType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // ...
             ->add('documentDesc', TextareaType::class, array('label' => 'Opis', 'required' => false, 'attr' => array('class' => 'tinymce')))
             ->add('DocumentFile', FileType::class, array('label' => 'Plik'))
-            ->add('category', EntityType::class, array( 'class' => IntraDocumentCategory::class))
-            ->add('submit', SubmitType::class, array('label' => 'Dodaj'))
-            // ...
+            ->add('category', EntityType::class, array( 'class' => IntraDocumentCategory::class,
+                'choice_label' => 'name',
+                'label' => 'Kategoria',
+//                'attr' => array('class' => 'col-sm-4')
+                ))
+            ->add('submit', SubmitType::class, array(
+                'label' => 'Dodaj',
+                'attr' => array('class' => 'btn btn-primary')
+            ))
         ;
     }
 

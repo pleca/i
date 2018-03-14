@@ -23,6 +23,13 @@ class IntraDocuments
     private $documentId;
 
     /**
+     * @var IntraDocumentCategory
+     * @ORM\Column(name="document_category_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\IntraDocumentCategory", inversedBy="intraDocuments")})
+     */
+    private $documentCategoryId;
+
+    /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
@@ -69,6 +76,22 @@ class IntraDocuments
      * @ORM\Column(type="integer", options={"unsigned":true})
      */
     private $documentUserId;
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->documentCategoryId;
+    }
+
+    /**
+     * @param mixed $documentCategoryId
+     */
+    public function setCategory($documentCategoryId)
+    {
+        $this->documentCategoryId = $documentCategoryId;
+    }
 
     /**
      * Set documentFile

@@ -8,8 +8,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\IntraDocumentCategory;
 use AppBundle\Entity\IntraDocuments;
 use AppBundle\Form\docType;
+use AppBundle\Form\DocumentCategoryType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -176,4 +178,36 @@ class documentsController extends Controller
 
         return $this->redirect($this->generateUrl('Dokumenty'));
     }
+
+    /**
+     * @Route("/documents/category/new", name="new_document_category")
+     */
+    public function newCategoryAction(Request $request)
+    {
+        $documentCategory = new IntraDocumentCategory();
+        $form = $this->createForm(DocumentCategoryType::class, $documentCategory);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mainCheckbox = $form->get('mainCheckbox')->getData();
+            $parentId = $documentCategory->getParentId();
+            if (!$parentId and $mainCheckbox ) {
+                $documentCategory->setParentId(0);
+            }else{
+                $documentCategory->setParentId($documentCategory->getParentId());
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($documentCategory);
+            $em->flush();
+            $this->addFlash("success", "Kategoria została dodana");
+
+            return $this->redirect($this->generateUrl('new_document_category'));
+        }
+
+        return $this->render('intranet/Document/newCategory.html.twig', array(
+                'form' => $form->createView())
+        );
+    }
+
+
 }

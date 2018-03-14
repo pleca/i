@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * IntraEvents
  *
  * @ORM\Table(name="intra_events")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\Entity\IntraEventsRepository")
+ * @ORM\Entity()
  */
 class IntraEvents
 {

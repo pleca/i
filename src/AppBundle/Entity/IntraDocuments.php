@@ -24,10 +24,10 @@ class IntraDocuments
 
     /**
      * @var IntraDocumentCategory
-     * @ORM\Column(name="document_category_id", type="integer")
+     * @ORM\JoinColumn(name="document_category_id", referencedColumnName="id")
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\IntraDocumentCategory", inversedBy="intraDocuments")})
      */
-    private $documentCategoryId;
+    private $documentCategory;
 
     /**
      * @var string
@@ -78,19 +78,19 @@ class IntraDocuments
     private $documentUserId;
 
     /**
-     * @return mixed
+     * @return IntraDocumentCategory
      */
     public function getCategory()
     {
-        return $this->documentCategoryId;
+        return $this->documentCategory;
     }
 
     /**
-     * @param mixed $documentCategoryId
+     * @param IntraDocumentCategory $documentCategory
      */
-    public function setCategory($documentCategoryId)
+    public function setCategory(IntraDocumentCategory $documentCategory)
     {
-        $this->documentCategoryId = $documentCategoryId;
+        $this->documentCategory = $documentCategory;
     }
 
     /**

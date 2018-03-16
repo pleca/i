@@ -24,16 +24,30 @@ class documentsController extends Controller
 {
     private function get_json_array()
     {
-        $ems = $this->getDoctrine()->getManager()->createQueryBuilder()
+        $qb1 = $this->getDoctrine()->getManager()->createQueryBuilder()
             ->from('AppBundle:IntraDocuments', 'd')
-            ->select("d.documentId, d.documentFile, d.documentFileTitle, d.documentDateAdd, d.documentDateMod, d.documentDesc, u.userName, u.userLastname")
+            ->select("d.documentId, d.documentFile, d.documentFileTitle, d.documentDateAdd, d.documentDateMod, d.documentDesc, u.userName, u.userLastname, c.id, c.parentId, c.name")
             ->leftJoin("AppBundle:IntraUser", "u", "WITH", "d.documentCreatorId=u.userId")
+            ->leftJoin("AppBundle:IntraDocumentCategory", "c", "WITH", "d.documentCategory=c.id")
             ->addOrderBy("d.documentId", "DESC")
             ->setMaxResults(10000)
             ->getQuery();
-        $data = $ems->getArrayResult();
+        $data = $qb1->getArrayResult();
 
         foreach ($data as $key => $row) {
+            if ($row["parentId"] == 0) {
+                $category = $row["name"];
+                $subcategory = null;
+            } else {
+                $qb2 = $this->getDoctrine()->getManager()->createQueryBuilder()
+                    ->select('c.name')
+                    ->from('AppBundle:IntraDocumentCategory', 'c')
+                    ->where('c.id = :id')
+                    ->setParameter('id', $row["parentId"])
+                    ->getQuery();
+                $category = $qb2->getSingleScalarResult();
+                $subcategory = $row["name"];
+            };
             $arr[] =
                 array(
                     "documentId" => $row["documentId"],
@@ -42,7 +56,9 @@ class documentsController extends Controller
                     "documentDateAdd" => $row["documentDateAdd"]->format('Y-m-d H:i:s'),
                     "documentDateMod" => $row["documentDateMod"]->format('Y-m-d H:i:s'),
                     "documentDesc" => $row["documentDesc"],
-                    "user" => $row["userName"] . ' ' . $row["userLastname"]
+                    "user" => $row["userName"] . ' ' . $row["userLastname"],
+                    "category" => $category,
+                    "subcategory" => $subcategory,
 
                 );
         }
@@ -190,9 +206,9 @@ class documentsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $mainCheckbox = $form->get('mainCheckbox')->getData();
             $parentId = $documentCategory->getParentId();
-            if (!$parentId and $mainCheckbox ) {
+            if (!$parentId and $mainCheckbox) {
                 $documentCategory->setParentId(0);
-            }else{
+            } else {
                 $documentCategory->setParentId($documentCategory->getParentId());
             }
             $em = $this->getDoctrine()->getManager();

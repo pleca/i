@@ -24,7 +24,7 @@ class IntraDocuments
 
     /**
      * @var IntraDocumentCategory
-     * @ORM\JoinColumn(name="document_category_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="document_category_id", referencedColumnName="id", nullable=true)
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\IntraDocumentCategory", inversedBy="intraDocuments")})
      */
     private $documentCategory;

@@ -20,24 +20,79 @@
     </div>
 
     <section class="home_grid">
-        <h2>Dokumenty</h2>
+        <h2>Kategorie dokumentów</h2>
         <div id="grid"></div>
     </section>
 
     <hr>
     {% if is_granted('ROLE_ADMIN') %}
-        <section class="docs_form">
-            <h3>Dodaj nową kategorię dokumentu</h3>
-            {{ form_start(form) }}
-            {{ form_row(form.mainCheckbox) }}
-            {{ form_row(form.name) }}
-            <div id="app_bundle_document_div_parent_category">
-                {{ form_row(form.parentId) }}
-            </div>
-            {{ form_row(form.save) }}
-            {{ form_end(form) }}
-        </section>
+        <div class="container">
+            <section class="docs_form">
+                {#<h3>Dodaj nową</h3>#}
+                {{ form_start(form) }}
+                {{ form_row(form.mainCheckbox) }}
+                {{ form_row(form.name) }}
+                <div id="app_bundle_document_div_parent_category">
+                    {{ form_row(form.parentId) }}
+                </div>
+                {{ form_row(form.save) }}
+                {{ form_widget(form.save, { 'class': 'btn-danger' }) }}
+                {{ form_end(form) }}
+            </section>
+        </div>
     {% endif %}
+
+    <div class="container">
+        <hr>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nazwa Kategorii</th>
+                <th>Typ</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>{% if category.parentId == 0 %}główna{% else %}podkategoria{% endif %}</td>
+                    <td>
+                        <a href="{{ path('document_category_update', { 'id': category.id }) }}" class="btn btn-info">
+                            <i class="fa fa-pencil"></i>Edytuj</a>
+                        <button class="btn btn-danger deleteCategory" id="{{ category.id }}">
+                            <i class="fa fa-close" aria-hidden="true"></i>Usuń
+                        </button>
+                        <div class="confirmation">
+                            <h3>Uwaga!</h3>
+                            <h4>Czy na pewno chcesz usunąć tę kategorię? Razem z kategorią usuniesz dokumenty należące
+                                do niej!</h4>
+                            <hr/>
+                            <p>Porada: przed usunięciem tej kategorii, przypisz dokumentom tej kategorii nową.</p>
+                            <a href="#" class="btn btn-success delete"><i class="fa fa-check" aria-hidden="true"></i>
+                                Tak</a>
+                            <a class="btn btn-danger cancel"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</a>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                $('.deleteCategory').on('click', function () {
+                                    var path = "{{ path('document_category_delete', {'id': category.id })|raw }}";
+                                    $('.confirmation').css('display', 'block');
+                                    $('.confirmation > .delete').attr('href', path);
+                                    $('.cancel').click(function () {
+                                        $('.confirmation').css('display', 'none');
+                                    });
+                                });
+                            });
+                        </script>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
     <script>
         $("#app_bundle_document_category_type_mainCheckbox").change(function () {
             if (this.checked) {

@@ -351,4 +351,5 @@ class IntraUser implements UserInterface
     {
         return $this->userVacationDays;
     }
+
 }

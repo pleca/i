@@ -29,7 +29,11 @@ class IntraDocumentCategory
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\IntraDocuments", mappedBy="documentCategory")
+     * @ORM\OneToMany(
+     *     targetEntity="AppBundle\Entity\IntraDocuments",
+     *     mappedBy="documentCategory",
+     *     cascade={"persist", "remove"}
+     * )
      */
     private $intraDocuments;
 

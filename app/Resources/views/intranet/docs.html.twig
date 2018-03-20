@@ -13,31 +13,56 @@
     <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
     <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
     <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
-    <div class="well well-sm"><span class="path"><a
-                    href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('css/bootstrap.min.css') }}"></script>
+    <div class="col-sm-12">
+        <div class="well well-sm"><span class="path"><a
+                        href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {% include ('::flash-messages.html.twig') %}
+            </div>
+        </div>
 
-    <section class="home_grid">
-        <h2>Dokumenty</h2>
-        <div id="grid"></div>
-    </section>
+        <section class="home_grid">
+            <h2>Dokumenty</h2>
+            <hr>
 
-    <hr>
-{#<div class="container">#}
-    {% if is_granted('ROLE_ADMIN') %}
-        <section class="docs_form">
-            <h3>Dodaj plik</h3>
-                {{ form_start(form) }}
-
-                {{ form_row(form.DocumentFile) }}
-                {{ form_row(form.documentDesc) }}
-                {#<div class="col-xs-4">#}
-                {{ form_row(form.category) }}
-                <a href="{{ path('new_document_category') }}" class="btn btn-default">Dodaj Nową Kategorię</a>
-            {#</div>#}
-            {{ form_end(form) }}
+            <!-- Trigger the modal with a button -->
+            {% if is_granted('ROLE_ADMIN') %}
+                <button type="button" class="btn btn-block " data-toggle="modal" data-target="#modalForm">Dodaj
+                    dokument
+                </button>
+            {% endif %}
+            <!-- Modal -->
+            <div id="modalForm" class="modal fade mb-3" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Dodawanie pliku</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ form_start(form) }}
+                            {{ form_row(form.DocumentFile) }}
+                            {{ form_row(form.documentDesc) }}
+                            {{ form_row(form.category) }}
+                            <a href="{{ path('document_category') }}" class="btn btn-default">Dodaj Nową
+                                Kategorię</a>
+                            <div class="text-right cancel-div"></div>
+                        </div>
+                        <div class="modal-footer">
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="grid" style="margin-top: 1em"></div>
+            <hr>
         </section>
-    {% endif %}
-{#</div>#}
+    </div>
 
     <script>
         kendo.culture("pl-PL");
@@ -60,9 +85,14 @@
                             url: "{{ path('deletedoc') }}",
                             type: "post",
                             dataType: "json"
-                        }
+                        },
+                        {#create: {#}
+                        {#url: "{{ path('createdoc') }}",#}
+                        {#type: "post",#}
+                        {#dataType: "json"#}
+                        {#}#}
                     },
-                    group: [ { field: "category" }, { field: "subcategory" } ],
+                    group: [{field: "category"}, {field: "subcategory"}],
                     batch: true,
                     pageSize: 40,
                     schema: {
@@ -73,7 +103,9 @@
                                 documentDesc: {editable: true},
                                 documentFile: {editable: true},
                                 documentDateAdd: {editable: false},
-                                documentDateMod: {editable: false}
+                                documentDateMod: {editable: false},
+                                category: {editable: true},
+                                subcategory: {editable: true}
                             }
                         }
                     }
@@ -85,6 +117,7 @@
                 selectable: false,
                 groupable: true,
                 sortable: true,
+                // toolbar: ["create"],
                 columns: [
                     {
                         field: "documentFile",
@@ -102,6 +135,14 @@
                     {
                         field: "user",
                         title: "Twórca"
+                    },
+                    {
+                        field: "category",
+                        title: "Kategoria"
+                    },
+                    {
+                        field: "subcategory",
+                        title: "Podkategoria"
                     }
                     {% if is_granted('ROLE_ADMIN') %}
                     ,
@@ -115,20 +156,9 @@
                 editable: {
                     mode: "popup",
                     confirmation: true,
-                    // update: true,
+                    // editor:,
                     template: $("#popup_editor").html()
                 }
-                // ,
-                // to skopiowane z http://jsfiddle.net/BCBzS/1302/
-                // edit: function(e) {
-                //     $(e.contariner)
-                //         .find("input[name='FirstName']")
-                //         .data("kendoAutoComplete")
-                //         .bind("change", function(e) {
-                //             console.log("auto complete changed");
-                //         });
-                // },
-
             });
         });
     </script>
@@ -138,35 +168,51 @@
             <div class="k-edit-label">
                 <label for="documentFile">Plik</label>
             </div>
-            {#<div data-container-for="documentFile" class="k-edit-field">#}
-                <input name="files" id="files" type="file" aria-label="files" />
-
-                <input name="documentId" id="documentId" type="text" data-bind="value:documentId" style="display: none;"/>
+            <div data-container-for="documentFile" class="k-edit-field">
+                <input name="files" id="files" type="file" aria-label="files"/>
+            </div>
+            <input name="documentId" id="documentId" type="text" data-bind="value:documentId" style="display: none;"/>
 
             <div class="k-edit-label">
                 <label for="documentDateAdd">Data Dodania</label>
             </div>
             <div class="k-edit-field">
-                <input type="text" class="k-input k-textbox k-state-disabled" name="documentDateAdd" data-bind="value:documentDateAdd" disabled>
+                <input type="text" class="k-input k-textbox k-state-disabled" name="documentDateAdd"
+                       data-bind="value:documentDateAdd" disabled>
             </div>
 
+            <div class="k-edit-label">
+                <label for="documentDesc">Opis</label>
+            </div>
             <div data-container-for="documentDesc" class="k-edit-field">
-                <div class="k-edit-label">
-                    <label for="documentDesc">Opis</label>
-                </div>
                 <textarea name="documentDesc" class="k-textbox" data-bind="value:documentDesc"></textarea>
             </div>
 
             <div class="k-edit-label">
                 <label for="user">Twórca</label>
-                </div>
-                <div data-container-for="user" class="k-edit-field">
-                <input type="text" class="k-input k-textbox k-state-disabled" name="user" data-bind="value:user" disabled>
+            </div>
+            <div data-container-for="user" class="k-edit-field">
+                <input type="text" class="k-input k-textbox k-state-disabled" name="user" data-bind="value:user"
+                       disabled>
             </div>
 
-            <button type="submit" class="k-button k-primary">Submit</button>
+            <div class="k-edit-label">
+                <label for="category">Kategoria</label>
+            </div>
+            <div data-container-for="category" class="k-edit-field">
+                <input type="text" class="k-input k-textbox" name="category" data-bind="value:category">
+            </div>
+
+            <div class="k-edit-label">
+                <label for="subcategory">Podkategoria</label>
+            </div>
+            <div data-container-for="subcategory" class="k-edit-field">
+                <input type="text" class="k-input k-textbox" name="subcategory" data-bind="value:subcategory">
+            </div>
+
+            {#<button type="submit" class="k-button k-primary">Aktualizuj</button>#}
         </form>
-                {#<input type="file"#}
+        {#<input type="file"#}
                 {#class="k-input k-textbox"#}
                 {#name="documentFile"#}
                 {#kendo-upload#}

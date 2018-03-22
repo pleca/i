@@ -7,7 +7,7 @@
 {%  block body %}
     <link rel="stylesheet" href="{{ asset('css/colorbox.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}" />
-    <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+    <div class="well well-sm"><span class="path"><a href="{{ path('Aktualności') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
     <div class="row">
         <div class="col-sm-12">
             {% include ('::flash-messages.html.twig') %}

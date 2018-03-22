@@ -14,10 +14,10 @@
     <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
     <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('css/bootstrap.min.css') }}"></script>
+    {#<script src="{{ asset('css/bootstrap.min.css') }}"></script>#}
     <div class="col-sm-12">
         <div class="well well-sm"><span class="path"><a
-                        href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span>
+                        href="{{ path('Aktualności') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span>
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -26,7 +26,7 @@
         </div>
 
         <section class="home_grid">
-            <h2>Dokumenty</h2>
+            <h2 id="dana">Dokumenty</h2>
             <hr>
 
             <!-- Trigger the modal with a button -->
@@ -66,6 +66,11 @@
 
     <script>
         kendo.culture("pl-PL");
+
+        $(".k-window").load(function(){
+            console.log("aaaaaaaa")
+        });
+
         $(document).ready(function () {
             var debug_url = '?XDEBUG_SESSION_START=PHPSTORM';
             var
@@ -160,7 +165,37 @@
                     template: $("#popup_editor").html()
                 }
             });
+
+            categoriesDS = new kendo.data.DataSource({
+                {#transport: {#}
+                    {#read: function(options) {#}
+                        {#$.ajax({#}
+                            {#url: "{{ path('get_json_categories') }}",#}
+                            {#dataType: 'json',#}
+                            {#success: function(result) {#}
+                                {#options.success(result);#}
+                            {#}#}
+                        {#});#}
+                    {#}#}
+                {#}#}
+                transport: {
+                    read: {
+                        url: "{{ path('get_json_categories') }}",
+                        dataType: "json"
+                    }
+                }
+            });
         });
+
+
+        $("#categoriesInput").kendoDropDownList({
+            dataTextField: "text",
+            dataValueField: "value",
+            dataSource: data,
+            height: 100
+        })
+            .closest(".k-widget")
+            .attr("id", "products_wrapper");
     </script>
 
     <script id="popup_editor" type="text/x-kendo-template">
@@ -210,49 +245,46 @@
                 <input type="text" class="k-input k-textbox" name="subcategory" data-bind="value:subcategory">
             </div>
 
+
+            <!-- dropdownlist-->
+            <div class="k-edit-label">
+                <label for="FacultyRankId">Kategoria</label>
+            </div>
+            <!-- dropdownlist editor for field: "FacultyRankId" -->
+            <div class="k-edit-field" id="categoriesDiv">
+
+                <select id="categoriesInput"
+                        name="id"
+                        data-role="dropdownlist"
+                        data-option-label="Kategoria"
+                        {#data-option-label="Wybierz województwo"#}
+                        data-value-primitive="true"
+                        data-filter="contains"
+                        data-value-field="id"
+                        {#data-value-field="Id"#}
+                        data-text-field="name"
+                        {#data-text-field="Name"#}
+                        data-bind="value:id"
+                        {#data-bind="value: EventProvinceID, source: type"#}
+                >
+                </select>
+
+                <input id="categoriesInput"
+                       name="id"
+                       data-role="dropdownlist"
+                       data-bind="value:id"
+                       data-source="categoriesDS"
+                       data-value-field="id"
+                       data-text-field="name"
+                       {#data-source='[{"text":"Głowna2","value":16,"selected":true},{"text":"podkategoria1","value":22}, {"text":"podkategoria2","value":24}, {"text":"Głowna2","value":25}]'#}
+                       {#data-source='[{"text":"Płatny","value":1,"selected":true},{"text":"Bezpłatny","value":2}, {"text":"xxx","value":3}]'#}
+                       data-value-primitive="true"
+                />
+            </div>
+
+
             {#<button type="submit" class="k-button k-primary">Aktualizuj</button>#}
         </form>
-        {#<input type="file"#}
-                {#class="k-input k-textbox"#}
-                {#name="documentFile"#}
-                {#kendo-upload#}
-                {#k-options="gridUploadOptions"#}
-                {#data-bind="value:documentFile"#}
-                {#>#}
-            {#</div>#}
-            {#<p style="padding-top: 1em; text-align: right">#}
-
-            {#<input name="files" id="files" type="file" aria-label="files" />#}
-            {#</p>#}
-
-{#Data Dodania#}
-            {#<div class="k-edit-label">#}
-                {#<label for="documentDateAdd">Data Dodania</label>#}
-            {#</div>#}
-            {#<div class="k-edit-field">#}
-                {#<input type="text" class="k-input k-textbox" name="documentDateAdd" data-bind="value:documentDateAdd">#}
-            {#</div>#}
-
-{#Opis#}
-            {#<div class="k-edit-label">#}
-                {#<label for="documentDesc">Opis</label>#}
-            {#</div>#}
-            {#<div data-container-for="documentDesc" class="k-edit-field">#}
-                {#<input type="text" class="k-input k-textbox" name="documentDesc"#}
-                       {#data-bind="value:documentDesc">#}
-                {#<textarea name="documentDesc" class="k-textbox" data-bind="value:documentDesc"></textarea>#}
-            {#</div>#}
-
-{#Twórca#}
-            {#<div class="k-edit-label">#}
-                {#<label for="user">Twórca</label>#}
-            {#</div>#}
-            {#<div data-container-for="user" class="k-edit-field">#}
-                {#<input type="text" class="k-input k-textbox" name="user" data-bind="value:user">#}
-            {#</div>#}
-
-            {#<button type="submit" class="k-button k-primary">Submit</button>#}
-        {#</form>#}
     </script>
 
 {% endblock %}

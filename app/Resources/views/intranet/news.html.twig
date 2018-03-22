@@ -12,7 +12,7 @@
     <script src="{{ asset('telerik/js/kendo.timezones.min.js') }}"></script>
     <div class="">
         <div class="col-sm-12">
-            <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
+            <div class="well well-sm"><span class="path"><a href="{{ path('Aktualności') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span></div>
             <div class="row">
                 <div class="col-sm-12">
                     {% include ('::flash-messages.html.twig') %}
@@ -28,6 +28,7 @@
                 {{ form_row(form.newsTitle) }}
                 {{ form_row(form.newsShortText) }}
                 {{ form_row(form.newsText) }}
+                {{ form_row(form.newsDatePublication, {'attr': {'id': 'datetimepicker'}})}}
                 {{ form_row(form.newsImage) }}
                 {{ form_end(form) }}
 
@@ -91,6 +92,7 @@
                         </a>
                         {% if userType == 'ROLE_ADMIN' %}
                             <a href="news/edit/{{ el.newsTitle }}" class="btn btn-info"><i class="fa fa-pencil" id="editNews" aria-hidden="true"></i> Edytuj</a>
+                            {#<a href="{{ path('edit_news', {'id': el.newsId}) }}" class="btn btn-info"><i class="fa fa-pencil" id="editNews" aria-hidden="true"></i> Edytuj</a>#}
                             <button class="btn btn-danger deleteNews" id="{{ el.newsId }}"><i class="fa fa-close" aria-hidden="true"></i> Usuń</button>
                                 <div class="confirmation">
                                     <h3>Uwaga!</h3>
@@ -102,12 +104,16 @@
                             <script>
                                 $( document ).ready(function() {
                                     $('#{{ el.newsId }}').on('click', function () {
-                                        var path = "{{ path('deleteNews', {'newsId': el.newsId })|raw}}";
+                                        var path = "{{ path('deleteNews', {'newsId': el.newsId })|raw }}";
                                         $('.confirmation').css('display', 'block');
                                         $('.confirmation > .delete').attr('href', path);
                                         $('.cancel').click(function () {
                                             $('.confirmation').css('display', 'none');
                                         });
+                                    });
+                                    $("#add_news_newsDatePublication").kendoDateTimePicker({
+                                        value: new Date(),
+                                        dateInput: true
                                     });
                                 });
                             </script>

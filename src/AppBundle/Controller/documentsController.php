@@ -27,6 +27,24 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class documentsController extends Controller
 {
 
+    /**
+     * @Route("/get_doc_categories", name="get_json_categories")
+     */
+    public function getJsonCategories()
+    {
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder()
+            ->from('AppBundle:IntraDocumentCategory', 'c')
+            ->select("c.id, c.parentId, c.name")
+//            ->leftJoin("AppBundle:IntraUser", "u", "WITH", "d.documentCreatorId=u.userId")
+//            ->leftJoin("AppBundle:IntraDocumentCategory", "c", "WITH", "d.documentCategory=c.id")
+//            ->addOrderBy("d.documentId", "DESC")
+//            ->setMaxResults(10000)
+            ->getQuery();
+        $data = $qb->getArrayResult();
+        $p=0;
+        return new Response(json_encode($data), 200);
+    }
+
     private function get_json_array()
     {
         $qb1 = $this->getDoctrine()->getManager()->createQueryBuilder()

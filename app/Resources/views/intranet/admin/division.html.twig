@@ -1,7 +1,7 @@
 {% extends 'intranet/admin/admin.html.twig' %}
 {% block adminBlock %}
     <div class="row">
-        <div class="well well-sm"><span class="path"><a href="{{ path('Strona Główna') }}">Strona Główna</a> / <a href="{{ path('Admin') }}">Admin</a> / <a href="{{ path('Struktura') }}">Struktura</a> / <a href="{{ path('Departament',{'departmentName': departmentName})}}">{{ departmentName }}</a> / {{ divisionName }}</span></div>
+        <div class="well well-sm"><span class="path"><a href="{{ path('Aktualności') }}">Strona Główna</a> / <a href="{{ path('Admin') }}">Admin</a> / <a href="{{ path('Struktura') }}">Struktura</a> / <a href="{{ path('Departament',{'departmentName': departmentName})}}">{{ departmentName }}</a> / {{ divisionName }}</span></div>
         <div class="col-sm-12">
             {% include ('::flash-messages.html.twig') %}
         </div>

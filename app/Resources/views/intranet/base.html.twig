@@ -28,11 +28,11 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="{{ path('Strona Główna') }}"><img src="{{ asset('images/logo.png') }}"></a>
+                <a class="navbar-brand" href="{{ path('Aktualności') }}"><img src="{{ asset('images/logo.png') }}"></a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ path('Strona Główna') }}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+                    <li><a href="{{ path('Aktualności') }}"><i class="fa fa-home" aria-hidden="true"></i></a></li>
                     <li><a href="{{ path('Aktualności') }}">Newsy</a></li>
                     <li><a href="{{ path('Dokumenty') }}">Dokumenty</a></li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}

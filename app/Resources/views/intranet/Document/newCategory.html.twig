@@ -11,7 +11,7 @@
     <script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
     <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
     <div class="well well-sm"><span class="path">
-        <a href="{{ path('Strona Główna') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span>
+        <a href="{{ path('Aktualności') }}">Strona Główna</a> / {{ app.request.get('_route') }}</span>
     </div>
     <div class="row">
         <div class="col-sm-12">
@@ -67,17 +67,19 @@
                         </button>
                         <div class="confirmation">
                             <h3>Uwaga!</h3>
-                            <h4>Czy na pewno chcesz usunąć tę kategorię? Razem z kategorią usuniesz dokumenty należące
-                                do niej!</h4>
+                            <h4>Czy na pewno chcesz usunąć tę kategorię? <br><br>Razem z kategorią usuniesz dokumenty
+                                należące
+                                do niej<br> oraz jej podkategorie!</h4>
                             <hr/>
-                            <p>Porada: przed usunięciem tej kategorii, przypisz dokumentom tej kategorii nową.</p>
+                            <p>Porada: Jeśli chcesz zachowac dokumenty, przypisz <br>dokumentom nową kategorię przed
+                                usunięciem dotychczasowej.</p>
                             <a href="#" class="btn btn-success delete"><i class="fa fa-check" aria-hidden="true"></i>
                                 Tak</a>
                             <a class="btn btn-danger cancel"><i class="fa fa-close" aria-hidden="true"></i> Anuluj</a>
                         </div>
                         <script>
                             $(document).ready(function () {
-                                $('.deleteCategory').on('click', function () {
+                                $('#'+'{{category.id}}').on('click', function () {
                                     var path = "{{ path('document_category_delete', {'id': category.id })|raw }}";
                                     $('.confirmation').css('display', 'block');
                                     $('.confirmation > .delete').attr('href', path);

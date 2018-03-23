@@ -24,18 +24,93 @@
                 {% include ('::flash-messages.html.twig') %}
             </div>
         </div>
-        <div>
+        <div class="addressContainer listContainer">
             <h2>test</h2>
             <div id="view">
-                <input data-bind="value: name" />
+                <input data-bind="value: name"/>
                 <input id="add_news_newsDatePublication">
                 <button data-bind="click: displayGreeting">Display Greeting</button>
             </div>
         </div>
 
-
+        <form id="testView">
+            Firstname: <input id="firstName"
+                              type="text"
+                              data-bind="value: firstName">
+            <br/>
+            Lastname: <input id="lastName"
+                             type="text"
+                             data-bind="value: lastName">
+            <br/>
+            Fullname: <input id="fullName"
+                             type="text"
+                             data-bind="value: fullName"
+                             readonly>
+            <br/>
+            <input type="submit">
+        </form>
+        <a data-bind="attr: {href: websiteLink}"
+           target="_blank">
+            Click Here
+        </a>
     </div>
 
+
+
+
+    <div id="view">
+        <span id="container"
+              data-bind="visible: isVisible">
+        Some content here....
+        </span>
+        <br/>
+        <button id="toggleVisible"
+                data-bind="click: updateVisible">
+            Toggle Visible
+        </button>
+    </div>
+
+    <script>
+        var viewModel = kendo.observable({
+            isVisible: true,
+            updateVisible: function() {
+                this.set('isVisible', !this.get('isVisible'));
+            }
+        });
+        kendo.bind($('div#view'),viewModel);
+    </script>
+
+
+
+
+
+    <script>
+        var viewModel = kendo.observable({
+            websiteLink: 'http://www.packtpub.com',
+        });
+        kendo.bind($('a'), viewModel);
+    </script>
+    <script>
+        var viewModel = kendo.observable({
+            firstName: "Sagar",
+            lastName: "Ganatra",
+            fullName: function () {
+                return this.get("firstName") +
+                    ' ' + this.get("lastName");
+            }
+        });
+        kendo.bind($('form#testView'), viewModel);
+    </script>
+    <script>
+        var template = kendo.template("Full Name: " +
+            "<span> #= lastName # </span>," +
+            "<span> #= firstName # </span>");
+        var data = {};
+        data.lastName = "Smith";
+        data.firstName = "Todd";
+        var result = template(data);
+        $('.addressContainer').append(result);
+    </script>
     <script>
 
         $("#add_news_newsDatePublication").kendoDateTimePicker({
@@ -45,11 +120,25 @@
 
         var viewModel = kendo.observable({
             name: "John Doe",
-            displayGreeting: function() {
+            displayGreeting: function () {
                 var name = this.get("name");
                 alert("Hello, " + name + "!!!");
             }
         });
+    </script>
+    <script type="text/x-kendo-template" id="testTemplate">
+        # for (var i=0; i < functions.length; i++) { #
+        <li> #= functions[i] #</li>
+        # } #
+    </script>
+    <script>
+        var templateContent = $('#testTemplate').html();
+        var template = kendo.template(templateContent);
+        var functions = ["concat", "indexOf", "join", "lastIndexOf",
+            "pop", "push", "reverse", "shift", "slice", "sort", "splice",
+            "toString", "unshift", "valueOf"];
+        var result = template(functions);
+        $('.listContainer').append(result);
     </script>
 
 {% endblock %}

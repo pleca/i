@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class editDepartment extends AbstractType
+class addDepartment extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,11 +19,7 @@ class editDepartment extends AbstractType
         $array = $options['departmentDirectorUid'];
         $builder
             ->add('departmentName', TextType::class, array('label' => 'Nazwa '))
-            ->add('departmentDirectorUid', ChoiceType::class, array(
-                'choices' => array_flip($array),
-                'label' => 'Dyrektor',
-                'choices_as_values' => true))
-            ->add('save', SubmitType::class, array('label' => 'Zapisz'));
+            ->add('save', SubmitType::class, array('label' => 'Dodaj'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

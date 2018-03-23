@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * IntraEvents
  *
  * @ORM\Table(name="intra_events")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\IntraEventsRepository")
  */
 class IntraEvents
 {
@@ -35,6 +35,29 @@ class IntraEvents
      * @ORM\Column(name="news_date_mod", type="datetime")
      */
     private $newsDateMod;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="news_date_publication", type="datetime", nullable=true)
+     */
+    private $newsDatePublication;
+
+    /**
+     * @return \DateTime
+     */
+    public function getNewsDatePublication()
+    {
+        return $this->newsDatePublication;
+    }
+
+    /**
+     * @param \DateTime $newsDatePublication
+     */
+    public function setNewsDatePublication($newsDatePublication)
+    {
+        $this->newsDatePublication = $newsDatePublication;
+    }
 
     /**
      * @var string

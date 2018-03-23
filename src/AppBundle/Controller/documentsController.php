@@ -26,6 +26,14 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class documentsController extends Controller
 {
+    /**
+     * @Route("/test", name="test")
+     */
+    public function testAction()
+    {
+
+        return $this->render('intranet/test.html.twig', []);
+    }
 
     /**
      * @Route("/get_doc_categories", name="get_json_categories")
@@ -35,13 +43,9 @@ class documentsController extends Controller
         $qb = $this->getDoctrine()->getManager()->createQueryBuilder()
             ->from('AppBundle:IntraDocumentCategory', 'c')
             ->select("c.id, c.parentId, c.name")
-//            ->leftJoin("AppBundle:IntraUser", "u", "WITH", "d.documentCreatorId=u.userId")
-//            ->leftJoin("AppBundle:IntraDocumentCategory", "c", "WITH", "d.documentCategory=c.id")
-//            ->addOrderBy("d.documentId", "DESC")
-//            ->setMaxResults(10000)
             ->getQuery();
         $data = $qb->getArrayResult();
-        $p=0;
+
         return new Response(json_encode($data), 200);
     }
 
@@ -133,47 +137,6 @@ class documentsController extends Controller
         return $this->render('intranet/docs.html.twig', array('docs_json' => json_encode($arr), 'form' => $form->createView()));
     }
 
-//    /**
-//     * @Route("/documents/new", name="createdoc")
-//     */
-//    public function newAction(Request $request)
-//    {
-//        $docf = new IntraDocuments();
-//        $form = $this->createForm(docType::class, $docf);
-//        $form->handleRequest($request);
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//
-//            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
-//            $file = $docf->getDocumentFile();
-//            $fileName = md5(uniqid()) . '.' . $file->guessExtension();
-//
-//            $file->move(
-//                $this->getParameter('docs_directory'),
-//                $fileName
-//            );
-//
-//            $currentTime = new \DateTime(date("Y-m-d H:i:s"));
-//            $userId = $this->getUser()->getUserId();
-//
-//            $docf->setDocumentFile($fileName);
-//            $docf->setdocumentFileTitle($file->getClientOriginalName());
-//            $docf->setdocumentDateAdd($currentTime);
-//            $docf->setdocumentDateMod($currentTime);
-//            $docf->setDocumentType($file->getClientMimeType());
-//            $docf->setDocumentCreatorId($userId);
-//            $docf->setDocumentUserId($userId);
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($docf);
-//            $em->flush();
-//
-//            return $this->redirect($this->generateUrl('Dokumenty'));
-//        }
-//
-//        $arr = $this->get_json_array();
-//        return $this->render('intranet/docs.html.twig', array('docs_json' => json_encode($arr), 'form' => $form->createView()));
-//    }
-
     /**
      * @Route("/get_docs", name="getjsondocs")
      */
@@ -210,9 +173,6 @@ class documentsController extends Controller
             }
         }
 
-        #$testfile = fopen($this->getParameter('docs_directory')."newfile_update.txt", "w") or die("Unable to open file!");
-        #fwrite($testfile, print_r($request , TRUE));
-        #fclose($testfile);
         return new Response(json_encode($req, true), 200);
     }
 
@@ -289,12 +249,6 @@ class documentsController extends Controller
             ->getRepository(IntraDocumentCategory::class)
             ->findAll();
 
-        if (!$categories) {
-            throw $this->createNotFoundException(
-                'Nie znaleziono kategorii'
-            );
-        }
-
         return $this->render('intranet/Document/newCategory.html.twig', array('categories' => $categories,
                 'form' => $form->createView())
         );
@@ -319,6 +273,7 @@ class documentsController extends Controller
             $this->addFlash("success", "Kategoria została edytowana");
             return $this->redirect($this->generateUrl('document_category'));
         }
+
         return $this->render('intranet/Document/editCategory.html.twig', [
             'form' => $form->createView(),
         ]);
@@ -330,20 +285,18 @@ class documentsController extends Controller
     public function deleteCategoryAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:IntraDocumentCategory')->find($id);
-//        $documents = $em->getRepository('AppBundle:IntraDocuments')->findBy(['documentCategory' => $id]);
+        $category = $em->getRepository('AppBundle:IntraDocumentCategory')->findOneBy(array('id' => $id));
+        $subcategories = $em->getRepository('AppBundle:IntraDocumentCategory')->findBy(array('parentId' => $id));
 
         if (!$category) {
             throw $this->createNotFoundException('Nie można znaleźć kategorii.');
         }
 
-//        if ($documents) {
-//            foreach ($documents as $document) {
-//                $document->setCategory(new IntraDocumentCategory());
-//                $em->persist($document);
-//            }
-//            $p = 0;
-//        }
+        if ($subcategories) {
+            foreach ($subcategories as $subcategory) {
+                $em->remove($subcategory);
+            }
+        }
 
         $em->remove($category);
         $em->flush();

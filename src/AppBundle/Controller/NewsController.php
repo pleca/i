@@ -21,11 +21,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 class NewsController extends Controller
-
 {
-
     /**
-     * @Route("/news", name="Aktualności")
+     * @Route("/", name="Aktualności")
      */
     public function newsAction(Request $request)
     {
@@ -33,13 +31,9 @@ class NewsController extends Controller
         $form = $this->createForm(addNews::class, $newsForm);
         $news = $this->getDoctrine()
             ->getRepository('AppBundle:IntraEvents')
-            ->findBy(array('newsType' => 1));
-
+            ->findAllOrderedByDatePublication();
         $user = $this->get('security.token_storage')->getToken()->getUsername();
         if ($user != "anon.") {
-
-            #$file_s = $this->getDoctrine()->getRepository('AppBundle:IntraUser')->findOneBy(array('userName' => $user));
-
             $em = $this->getDoctrine()->getManager();
             $query = $em->createQuery(
                 "SELECT c.userType FROM AppBundle:IntraUser c WHERE c.userName ='" . $user . "'"
@@ -136,6 +130,7 @@ class NewsController extends Controller
         $form->get('newsTitle')->setData($ct['newsTitle']);
         $form->get('newsShortText')->setData($ct['newsShortText']);
         $form->get('newsText')->setData($ct['newsText']);
+        $form->get('newsDatePublication')->setData($ct['newsDatePublication']);
         $form->handleRequest($request);
         $post = $em->getRepository('AppBundle:IntraEvents')->find($ct['newsId']);
         /** @var $post IntraEvents */
@@ -164,6 +159,7 @@ class NewsController extends Controller
             $post->setNewsDateMod(new \DateTime('now', (new \DateTimeZone('Europe/Warsaw'))));
             $post->setNewsStart(new \DateTime('now', (new \DateTimeZone('Europe/Warsaw'))));
             $post->setNewsEnd(new \DateTime('now', (new \DateTimeZone('Europe/Warsaw'))));
+            $post->setNewsDatePublication($newsForm->getNewsDatePublication());
             $post->setNewsCreatorId($ct['newsCreatorId']);
             $post->setNewsUserId($ct['newsUserId']);
             $post->setNewsType($ct['newsType']);

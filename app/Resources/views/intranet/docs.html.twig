@@ -103,6 +103,7 @@
                     schema: {
                         model: {
                             id: "documentId",
+                            categoryId: "categoryId",
                             fields: {
                                 documentId: {editable: false},
                                 documentDesc: {editable: true},
@@ -231,19 +232,19 @@
                        disabled>
             </div>
 
-            <div class="k-edit-label">
-                <label for="category">Kategoria</label>
-            </div>
-            <div data-container-for="category" class="k-edit-field">
-                <input type="text" class="k-input k-textbox" name="category" data-bind="value:category">
-            </div>
+            {#<div class="k-edit-label">#}
+                {#<label for="category">Kategoria</label>#}
+            {#</div>#}
+            {#<div data-container-for="category" class="k-edit-field">#}
+                {#<input type="text" class="k-input k-textbox" name="category" data-bind="value:category">#}
+            {#</div>#}
 
-            <div class="k-edit-label">
-                <label for="subcategory">Podkategoria</label>
-            </div>
-            <div data-container-for="subcategory" class="k-edit-field">
-                <input type="text" class="k-input k-textbox" name="subcategory" data-bind="value:subcategory">
-            </div>
+            {#<div class="k-edit-label">#}
+                {#<label for="subcategory">Podkategoria</label>#}
+            {#</div>#}
+            {#<div data-container-for="subcategory" class="k-edit-field">#}
+                {#<input type="text" class="k-input k-textbox" name="subcategory" data-bind="value:subcategory">#}
+            {#</div>#}
 
 
             <!-- dropdownlist-->
@@ -252,40 +253,10 @@
             </div>
             <!-- dropdownlist editor for field: "FacultyRankId" -->
             <div class="k-edit-field" id="categoriesDiv">
-
-                {#<select id="categoriesInput"#}
-                        {#name="id"#}
-                        {#data-role="dropdownlist"#}
-                        {#data-option-label="Kategoria"#}
-                        {#data-option-label="Wybierz województwo"#}
-                        {#data-value-primitive="true"#}
-                        {#data-filter="contains"#}
-                        {#data-value-field="id"#}
-                        {#data-value-field="Id"#}
-                        {#data-text-field="name"#}
-                        {#data-text-field="Name"#}
-                        {#data-bind="value:id"#}
-                        {#data-bind="value: EventProvinceID, source: type"#}
-                {#>#}
-                {#</select>#}
-
-                {#<input id="categoriesInput"#}
-                       {#name="id"#}
-                       {#data-role="dropdownlist"#}
-                       {#data-bind="value:id"#}
-                       {#data-source="categoriesDS"#}
-                       {#data-value-field="id"#}
-                       {#data-text-field="name"#}
-                       {#data-source='[{"text":"Głowna2","value":16,"selected":true},{"text":"podkategoria1","value":22}, {"text":"podkategoria2","value":24}, {"text":"Głowna2","value":25}]'#}
-                       {#data-source='[{"text":"Płatny","value":1,"selected":true},{"text":"Bezpłatny","value":2}, {"text":"xxx","value":3}]'#}
-                       {#data-value-primitive="true"#}
-                {#/>#}
-
-
                 <input id="categoriesInput" name="id"
                        {# tu wskazuję z którą wartością z data-source wiązać ten input tj z czym synchronizować, czyli
                         zmiany w inpucie na które pole ma wpływać z dataSource#}
-                       data-bind="value:id"
+                       data-bind="value:categoryId"
                        data-value-field="id"
                        {#to co jest wyświetlane w dropdown#}
                        data-text-field="name"

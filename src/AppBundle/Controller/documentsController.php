@@ -86,6 +86,7 @@ class documentsController extends Controller
                     "user" => $row["userName"] . ' ' . $row["userLastname"],
                     "category" => $category,
                     "subcategory" => $subcategory,
+                    "categoryId" => $row["id"],
 
                 );
         }
@@ -186,7 +187,7 @@ class documentsController extends Controller
         if (!$data) {
             return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
         }
-
+        $data = $data['models'][0];
         if (!$data["documentId"]) {
             return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
         }

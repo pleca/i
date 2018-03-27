@@ -60,7 +60,7 @@ class documentsController extends Controller
             if ($value['parentId'] < 1) {
                 $data[$key]['name'] = strtoupper($value['name']);
             } else {
-                $data[$key]['name'] = '  ' . strtolower($value['name']);
+                $data[$key]['name'] = '    ' . strtolower($value['name']);
             }
         }
 

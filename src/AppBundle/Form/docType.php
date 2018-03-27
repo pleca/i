@@ -29,7 +29,6 @@ class docType extends AbstractType
             ->add('category', EntityType::class, array( 'class' => IntraDocumentCategory::class,
                 'choice_label' => 'name',
                 'label' => 'Kategoria',
-//                'attr' => array('class' => 'col-sm-4')
                 ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Dodaj',

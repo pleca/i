@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * @Route("/documents")
@@ -40,11 +41,28 @@ class documentsController extends Controller
      */
     public function getJsonCategories()
     {
-        $qb = $this->getDoctrine()->getManager()->createQueryBuilder()
-            ->from('AppBundle:IntraDocumentCategory', 'c')
-            ->select("c.id, c.parentId, c.name")
-            ->getQuery();
-        $data = $qb->getArrayResult();
+
+        $em = $this->getDoctrine()->getManager();
+
+        /**
+         * zapytanie zwraca grupy i ich pogrupy kolejno, jedna grupa i jej dzieci i kolejna grupa i jej dzieci
+         */
+        $sql = " 
+   SELECT `id` as `categoryId`,`name`,`parent_id` as `parentId`, ( SELECT LPAD(`intra_document_category`.id, 5, '0') FROM `intra_document_category` parent WHERE parent.id = `intra_document_category`.id AND parent.parent_id = 0 UNION SELECT CONCAT(LPAD(parent.id, 5, '0'), '.', LPAD(child.id, 5, '0')) FROM `intra_document_category` parent INNER JOIN `intra_document_category` child ON (parent.id = child.parent_id) WHERE child.id = `intra_document_category`.id AND parent.parent_id = 0 ) AS level2 FROM `intra_document_category` order by level2
+    ";
+
+        $em = $this->getDoctrine()->getManager();
+        $stmt = $em->getConnection()->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll();
+
+        foreach ($data as $key => $value) {
+            if ($value['parentId'] < 1) {
+                $data[$key]['name'] = strtoupper($value['name']);
+            } else {
+                $data[$key]['name'] = '  ' . strtolower($value['name']);
+            }
+        }
 
         return new Response(json_encode($data), 200);
     }
@@ -149,6 +167,7 @@ class documentsController extends Controller
 
     /**
      * @Route("/delete", name="deletedoc")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteAction(Request $request)
     {
@@ -179,6 +198,7 @@ class documentsController extends Controller
 
     /**
      * @Route("/update", name="updatedoc")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request)
     {
@@ -187,17 +207,18 @@ class documentsController extends Controller
         if (!$data) {
             return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
         }
-        $data = $data['models'][0];
+//        $data = $data['models'][0];
         if (!$data["documentId"]) {
             return new Response('{ "errors": ["Brak danych", "Wprowadź dane"] }', 200);
         }
 
         $em = $this->getDoctrine()->getManager();
         $document = $em->getRepository('AppBundle:IntraDocuments')->find($data["documentId"]);
+        $category = $em->getRepository('AppBundle:IntraDocumentCategory')->findOneBy(['id' => $data["categoryId"]]);
 
         $document->setDocumentDesc($data["documentDesc"]);
 
-        if ($_FILES['files']) {
+        if (!empty($_FILES['files']) and ($_FILES['files']['size'] > 0)) {
             $file = new UploadedFile(
                 $_FILES['files']['tmp_name'],
                 $_FILES['files']['name'],
@@ -215,6 +236,7 @@ class documentsController extends Controller
         $document->setDocumentDateMod(new \DateTime(date("Y-m-d H:i:s")));
         $document->setDocumentUserId($userId);
         $document->setDocumentCreatorId($userId);
+        $document->setCategory($category);
         $em->persist($document);
         $em->flush();
 
@@ -223,6 +245,7 @@ class documentsController extends Controller
 
     /**
      * @Route("/category", name="document_category")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function newCategoryAction(Request $request)
     {
@@ -257,6 +280,7 @@ class documentsController extends Controller
 
     /**
      * @Route("/category/{id}/update", name="document_category_update")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function updateCategoryAction(Request $request, $id)
     {
@@ -282,6 +306,7 @@ class documentsController extends Controller
 
     /**
      * @Route("/category/{id}/delete", name="document_category_delete")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function deleteCategoryAction(Request $request, $id)
     {

@@ -67,7 +67,7 @@
     <script>
         kendo.culture("pl-PL");
 
-        $(".k-window").load(function(){
+        $(".k-window").load(function () {
             console.log("aaaaaaaa")
         });
 
@@ -91,11 +91,6 @@
                             type: "post",
                             dataType: "json"
                         },
-                        {#create: {#}
-                        {#url: "{{ path('createdoc') }}",#}
-                        {#type: "post",#}
-                        {#dataType: "json"#}
-                        {#}#}
                     },
                     group: [{field: "category"}, {field: "subcategory"}],
                     batch: true,
@@ -123,7 +118,17 @@
                 selectable: false,
                 groupable: true,
                 sortable: true,
-                // toolbar: ["create"],
+                filterable: {
+                    extra: false,
+                    operators: {
+                        string: {
+                            contains: "Zawiera",
+                            startswith: "Zaczyna się od",
+                            eq: "Jest równe",
+                            neq: "Nie jest równe"
+                        }
+                    }
+                },
                 columns: [
                     {
                         field: "documentFile",
@@ -168,17 +173,6 @@
             });
 
             categoriesDS = new kendo.data.DataSource({
-                {#transport: {#}
-                    {#read: function(options) {#}
-                        {#$.ajax({#}
-                            {#url: "{{ path('get_json_categories') }}",#}
-                            {#dataType: 'json',#}
-                            {#success: function(result) {#}
-                                {#options.success(result);#}
-                            {#}#}
-                        {#});#}
-                    {#}#}
-                {#}#}
                 transport: {
                     read: {
                         url: "{{ path('get_json_categories') }}",
@@ -187,16 +181,6 @@
                 }
             });
         });
-
-
-        $("#categoriesInput").kendoDropDownList({
-            dataTextField: "text",
-            dataValueField: "value",
-            dataSource: data,
-            height: 100
-        })
-            .closest(".k-widget")
-            .attr("id", "products_wrapper");
     </script>
 
     <script id="popup_editor" type="text/x-kendo-template">
@@ -232,33 +216,18 @@
                        disabled>
             </div>
 
-            {#<div class="k-edit-label">#}
-                {#<label for="category">Kategoria</label>#}
-            {#</div>#}
-            {#<div data-container-for="category" class="k-edit-field">#}
-                {#<input type="text" class="k-input k-textbox" name="category" data-bind="value:category">#}
-            {#</div>#}
-
-            {#<div class="k-edit-label">#}
-                {#<label for="subcategory">Podkategoria</label>#}
-            {#</div>#}
-            {#<div data-container-for="subcategory" class="k-edit-field">#}
-                {#<input type="text" class="k-input k-textbox" name="subcategory" data-bind="value:subcategory">#}
-            {#</div>#}
-
-
             <!-- dropdownlist-->
             <div class="k-edit-label">
                 <label for="FacultyRankId">Kategoria</label>
             </div>
             <!-- dropdownlist editor for field: "FacultyRankId" -->
             <div class="k-edit-field" id="categoriesDiv">
-                <input id="categoriesInput" name="id"
-                       {# tu wskazuję z którą wartością z data-source wiązać ten input tj z czym synchronizować, czyli
-                        zmiany w inpucie na które pole ma wpływać z dataSource#}
+                <input id="categoriesInput" name="categoryId"
+                        {# tu wskazuję z którą wartością z data-source wiązać ten input tj z czym synchronizować, czyli
+                         zmiany w inpucie na które pole ma wpływać z dataSource#}
                        data-bind="value:categoryId"
-                       data-value-field="id"
-                       {#to co jest wyświetlane w dropdown#}
+                       data-value-field="categoryId"
+                        {#to co jest wyświetlane w dropdown#}
                        data-text-field="name"
                        data-source="categoriesDS"
                        data-role="dropdownlist"
@@ -266,11 +235,21 @@
                 />
             </div>
 
+            <script type="text/javascript">
+                $('.k-edit-buttons:eq(1)').hide();
+                $("span.k-dropdown-wrap > span.k-input").each(function() {
+                    console.log($(this).text());
+                    var text = $(this).text().replace('PODKATEGORIA666, ', '.   .');
+                    $(this).text(text);
+                });
 
-            {#<button type="submit" class="k-button k-primary">Aktualizuj</button>#}
-        </form>
+
+            <\/script>
+                <div class="k-edit-buttons k-state-default">
+                    <button type="submit" class="k-button k-primary"> Aktualizuj </button>
+                </div>
+            </form>
     </script>
-
 {% endblock %}
 
 

@@ -60,7 +60,7 @@ class documentsController extends Controller
             if ($value['parentId'] < 1) {
                 $data[$key]['name'] = strtoupper($value['name']);
             } else {
-                $data[$key]['name'] = '    ' . strtolower($value['name']);
+                $data[$key]['name'] = '   ' . strtolower($value['name']);
             }
         }
 
@@ -119,7 +119,11 @@ class documentsController extends Controller
     public function filesAction(Request $request)
     {
         $docf = new IntraDocuments();
-        $form = $this->createForm(docType::class, $docf);
+        $form = $this->createForm(
+            docType::class,
+            $docf,
+            ['entityManager' => $this->getDoctrine()->getManager(),]
+        );
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -133,9 +137,15 @@ class documentsController extends Controller
                 $fileName
             );
 
+            $formData=$request->get('doc');
+            $categoryId = $formData['category'];
+            $em = $this->getDoctrine()->getManager();
+            $category = $em->getRepository('AppBundle:IntraDocumentCategory')->find($categoryId);
+
             $currentTime = new \DateTime(date("Y-m-d H:i:s"));
             $userId = $this->getUser()->getUserId();
 
+            $docf->setCategory($category);
             $docf->setDocumentFile($fileName);
             $docf->setdocumentFileTitle($file->getClientOriginalName());
             $docf->setdocumentDateAdd($currentTime);

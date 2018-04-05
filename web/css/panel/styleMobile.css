@@ -1,0 +1,570 @@
+.wysun_blok_menu .fa-times {
+  opacity: 0;
+}
+@media all and (max-width: 768px) {
+  .drukDoWypelnieniaPopUp .daneStronyUmowyPopUp .panel {
+    margin-top: 5px !important;
+  }
+  .drukDoWypelnieniaPopUp .daneStronyUmowyPopUp .panel:first-child {
+    margin-top: 0 !important;
+  }
+  .przyciskZapiszZmianyZielony,
+  .inputPole {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .panel-body {
+    overflow-x: auto;
+  }
+  .stopkaStrony {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+  }
+  .stopkaStrony .wersja {
+    top: 5px;
+  }
+  .container-fluid {
+    padding: 0;
+  }
+  textarea,
+  .list-group-item,
+  .modal-header h5,
+  .popover-title,
+  body,
+  div,
+  p,
+  span,
+  input,
+  button {
+    font-size: 10px !important;
+  }
+  .popover-content {
+    padding: 5px !important;
+  }
+  .popover-content > button {
+    margin-bottom: 0 !important;
+  }
+  button.close {
+    transform: scale(2);
+    margin-top: 4px !important;
+    margin-right: 6px;
+  }
+  .height_40 {
+    height: 30px !important;
+  }
+  .naglowekStrony {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    height: 25px;
+  }
+  .naglowekStrony .czasTrwaniaSesji {
+    top: 4px;
+  }
+  .naglowekLogo.text-right {
+    text-align: center !important;
+  }
+  .naglowekStronyTyl {
+    margin-bottom: 30px !important;
+  }
+  .stopkaStrony {
+    height: 28px;
+  }
+  .stopkaStrony p {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 100%;
+  }
+  .wysun_menu {
+    padding: 4px 8px 3px;
+  }
+  .wysun_menu .wysun_menu_kreska {
+    height: 3px;
+    width: 20px;
+  }
+  #szczegolyElementu .padding_r_10,
+  .drukDoWypelnieniaPopUp .padding_r_10 {
+    padding-right: 0 !important;
+  }
+}
+@media all and (max-width: 540px) {
+  #ui-datepicker-div {
+    width: 237px;
+    z-index: 5 !important;
+  }
+  .mpadding_r_0 {
+    padding-right: 0 !important;
+  }
+  .rankingWynik,
+  .listaUzytkownikowUprawnienia {
+    padding: 5px 0 !important;
+  }
+  .wyswietlRankingPole {
+    margin: 0 !important;
+  }
+  .wyswietlRankingPole button {
+    margin: 0 !important;
+  }
+  div.dataTables_wrapper > div.row {
+    margin: 0;
+  }
+  .konkursDokumentOgolne {
+    padding: 0 !important;
+  }
+  .konkursDokumentOgolne #przyciskUploadGrupaUpload,
+  .konkursDokumentOgolne .przyciskUploadGrupaUpload {
+    height: 30px;
+    line-height: 17px;
+  }
+  .konkursDokumentOgolne .ZapiszDodajDokument,
+  .konkursDokumentOgolne .dropdown > button {
+    margin-bottom: 0 !important;
+  }
+  #popUpTresc2 .col-xs-6 > .well:last-child {
+    margin-bottom: 5px !important;
+  }
+  .konkursDokumentWidocznosc .col-xs-6 {
+    padding: 0 !important;
+  }
+  .konkursDokumentWidocznosc .col-xs-6 .well {
+    margin: 5px !important;
+  }
+  .konkursDokumentWidocznosc .panel-body {
+    padding: 5px !important;
+  }
+  .konkursyModul > .col-md-12,
+  .konkursyModul > .col-md-2,
+  .konkursyModul > .col-md-10 {
+    padding: 0 !important;
+  }
+  .konkursyModul > .col-md-12 > .panel,
+  .konkursyModul > .col-md-2 > .panel,
+  .konkursyModul > .col-md-10 > .panel,
+  .konkursyModul > .col-md-12 .gdzie_jestem,
+  .konkursyModul > .col-md-2 .gdzie_jestem,
+  .konkursyModul > .col-md-10 .gdzie_jestem {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .konkursyModul .konkurs {
+    padding: 0 !important;
+    margin: 5px 0;
+  }
+  .konkursyModul .konkurs .konkursOpcje {
+    right: 10px;
+  }
+  .konkursyModul .konkurs .wyswietlKonkurs .panel-body {
+    padding: 0 !important;
+  }
+  .konkursDane .col-md-6,
+  .konkursDane .col-md-1 {
+    padding: 0 !important;
+  }
+  .konkursDane #przyciskUploadGrupaUpload,
+  .konkursDane .przyciskUploadGrupaUpload {
+    height: 30px;
+    margin-bottom: 0 !important;
+    margin-top: 5px !important;
+  }
+  .konkursDane #przyciskUploadGrupaUpload input,
+  .konkursDane .przyciskUploadGrupaUpload input {
+    margin-bottom: 0 !important;
+  }
+  .konkursDane .panel-body {
+    padding: 5px !important;
+  }
+  .konkursDane .konkursDodajNowy {
+    margin-bottom: 0 !important;
+  }
+  .konkursDane .konkursWidocznosc .col-xs-6 {
+    padding: 0 !important;
+  }
+  .konkursDane .konkursWidocznosc .col-xs-6 .well {
+    margin: 5px !important;
+  }
+  .panelHistoriaTresc {
+    padding: 0 !important;
+    border: none !important;
+  }
+  .panelHistoriaTresc .moja_tabela {
+    margin: 5px 0;
+    border: none !important;
+  }
+  .tab-pane,
+  .modal .modal-header,
+  .modal-body {
+    padding: 5px !important;
+  }
+  .tabelka_avatar {
+    display: none;
+  }
+  .btn {
+    border-radius: 0 !important;
+  }
+  .grupyUzytkownika {
+    margin-top: 5px;
+  }
+  .modal-body > .panel,
+  .tab-content > .panel,
+  .uzytkownikGrupaUprawnien,
+  .tab-content .margin_b_10,
+  .pnelHistroiaRejestracji {
+    margin-bottom: 5px !important;
+  }
+  .panelGrupaUprawnienUzytkownik:last-child,
+  .panelHistoria:last-child {
+    margin-bottom: 0 !important;
+  }
+  #uzytkownikAvatarPrzyciskGrupaUpload,
+  #szczegolyElementu .dropdown button,
+  #szczegolyElementu input,
+  input,
+  .uzytkownikOgolnePopUp .dropdown button {
+    height: 30px !important;
+    padding: 5px !important;
+  }
+  #uzytkownikAvatarPrzyciskGrupa i {
+    height: 30px !important;
+    padding: 8px !important;
+  }
+  #panel_body_zawartosc,
+  .panel-body.panel_body_menu,
+  .panelLogowania,
+  .listaZakladek,
+  #szczegolyElementu {
+    padding: 5px !important;
+  }
+  .tab-content {
+    padding: 0 !important;
+  }
+  .btn,
+  .form-group,
+  input,
+  .pojGrupaUzytkownikow {
+    margin-bottom: 5px !important;
+  }
+  .form-group > input,
+  #uzytkownikAvatarPrzyciskGrupa .btn,
+  #uzytkownikAvatarPrzyciskGrupa .fa,
+  .zapiszZmianyAdministracja {
+    margin-bottom: 0 !important;
+  }
+  .table > thead > tr > th,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > th,
+  .table > thead > tr > td,
+  .table > tbody > tr > td,
+  .table > tfoot > tr > td {
+    padding: 2px;
+  }
+  .mobileColMd {
+    padding: 0 !important;
+  }
+  .mobileColMd > .panel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  #strona .administracjaSystememStrona,
+  #strona .filmyModul {
+    padding: 0 !important;
+  }
+  #strona .administracjaSystememStrona .szczegolyElementuZawartosc,
+  #strona .filmyModul .szczegolyElementuZawartosc,
+  #strona .administracjaSystememStrona .gdzieJestem,
+  #strona .filmyModul .gdzieJestem,
+  #strona .administracjaSystememStrona .stronaMenuBoczne,
+  #strona .filmyModul .stronaMenuBoczne,
+  #strona .administracjaSystememStrona .glownaZawartoscStrony,
+  #strona .filmyModul .glownaZawartoscStrony {
+    padding: 0 !important;
+  }
+  #strona .administracjaSystememStrona .szczegolyElementuZawartosc > .panel,
+  #strona .filmyModul .szczegolyElementuZawartosc > .panel,
+  #strona .administracjaSystememStrona .gdzieJestem > .panel,
+  #strona .filmyModul .gdzieJestem > .panel,
+  #strona .administracjaSystememStrona .stronaMenuBoczne > .panel,
+  #strona .filmyModul .stronaMenuBoczne > .panel,
+  #strona .administracjaSystememStrona .glownaZawartoscStrony > .panel,
+  #strona .filmyModul .glownaZawartoscStrony > .panel,
+  #strona .administracjaSystememStrona .szczegolyElementuZawartosc .gdzie_jestem,
+  #strona .filmyModul .szczegolyElementuZawartosc .gdzie_jestem,
+  #strona .administracjaSystememStrona .gdzieJestem .gdzie_jestem,
+  #strona .filmyModul .gdzieJestem .gdzie_jestem,
+  #strona .administracjaSystememStrona .stronaMenuBoczne .gdzie_jestem,
+  #strona .filmyModul .stronaMenuBoczne .gdzie_jestem,
+  #strona .administracjaSystememStrona .glownaZawartoscStrony .gdzie_jestem,
+  #strona .filmyModul .glownaZawartoscStrony .gdzie_jestem {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  #strona .dataTables_wrapper .col-sm-12 {
+    padding: 0;
+  }
+  #strona .dataTables_wrapper .col-sm-6 {
+    padding: 0 5px;
+    width: 50%;
+    float: left;
+  }
+  #strona .dataTables_wrapper .col-sm-6 .dataTables_length {
+    text-align: left;
+  }
+  #strona .dataTables_wrapper .col-sm-6 .dataTables_filter {
+    text-align: right;
+  }
+  #strona .dataTables_wrapper .col-sm-4 {
+    padding: 0 5px;
+    width: 40%;
+  }
+  #strona .dataTables_wrapper .col-sm-4 .dataTables_info {
+    text-align: left;
+  }
+  #strona .dataTables_wrapper .col-sm-8 {
+    padding: 0 5px;
+    width: 100%;
+  }
+  #strona .dataTables_wrapper .col-sm-8 .pagination {
+    padding-left: 0 !important;
+  }
+  #strona .uzytkownikGrupaUprawnien .panel-body {
+    padding: 0;
+  }
+  #strona .uzytkownikGrupaUprawnien .panel-body .list-group-item {
+    border-radius: 0;
+    border-top: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  #menu .menu {
+    right: -800px;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+  }
+  #menu .menu .menu_kreska,
+  #menu .menu .ustawienia_uzytkownika {
+    display: none;
+  }
+  #menu .menu .fa-times {
+    display: block;
+    top: 3px;
+    right: 11px;
+    opacity: 1;
+  }
+  #menu .menu .uzytkownik_informacje {
+    padding: 10px;
+  }
+  #menu .menu .menu_opcje_l_r {
+    padding: 0;
+  }
+  #menu .menu .menu_opcje_l_r a {
+    display: block;
+    float: left;
+    width: 50%;
+    padding: 5px 10px;
+  }
+  #menu .menu .menu_opcje_l_r a .menu_element {
+    float: none;
+    margin: 0;
+    width: 100% !important;
+  }
+  #menu .menu #wyloguj {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  #menu .wysun_blok_menu {
+    right: 0;
+  }
+  .strona_glowna,
+  .powiadomieniaMobile,
+  #stronaZawartosc {
+    padding: 0 !important;
+  }
+  .strona_glowna > .panel,
+  .powiadomieniaMobile > .panel,
+  #stronaZawartosc > .panel {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .strona_glowna > .panel > .panel-body {
+    padding: 5px 0 10px !important;
+  }
+  .strona_glowna > .panel > .panel-body > .col-xs-12 {
+    padding: 0 10px;
+    margin: 5px 0 0;
+  }
+  .strona_glowna > .panel > .panel-body > .col-xs-12 .element_do_wyboru {
+    padding: 10px;
+  }
+  .powiadomieniaMobile .panel-body {
+    padding: 0;
+  }
+  .tytulStrony {
+    display: none;
+  }
+  .szkoleniaModul > .col-md-12,
+  .szkoleniaModul > .col-md-2,
+  .szkoleniaModul > .col-md-7,
+  .szkoleniaModul > .col-md-3 {
+    padding: 0 !important;
+  }
+  .szkoleniaModul > .col-md-12 > .panel,
+  .szkoleniaModul > .col-md-2 > .panel,
+  .szkoleniaModul > .col-md-7 > .panel,
+  .szkoleniaModul > .col-md-3 > .panel,
+  .szkoleniaModul > .col-md-12 .gdzie_jestem,
+  .szkoleniaModul > .col-md-2 .gdzie_jestem,
+  .szkoleniaModul > .col-md-7 .gdzie_jestem,
+  .szkoleniaModul > .col-md-3 .gdzie_jestem {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .szkoleniaModul .panel_body_menu .margin_t_10 {
+    margin-top: 0 !important;
+  }
+  .szkoleniaModul .panel {
+    margin: 0 !important;
+  }
+  .szkoleniaModul .lak {
+    width: 100%;
+  }
+  .szkoleniaModul .lak > .szapp,
+  .szkoleniaModul .szkolenia_aktualnosc_pojedyncza:last-child,
+  .szkoleniaModul .szkolenia_aktualnosc_pojedyncza {
+    width: 100%;
+    margin: 5px 0;
+    padding: 0;
+  }
+  .szkoleniaModul .szap_img {
+    display: none;
+  }
+  .szkoleniaModul .szkoleniaZawartosc,
+  .szkoleniaModul .listaKonczacychSieSzkolen {
+    margin-top: 20px;
+  }
+  .szkoleniaModul .szkoleniaZawartosc #panel_body_zawartosc .panel {
+    margin-bottom: 10px !important;
+  }
+  .szkoleniaModul .szkoleniaZawartosc #panel_body_zawartosc .panel .panel-body {
+    padding: 5px 0;
+  }
+  .oknoSzkolenia .well {
+    margin-bottom: 5px !important;
+  }
+  .oknoSzkolenia .panel {
+    margin-bottom: 5px !important;
+  }
+  .oszPlan .panel-body {
+    padding: 5px 0;
+  }
+  .oknoSzkoleniaUczestnicy .panel {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .szczegolyTestu {
+    margin-top: 5px !important;
+  }
+  .zapiszUsunDoSzkolenia,
+  .listaKonczacychSieSzkolen {
+    margin-top: 0 !important;
+  }
+  .zapiszUsunDoSzkolenia {
+    margin-bottom: 0 !important;
+  }
+  .drukiModul > .col-md-12,
+  .drukiModul > .col-md-2,
+  .drukiModul > .col-md-6,
+  .drukiModul > .col-md-4 {
+    padding: 0 !important;
+  }
+  .drukiModul > .col-md-12 > .panel,
+  .drukiModul > .col-md-2 > .panel,
+  .drukiModul > .col-md-6 > .panel,
+  .drukiModul > .col-md-4 > .panel,
+  .drukiModul > .col-md-12 .gdzie_jestem,
+  .drukiModul > .col-md-2 .gdzie_jestem,
+  .drukiModul > .col-md-6 .gdzie_jestem,
+  .drukiModul > .col-md-4 .gdzie_jestem {
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .drukiModul .glownaZawartoscStrony .panel-body {
+    padding: 5px 0;
+  }
+  .drukUmowy button,
+  .przyciskZapiszZmianyZielony,
+  .sposobPlatnosci button,
+  .inputPole input {
+    height: 30px;
+  }
+  .przyciskZapiszZmianyZielony,
+  .inputPole {
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+  }
+  .drukDoWypelnieniaPopUp .inputPole,
+  .drukDoWypelnieniaPopUp .przyciskZapiszZmianyZielony {
+    margin-bottom: 0 !important;
+  }
+  .drukDoWypelnieniaPopUp input {
+    margin-bottom: 5px !important;
+  }
+  .drukDoWypelnieniaPopUp .panel-body {
+    padding: 5px;
+  }
+  .dodajKonkursNowy {
+    padding: 0 !important;
+  }
+  .miniaturaKonkurs {
+    height: 160px !important;
+  }
+  .miniaturaDodatkowaGrafikaKonkurs {
+    width: 48% !important;
+  }
+  .panel_body_zawartosc .panel-body {
+    padding: 5px !important;
+  }
+  .panel_body_zawartosc .panel-body .film {
+    padding: 0 !important;
+  }
+}
+@media all and (max-width: 990px) {
+  .daneKlientaPopUp .padding_r_10,
+  .danePoszkodowany .padding_r_10,
+  .daneUprawnionegoPopUp .padding_r_10,
+  .daneOZdarzeniuPopUp .padding_r_10,
+  .daneStronyUmowyPopUp .padding_r_10,
+  .szczegolyUmowa .padding_r_10,
+  .daneDzialajacyWImieniu .padding_r_10,
+  .danePosiadaczaRachunkuEmerytalnego .padding_r_10,
+  .daneKlientaRzeczowe .padding_r_10,
+  .danePrzedmiotuUmowy .padding_r_10,
+  .daneoswiadczeniaUmowy .padding_r_10,
+  .daneUprawnionych .padding_r_10,
+  .daneSpadkobiercow .padding_r_10,
+  .daneUrzeduSkarbowegoKlienta .padding_r_10,
+  .danePelnomocnikaWlasciciela .padding_r_10,
+  .daneUrzeduSkarbowegoPelnomocnikaWlasciciela .padding_r_10,
+  .daneReprezentantaWlasciciela .padding_r_10,
+  .daneUrzeduSkarbowegoReprezentantaWlasciciela .padding_r_10,
+  .daneWspolwlascicielaRzeczowe .padding_r_10,
+  .daneUrzeduSkarbowegoWspolwlasciciela .padding_r_10,
+  .danePelnomocnikaWspolwlasciciela .padding_r_10,
+  .daneUrzeduSkarbowegoPelnomocnikaWspolwlasciciela .padding_r_10,
+  .daneReprezentantaWspolwlasciciela .padding_r_10,
+  .daneUrzeduSkarbowegoReprezentantaWspolwlasciciela .padding_r_10,
+  .daneRWD .padding_r_10
+  {
+    padding-bottom: 10px !important;
+    padding-right: 0px !important;
+  }
+
+}

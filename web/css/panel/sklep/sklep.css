@@ -1,0 +1,39 @@
+.sklepListaKategorii .nav {
+  width: 19%;
+  border: none;
+  margin-right: 1%;
+}
+.sklepListaKategorii .nav li {
+  margin-bottom: 5px;
+}
+.sklepListaKategorii .nav li.active a {
+  border: 1px solid #ddd !important;
+  background: #FFF !important;
+}
+.sklepListaKategorii .nav li a {
+  border-radius: 4px;
+  display: block;
+  cursor: pointer;
+  background: rgba(204, 204, 204, 0.2);
+  border-color: #eee #ddd #eee #eee;
+  margin-bottom: 1px;
+}
+.sklepListaKategorii .nav li a:hover {
+  border-color: #eee;
+  background: rgba(204, 204, 204, 0.7);
+}
+.sklepListaKategorii .tab-content {
+  width: 80%;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 4px;
+}
+.sklepListaKategorii .produktPojedynczy .panel-body {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  height: 140px;
+}
+.produktDane .wysiwyg-toolbar {
+  width: 100% !important;
+}

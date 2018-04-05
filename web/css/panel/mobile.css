@@ -1,0 +1,619 @@
+.mobile_opcje_logowania{
+	display:none;
+	width: 40px;
+	padding: 5px;
+	border: none;
+	text-align: center;
+	cursor:pointer;
+	position: fixed;
+	top:1px; 
+	right:3px;
+	z-index: 6;
+}
+
+.mobile_opcje_logowania .mol_e{
+	margin-bottom: 4px;
+	border-radius: 2px;
+	background: #FFF;
+	width:30px;
+	height: 5px;
+}
+
+.mobile_opcje_logowania .mol_e:last-child{
+	margin-bottom: 0;
+}
+
+#menu_mobile_logowanie{
+	position:fixed;
+	top:38px;
+	left:0;
+	overflow: hidden;
+	background: #FFF;
+	z-index: 2;
+	width: 100%;
+	box-shadow: 2px 2px 2px #666;
+}
+
+@media all and (max-width:800px){
+	.body_strona.lista.mobile_umowy .body_strona_l{
+		width:100%;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_l .element_do_wyboru{
+		width:90%;
+		padding: 15px 5%;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r{
+		width:96%;
+		padding: 2%;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz p{
+		padding: 2%;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_id{
+		width:6% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_imie{
+		width:24% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_nazwisko{
+		width:24% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_pesel{
+		width:16% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_opcje{
+		width:6% !important;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz {
+    	width: 100%;
+    }
+    .tabelka_dowod_osobisty{
+    	display:none;
+    }
+	.body_strona.lista .body_strona_l {
+	    width: 30%;
+	    position: relative;
+	    float: left;
+	}
+	
+	.uzytkownik_dane_element{
+		width:100%;
+		margin-right:0px;
+	}
+	.uzytkownik_imie{
+		margin-bottom: 10px;
+	}
+	.uzytkownik_dane input , #zaladowany_plik{
+	    width: 100%;
+		padding: 15px 5%;
+	}
+	#uzytkownik_stare_haslo, #uzytkownik_nowe_haslo, #uzytkownik_nowe_haslo_powtorz {
+	    width: 100%;
+		padding: 15px 5%;
+	}
+	.body_strona.lista{
+		margin-bottom: 20px;
+	}
+	.body_strona.lista .body_strona_r {
+	    width: 65%;
+	    background: #CCC;
+	    float: right;
+	    padding: 10px;
+	}
+	.menu_element {
+		width: 117px !important;
+	}
+	.body_strona.strona_glowna .element_do_wyboru{
+		width: 90%;
+		padding: 15px 5%;
+		margin-bottom:10px;
+		margin-left:0;
+	}
+	.wysun_menu {
+	    padding: 8px 8px;
+	    transition: 0.2s;
+	}
+	.wysun_blok_menu {
+	    right: -20px;
+	}
+	.menu {
+		top: -40px;
+	    width: 320px;
+	}
+	.wysun_menu .wysun_menu_kreska {
+		width: 30px;
+		height: 5px;
+	}
+	.wysun_menu .wysun_menu_kreska:last-child {
+		margin-bottom: 0;
+	}
+	
+	.zakladki_tresc {
+	    height: 370px;
+	}
+	p, body, html, div{
+		font-size: 14px;
+	}
+	input{
+		font-size: 12px;
+	}
+	
+	#powiadomienia_formularz .komunikat_blad {
+	    padding: 10px 5%;
+	    width: 89%;
+	}
+	
+	.mobile_opcje_logowania_opcje {
+		display:none;
+		
+	}
+	
+	.mobile_opcje_logowania_opcje .element_do_wyboru {
+        width:100%;
+		border:none;
+		border-bottom: 1px solid #CCC;
+        margin-bottom: 0 !important;
+        border-radius: 0;
+	}
+	
+	.mobile_opcje_logowania_opcje .element_do_wyboru:hover {
+		transform: scale(1);
+	    box-shadow: none;
+	    border: none !important;
+	    border-left: none !important;
+        border-bottom: 1px solid #CCC !important;
+	    background: #f2f2f2;
+	}
+	
+	.mobile_opcje_logowania_opcje{
+		overflow: hidden;
+	}
+	
+	.mobile_opcje_logowania {
+
+	    display: block;
+	}
+	
+	.body_strona_l, .body_strona_r{
+		float:none;
+	}
+	
+	.tytul_strony_b{
+		height: 40px;
+	}
+	.tytul_strony{
+		min-width: 540px;
+	}	
+	.tytul_strony p {
+		width:100%;
+		padding: 10px 0px;
+	}
+
+	.body_strona_tytul {
+	    width:85%;
+	    padding: 0px 5% 0px 10%;
+	}
+
+	.logowanie .body_strona_r {
+	    padding: 10px 2%;
+	    width: 96%;
+	    margin-bottom: 20px;
+	    min-height: 160px;
+	}
+	.logowanie .body_strona_r_tlo {
+		min-height: 150px;
+		
+	}
+	.zakladka_tresc_tresc {
+		background: none !important;
+	}
+	
+
+	
+	#formularz_rejestracyjny {
+	    top:0;
+		left:0;
+        width:100%;
+	}
+
+	.logowanie .body_strona_l {
+	    width: 100%;
+	}
+	.logowanie .element_do_wyboru {
+	   width:89%;
+		padding: 20px 5%;
+	}
+	.czas_trwania_sesji {
+	    top: 10px;
+	    left: 10px;
+	}
+	.zleceniodawca_formularz_element{
+		width:100%;
+		margin-right:0px;
+		margin-top:10px;
+	}
+	.zleceniodawca_formularz p {
+		margin-top:10px;
+	}
+	.zleceniodawca_formularz input{
+		width: 100%;
+		padding: 10px 5%;
+	}
+	#powiadomienia_www {
+	    min-width: 320px;
+	}
+	.zakladki .zakladki_element {
+	    float: left;
+	    margin: 5px 5px;
+	    padding: 15px 15px;
+	    border: 1px solid #FFF;
+	    border-bottom: 1px solid #FFF;
+	    border-radius:2px;
+	    cursor: pointer;
+	}
+	.tabelka_data{
+		display:none;
+	}
+	.lista_dostepnych_umow .element_do_wyboru{
+		width:84%;
+		padding: 15px 5%;
+		margin: 10px 3%;
+	}
+	.lista_umow_opcje {
+	    padding: 5px 2%;
+	    width: 100%;
+	}
+	
+	#tabelka_wyjazdow input, #tabelka_wyjazdow textarea {
+		border:none;
+		padding: 0;
+	}
+	#tabelka_wyjazdow textarea {
+		width: 100%;
+	}
+	
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_lp {
+	    width: 5%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_data {
+	    width: 11%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_mw {
+	    width: 11%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_md {
+	   	width: 11%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_rp {
+	    width: 37%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	.tabelka_wyjazdow_wiersz_naglowek .twwe_od {
+	    width: 12%;
+	    padding: 10px 1%;
+	    height:50px;
+	}
+	 .twwe_lp {
+	    width: 5%;
+	    padding: 12.8px 1% 10px;
+	}
+	
+	 .twwe_data {
+	    width: 11%;
+	    padding: 1%;
+	}
+	 .twwe_mw {
+	    width: 11%;
+	    padding: 1%;
+	}
+	.twwe_md {
+	   	width: 11%;
+	    padding: 1%;
+	}
+	 .twwe_rp {
+	    width: 37%;
+	    padding: 1%;
+	}
+	 .twwe_od {
+	    width: 12%;
+	    padding: 1%;
+	}
+	.tabelka_wyjazdow_opcje p {
+		margin-top:0;
+	}
+	/*-----------------TABELKA DOKUMENTOW----------------------------*/
+	.tabelka_dokumentow_wiersz_naglowek .td_lp {
+	    padding: 10px 0;
+	    height: 20px;
+	    width:6%;
+	}
+	.tabelka_dokumentow_wiersz_naglowek .td_w {
+	    padding: 10px 0;
+	    height: 20px;
+	    width:60%;
+	}
+	.tabelka_dokumentow_wiersz_naglowek .td_r {
+	    padding: 10px 0;
+	    height: 20px;
+	    border-right: none;
+	    width:33%;
+	}
+	.td_lp {
+	    padding-top: 10px;
+	    width:6%;
+	    height: 25px;
+	}
+	.td_w {
+	    width:60%;
+	    height: 35px;
+	    position: relative;
+	    overflow: hidden;
+	}
+	.td_r {
+	    border-right: none;
+	    width:33%;
+	}
+		#rodzaj_dokumentu {
+	    padding: 5px 0;
+	    width: 100%;
+	    border: none;
+	    height: 35px;
+	}
+	.tabelka_dokumentow_opcje p {
+		margin-top: 0;
+	}
+	.lista_klientow_opcje{
+		padding: 5px 5%;
+		width: 100%;
+		border: 1px solid #CCC;
+		height: 31px;
+	}
+	.select_dzialajacy_w_imieniu, .select_wynagrodzenie{
+		width:100% !important;
+		padding: 5px 5% !important;
+		float: none;
+	    position: relative;
+	}
+	.dodatkowa_informacja_dymek {
+	    float: none;
+	    position: relative;
+	    background: url(/img/info.png);
+	    background-size: 100% 100%;
+	    width: 30px;
+	    height: 30px;
+	    margin: 10px auto;
+	}
+	.dodatkowa_informacja_dymek span {
+		width: 240px;
+		left: -120px;
+	}
+	.dodatkowa_informacja_dymek span::after {
+	    left: 125px;
+	}
+	.zleceniodawca_formularz_data_wypadku input{
+		width:100%;
+		padding: 10px 5%;
+	}
+	.wynagrodzenie_opcje input, .dzialajacy_w_imieniu_dane input{
+		width:100%;
+		padding: 10px 5%;
+	}
+	.zleceniodawca_formularz_element input, .zleceniodawca_formularz_wynagrodzenie_procent input {
+	   	width:100%;
+		padding: 10px 5%;
+	}
+	.body_strona.lista.mobile_administracja .body_strona_l {
+	    width: 100%;
+	}
+	.body_strona.lista.mobile_administracja .body_strona_r {
+	    width: 96%;
+	    padding: 2%;
+	}
+	.body_strona.lista.mobile_administracja .body_strona_l .element_do_wyboru {
+	    width: 90%;
+	    padding: 15px 5%;
+	}
+	.tabelka_data_dodania, .tabelka_zmiana_hasla{
+		display:none;
+	}
+	.uzytkownik_dodaj_tlo input{
+		width:100%;
+		padding: 15px 5%;
+	}
+	.uzytkownik_szczegoly_tresc_pole{
+		width:100%;
+		margin-top:10px;
+	}
+	.uzytkownik_szczegoly_tresc_pole input{
+		width:100%;
+		padding: 15px 5%;
+	}
+	.uzytkownik_dodaj_tlo .uzytkownik_dodaj_tresc_pole{
+		width:100%;
+		margin-top:10px;
+	}
+	.uzytkownik_szczegoly_belka_gorna{
+		margin-bottom:0;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_id {
+	    width: 6%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_login {
+	    width: 30%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_uimie {
+	    width: 23%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_unazwisko {
+	    width: 20%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_opcje {
+	    width: 10%;
+	    padding: 1%;
+	}
+	.uzytkownik_szczegoly_opcje {
+	    position: relative;
+	    float: left;
+	    width: 100%;
+	}
+	.mobile_administracja .body_strona_l, .mobile_umowy .body_strona_l{
+		border-bottom:1px solid #CCC;
+		margin-bottom: 10px;
+	}
+	
+	.mobile_umowy .element_do_wyboru:last-child, .mobile_administracja .element_do_wyboru:last-child{
+		margin-bottom: 0 !important;
+	}
+	/*19-04-2017*/
+
+	.stopka_strony{
+		padding-top: 10px ;
+		padding-bottom: 10px ;
+	}
+
+    .body_strona{
+        padding-bottom: 40px;
+    }
+
+}
+
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*-----------------------------------------540px-----------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------*/
+
+@media all and (max-width:540px){
+	.login_napis{
+		display:none;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_id {
+	    width: 10%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_login {
+	    width: 20%;
+	    padding: 1%;
+	}
+	.body_strona.lista .body_strona_r .tabelka .tabelka_wiersz .tabelka_opcje {
+	    width: 12%;
+	    padding: 1%;
+	}
+	.uzytkownik_szczegoly_avatar{
+		width: 100%;
+	}
+	.uzytkownik_szczegoly_tresc {
+	    margin-left: 0px;
+	    float:right;
+	}
+	.tabelka_wyjazdow_wiersz_naglowek{
+		display:none;
+	}
+	.tabelka_wyjazdow_wiersz_element{
+		width:100%;
+		border-bottom:1px solid #CCC;
+		border-right: none;
+		text-align: left;
+		padding: 0px;
+	}
+	.tabelka_wyjazdow_wiersz_element input{
+		width:96% !important;
+		padding: 0px 2% !important;
+		text-align: left;
+	}
+	.tabelka_wyjazdow_wiersz_element textarea{
+		width:100% !important;
+		padding: 2% 2% !important;
+		text-align: left;
+	}
+	.twwe_lp{
+		background: #f2f2f2;
+	}
+	
+	.tabelka_umowa, .generuj, .generuj_oswiadczenie{
+		display:none;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_nazwisko{
+		width:35% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_pesel{
+		width:30% !important;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_opcje {
+	    width: 8% !important;
+	    padding: 0px 10px;
+	}
+	.body_strona.lista.mobile_umowy .body_strona_r .tabelka_wiersz .tabelka_imie{
+		display:none;
+	}
+	.body_strona_l.index{
+		border-top:none;
+	}
+	.body_strona_l{
+		border-top:1px solid #CCC;
+	}
+	.body_strona.lista .body_strona_l {
+    	width: 100%;
+    	float:right;
+    	padding: 10px 0px;
+    }
+    .body_strona.lista .body_strona_r {
+	    width: 96%;
+	    background: #CCC;
+	    float: left;
+	    padding: 2%;
+	    margin-bottom: 20px;
+	}
+	.tytul_strony p {
+		opacity: 0;
+	}
+	.zakladki_przycisk {
+		padding: 15px 15px;
+		border:1px solid #CCC;
+	}
+
+	#powrot_do_glownej {
+	    text-align: center;
+	}
+	.body_strona_tytul {
+	    text-align: center;
+	    margin-top:10px;
+	    width: 100%;
+		padding: 0 ;
+	}
+	.logowanie .body_strona_r {
+	    padding: 0 0;
+	    width: 100%;
+	    background: none;
+	    margin-bottom:40px;
+	    min-height: 190px;
+	}
+
+	.logowanie .body_strona_r_tlo {
+	    padding: 0;
+	}
+
+
+}
+
+@media all and (max-width:340px){
+
+}

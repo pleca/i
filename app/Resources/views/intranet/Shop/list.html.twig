@@ -42,6 +42,9 @@
 <link rel="stylesheet" href="{{ asset('css/panel/sklep/sklep.css') }}"/>
 <link rel="stylesheet" href="{{ asset('css/panel/animate.css') }}"/>
 
+{#moje style#}
+<link rel="stylesheet" href="{{ asset('css/panel/sklep/MojeSklep.css') }}"/>
+
 
 <div class="container-fluid padding_r_0 padding_l_0 sklepModul">
     <div class="col-md-12 gdzieJestem "><a href="https://umowy.votum-sa.pl/strona_glowna"><p>Strona główna</p></a>
@@ -54,15 +57,18 @@
             </div>
         </div>
     </div>
-    <div class="col-md-7 sklepModulZawartosc padding_l_0 padding_r_0">
+    <div class="col-md-10 sklepModulZawartosc padding_l_0 padding_r_0">
         <div class="panel panel-default">
             <div id="panel_body_zawartosc" class="panel-body ">
                 <div class="col-md-12 dodajProduktNowy margin_b_10 padding_0">
-                    <div class="panel panel-default ">
+                    <div class="panel panel-default col-md-8 add-product-button">
                         <div class="panel_naglowek"><i class="float_r fa fa-plus dodaj_produkt"
                                                        aria-hidden="true"></i>
                             <div class="clear_b"></div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <a id="cart-info" href="#">Koszyk<span><span data-bind="text: cart.contentsCount"></span>0 produktów</span></a>
                     </div>
                 </div>
                 <div class="clear_b"></div>
@@ -92,37 +98,34 @@
                                     class="width_100" href="#wydawnictwa" aria-controls="wydawnictwa" role="tab"
                                     data-toggle="tab">Wydawnictwa</a></li>
                     </ul>
-                    <div class="tab-content float_l padding_b_5 padding_t_5 padding_l_5 padding_r_5"
+                    {#<div class="tab-content float_l padding_b_5 padding_t_5 padding_l_5 padding_r_5"#}
+                    <div class="tab-content float_l"
                          style="min-height: 240px;">
 
                         <div role="tabpanel" class="tab-pane active materialy_drukowane" id="materialy_drukowane">
-                            <div id="listView">
-
-
-                                <script type="text/x-kendo-template" id="template">
-                                    {#<div class="col-md-3 padding_l_5 padding_r_5 padding_t_5 padding_b_5">#}
-                                    <div class="col-md-3">
-                                        <div class="panel panel-default margin_b_10 produktPojedynczy">
-                                            <div class="panel-heading">
-                                                #:ProductName#
-                                                <i class="fa fa-cart-plus float_r" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="panel-body">
-                                                <img class="width_100 height_auto"
-                                                     src="https://upload.wikimedia.org/wikipedia/commons/8/85/Dr._Strangelove_-_The_War_Room.png"
-                                                     alt="#: ProductName #"
-                                                >
-                                                <!--                                        <p>#:kendo.toString(UnitPrice, "c")#</p>-->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </script>
-
-
-                            </div>
+                            <div id="listView"></div>
                         </div>
-
                         <div id="pager" class="k-pager-wrap"></div>
+
+
+                        <script type="text/x-kendo-template" id="template">
+                            {#<div class="col-md-3 padding_l_5 padding_r_5 padding_t_5 padding_b_5">#}
+                            <div class="col-md-3">
+                                <div class="panel panel-default margin_b_10 produktPojedynczy">
+                                    <div class="panel-heading">
+                                        #:ProductName#
+                                        <i class="fa fa-cart-plus float_r" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img class="width_100 height_auto"
+                                             src="https://upload.wikimedia.org/wikipedia/commons/8/85/Dr._Strangelove_-_The_War_Room.png"
+                                             alt="#: ProductName #"
+                                        >
+                                        <!--                                        <p>#:kendo.toString(UnitPrice, "c")#</p>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </script>
 
                         <script>
                             var products = [{
@@ -229,9 +232,9 @@
                                     pageSize: 9
                                 });
 
-                                // $("#pager").kendoPager({
-                                //     dataSource: dataSource
-                                // });
+                                $("#pager").kendoPager({
+                                    dataSource: dataSource
+                                });
 
                                 $("#listView").kendoListView({
                                     dataSource: dataSource,
@@ -239,16 +242,8 @@
                                 });
                             });
                         </script>
-                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3 sklepModul">
-        <div class="panel panel-default">
-            <div class="panel-heading">Koszyk</div>
-            <div class="panel-body" id="szczegolyElementu">
-                <p>Wybierz element aby wyświetlić szczegóły...</p>
+                </div>
             </div>
         </div>
     </div>

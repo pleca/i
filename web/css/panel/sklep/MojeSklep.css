@@ -1,7 +1,7 @@
 #cart-info {
   float: right;
-  height: 48px;
-  line-height: 48px;
+  height: 39px;
+  line-height: 39px;
   vertical-align: middle;
   font-size: 12px;
   text-transform: uppercase;
@@ -59,10 +59,10 @@
   position: absolute;
   left: 0;
   top: 0;
-  border-top: 24px solid #000;
-  border-right: 24px solid transparent;
-  border-bottom: 24px solid transparent;
-  border-left: 24px solid #000;
+  border-top: 19.5px solid #000;
+  border-right: 19.5px solid transparent;
+  border-bottom: 19.5px solid transparent;
+  border-left: 19.5px solid #000;
 }
 
 #cart-info span:after {

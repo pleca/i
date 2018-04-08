@@ -46,6 +46,28 @@
 <link rel="stylesheet" href="{{ asset('css/panel/sklep/MojeSklep.css') }}"/>
 
 
+{# NIEDZIELA - SKOPIOWANE Z PANEL-PRZEDSTAWICIELA Z PIĄTKU#}
+{#<link rel="stylesheet" href="<?php echo 'https://' . $_SERVER ['HTTP_HOST'] . '/biblioteki/bootstrap-4.0.0-dist/css/bootstrap.css'; ?>" type="text/css" />#}
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+{#<script type="text/javascript" src="<?php adres_strony(); ?>biblioteki/bootstrap-4.0.0-dist/js/bootstrap.js"></script>#}
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+{#<script src="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/js/jquery.js"></script>#}
+<script src="{{ asset('telerik/js/jquery.min.js') }}"></script>
+{#<script src="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/js/kendo.all.js"></script>#}
+<script src="{{ asset('telerik/js/kendo.all.min.js') }}"></script>
+{#<script id="skrypty" type="text/javascript" src="<?php echo adres_strony(); ?>moduly/e-task/js/funkcje"></script>#}
+{#<link rel="stylesheet" href="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/styles/web/kendo.common.css" />#}
+<link rel="stylesheet" href="{{ asset('telerik/styles/kendo.common.min.css') }}"/>
+{#<link rel="stylesheet" href="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/styles/web/kendo.bootstrap-v4.css" />#}
+{#<link rel="stylesheet" href="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/styles/web/kendo.bootstrap.mobile.css" />#}
+{#<script src="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/js/messages/kendo.messages.pl-PL.js"></script>#}
+<script src="{{ asset('telerik/js/messages/kendo.messages.pl-PL.min.js') }}"></script>
+{#<script src="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/js/cultures/kendo.culture.pl-PL.js"></script>#}
+<script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
+{#<link rel="stylesheet" href="<?php echo 'https://' . $_SERVER ['HTTP_HOST'] . '/moduly/e-task/css/style.css'; ?>" type="text/css" />#}
+<link rel="stylesheet" href="{{ asset('css/panel/sklep/MojeSklep.css') }}"/>
+
+
 <div class="container-fluid padding_r_0 padding_l_0 sklepModul">
     <div class="col-md-12 gdzieJestem "><a href="https://umowy.votum-sa.pl/strona_glowna"><p>Strona główna</p></a>
     </div>
@@ -58,197 +80,179 @@
         </div>
     </div>
     <div class="col-md-10 sklepModulZawartosc padding_l_0 padding_r_0">
-        <div class="panel panel-default">
-            <div id="panel_body_zawartosc" class="panel-body ">
-                <div class="col-md-12 dodajProduktNowy margin_b_10 padding_0">
-                    <div class="panel panel-default col-md-8 add-product-button">
-                        <div class="panel_naglowek"><i class="float_r fa fa-plus dodaj_produkt"
-                                                       aria-hidden="true"></i>
-                            <div class="clear_b"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <a id="cart-info" href="#">Koszyk<span><span data-bind="text: cart.contentsCount"></span>0 produktów</span></a>
-                    </div>
-                </div>
-                <div class="clear_b"></div>
-                <div class="sklepListaKategorii">
-                    <ul class="nav nav-tabs float_l" role="tablist">
-                        <li role="presentation" data-klasa="materialy_drukowane"
-                            class="width_100 active materialy_drukowane"><a class="width_100"
-                                                                            href="#materialy_drukowane"
-                                                                            aria-controls="materialy_drukowane"
-                                                                            role="tab" data-toggle="tab">Materiały
-                                drukowane</a></li>
-                        <li role="presentation" data-klasa="gadzety" class="width_100 gadzety"><a class="width_100"
-                                                                                                  href="#gadzety"
-                                                                                                  aria-controls="gadzety"
-                                                                                                  role="tab"
-                                                                                                  data-toggle="tab">Gadżety</a>
-                        </li>
-                        <li role="presentation" data-klasa="artykuly_samochodowe"
-                            class="width_100 artykuly_samochodowe"><a class="width_100" href="#artykuly_samochodowe"
-                                                                      aria-controls="artykuly_samochodowe"
-                                                                      role="tab" data-toggle="tab">Artykuły
-                                samochodowe</a></li>
-                        <li role="presentation" data-klasa="wyposazenie" class="width_100 wyposazenie"><a
-                                    class="width_100" href="#wyposazenie" aria-controls="wyposazenie" role="tab"
-                                    data-toggle="tab">Wyposażenie</a></li>
-                        <li role="presentation" data-klasa="wydawnictwa" class="width_100 wydawnictwa"><a
-                                    class="width_100" href="#wydawnictwa" aria-controls="wydawnictwa" role="tab"
-                                    data-toggle="tab">Wydawnictwa</a></li>
-                    </ul>
-                    {#<div class="tab-content float_l padding_b_5 padding_t_5 padding_l_5 padding_r_5"#}
-                    <div class="tab-content float_l"
-                         style="min-height: 240px;">
-
-                        <div role="tabpanel" class="tab-pane active materialy_drukowane" id="materialy_drukowane">
-                            <div id="listView"></div>
-                        </div>
-                        <div id="pager" class="k-pager-wrap"></div>
-
-
-                        <script type="text/x-kendo-template" id="template">
-                            {#<div class="col-md-3 padding_l_5 padding_r_5 padding_t_5 padding_b_5">#}
-                            <div class="col-md-3">
-                                <div class="panel panel-default margin_b_10 produktPojedynczy">
-                                    <div class="panel-heading">
-                                        #:ProductName#
-                                        <i class="fa fa-cart-plus float_r" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="panel-body">
-                                        <img class="width_100 height_auto"
-                                             src="https://upload.wikimedia.org/wikipedia/commons/8/85/Dr._Strangelove_-_The_War_Room.png"
-                                             alt="#: ProductName #"
-                                        >
-                                        <!--                                        <p>#:kendo.toString(UnitPrice, "c")#</p>-->
-                                    </div>
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="dodajProduktNowy margin_b_10 padding_0">
+                        <div class="col-md-9">
+                            <div class="panel panel-default add-product-button">
+                                <div class="panel_naglowek"><i class="float_r fa fa-plus dodaj_produkt"
+                                                               aria-hidden="true"></i>
+                                    <div class="clear_b"></div>
                                 </div>
                             </div>
-                        </script>
-
-                        <script>
-                            var products = [{
-                                "ProductID": 1,
-                                "ProductName": "Chai",
-                                "UnitPrice": 18,
-                                "UnitsInStock": 39,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 2,
-                                "ProductName": "Chang",
-                                "UnitPrice": 19,
-                                "UnitsInStock": 17,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 3,
-                                "ProductName": "Aniseed Syrup",
-                                "UnitPrice": 10,
-                                "UnitsInStock": 13,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 4,
-                                "ProductName": "Chef Anton\u0027s Cajun Seasoning",
-                                "UnitPrice": 22,
-                                "UnitsInStock": 53,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 5,
-                                "ProductName": "Chef Anton\u0027s Gumbo Mix",
-                                "UnitPrice": 21.35,
-                                "UnitsInStock": 0,
-                                "Discontinued": true
-                            }, {
-                                "ProductID": 6,
-                                "ProductName": "Grandma\u0027s Boysenberry Spread",
-                                "UnitPrice": 25,
-                                "UnitsInStock": 120,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 7,
-                                "ProductName": "Uncle Bob\u0027s Organic Dried Pears",
-                                "UnitPrice": 30,
-                                "UnitsInStock": 15,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 8,
-                                "ProductName": "Northwoods Cranberry Sauce",
-                                "UnitPrice": 40,
-                                "UnitsInStock": 6,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 9,
-                                "ProductName": "Mishi Kobe Niku",
-                                "UnitPrice": 97,
-                                "UnitsInStock": 29,
-                                "Discontinued": true
-                            }, {
-                                "ProductID": 10,
-                                "ProductName": "Ikura",
-                                "UnitPrice": 31,
-                                "UnitsInStock": 31,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 11,
-                                "ProductName": "Queso Cabrales",
-                                "UnitPrice": 21,
-                                "UnitsInStock": 22,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 12,
-                                "ProductName": "Queso Manchego La Pastora",
-                                "UnitPrice": 38,
-                                "UnitsInStock": 86,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 13,
-                                "ProductName": "Konbu",
-                                "UnitPrice": 6,
-                                "UnitsInStock": 24,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 14,
-                                "ProductName": "Tofu",
-                                "UnitPrice": 23.25,
-                                "UnitsInStock": 35,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 15,
-                                "ProductName": "Genen Shouyu",
-                                "UnitPrice": 15.5,
-                                "UnitsInStock": 39,
-                                "Discontinued": false
-                            }, {
-                                "ProductID": 16,
-                                "ProductName": "Pavlova",
-                                "UnitPrice": 17.45,
-                                "UnitsInStock": 29,
-                                "Discontinued": false
-                            }
-                            ];
-                            $(function () {
-                                var dataSource = new kendo.data.DataSource({
-                                    data: products,
-                                    pageSize: 9
-                                });
-
-                                $("#pager").kendoPager({
-                                    dataSource: dataSource
-                                });
-
-                                $("#listView").kendoListView({
-                                    dataSource: dataSource,
-                                    template: kendo.template($("#template").html())
-                                });
-                            });
-                        </script>
-                </div>
+                        </div>
+                        <div class="col-md-3">
+                            <a id="cart-info" href="#">Koszyk<span><span data-bind="text: cart.contentsCount"></span>0 produktów</span></a>
+                        </div>
+                    </div>
+                    <div class="clear_b"></div>
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            {# LISTA PRODUKTÓW I KOSZYK #}
+                            <div class="layout-products">
+                                <p data-bind="visible: cart.cleared"> Dziękujemy za zakupy!</p>
+                                <!--MIEJSCE DLA PRODUKTÓW W KOSZYKU I ASORTYMENTU-->
+                                <div id="main-section">
+                                    <!--MIEJSCE DLA PRODUKTÓW DODANYCH DO KOSZYKA-->
+                                    <section id="pre-content"></section>
+                                    <!--MIEJSCE DLA ASORTYMENTU-->
+                                    <section id="content">
+                                        <ul id="main"></ul>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="clear_b"></div>
 </div>
+<div class="clear_b"></div>
+
+<script>
+    $(document).ready(function () {
+        var products;
+        // models / data
+        //ODBIERA DANE JSON Z PLIKU menu.json
+        var items = new kendo.data.DataSource({
+            data: products
+            // schema:
+            //     {
+            //         model: {}
+            //     },
+            // transport:
+            //     {
+            //         read:
+            //             {
+            //                 url:  "/data/menu.json",
+            //                 dataType: "json"
+            //             }
+            //     }
+        });
+
+        $("#content").kendoListView({
+            dataSource: items,
+            template: kendo.template($("#template").html())
+        });
+
+
+    });
+
+
+
+
+    products = [{
+        "ProductID": 1,
+        "ProductName": "Chai",
+        "UnitPrice": 18,
+        "UnitsInStock": 39,
+        "Discontinued": false
+    }, {
+        "ProductID": 2,
+        "ProductName": "Chang",
+        "UnitPrice": 19,
+        "UnitsInStock": 17,
+        "Discontinued": false
+    }, {
+        "ProductID": 3,
+        "ProductName": "Aniseed Syrup",
+        "UnitPrice": 10,
+        "UnitsInStock": 13,
+        "Discontinued": false
+    }, {
+        "ProductID": 4,
+        "ProductName": "Chef Anton\u0027s Cajun Seasoning",
+        "UnitPrice": 22,
+        "UnitsInStock": 53,
+        "Discontinued": false
+    }, {
+        "ProductID": 5,
+        "ProductName": "Chef Anton\u0027s Gumbo Mix",
+        "UnitPrice": 21.35,
+        "UnitsInStock": 0,
+        "Discontinued": true
+    }, {
+        "ProductID": 6,
+        "ProductName": "Grandma\u0027s Boysenberry Spread",
+        "UnitPrice": 25,
+        "UnitsInStock": 120,
+        "Discontinued": false
+    }, {
+        "ProductID": 7,
+        "ProductName": "Uncle Bob\u0027s Organic Dried Pears",
+        "UnitPrice": 30,
+        "UnitsInStock": 15,
+        "Discontinued": false
+    }, {
+        "ProductID": 8,
+        "ProductName": "Northwoods Cranberry Sauce",
+        "UnitPrice": 40,
+        "UnitsInStock": 6,
+        "Discontinued": false
+    }, {
+        "ProductID": 9,
+        "ProductName": "Mishi Kobe Niku",
+        "UnitPrice": 97,
+        "UnitsInStock": 29,
+        "Discontinued": true
+    }, {
+        "ProductID": 10,
+        "ProductName": "Ikura",
+        "UnitPrice": 31,
+        "UnitsInStock": 31,
+        "Discontinued": false
+    }, {
+        "ProductID": 11,
+        "ProductName": "Queso Cabrales",
+        "UnitPrice": 21,
+        "UnitsInStock": 22,
+        "Discontinued": false
+    }, {
+        "ProductID": 12,
+        "ProductName": "Queso Manchego La Pastora",
+        "UnitPrice": 38,
+        "UnitsInStock": 86,
+        "Discontinued": false
+    }, {
+        "ProductID": 13,
+        "ProductName": "Konbu",
+        "UnitPrice": 6,
+        "UnitsInStock": 24,
+        "Discontinued": false
+    }, {
+        "ProductID": 14,
+        "ProductName": "Tofu",
+        "UnitPrice": 23.25,
+        "UnitsInStock": 35,
+        "Discontinued": false
+    }, {
+        "ProductID": 15,
+        "ProductName": "Genen Shouyu",
+        "UnitPrice": 15.5,
+        "UnitsInStock": 39,
+        "Discontinued": false
+    }, {
+        "ProductID": 16,
+        "ProductName": "Pavlova",
+        "UnitPrice": 17.45,
+        "UnitsInStock": 29,
+        "Discontinued": false
+    }
+    ];
+</script>
+
 </body>
 {% endblock %}
 

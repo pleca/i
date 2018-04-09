@@ -1,20 +1,20 @@
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, input, p, th, td, button, span {
-    margin: 0;
-    padding: 0;
-    border: 0;
+    margin:0;
+    padding:0;
+    border:0;
 }
 
 a {
-    text-decoration: none;
-    color: #000;
+    text-decoration:none;
+    color:#000;
 }
 
-ul, ol {
-    list-style: none;
+ul, ol{
+    list-style:none;
 }
 
-img {
-    border: 0;
+img{
+    border:0;
 }
 
 html {
@@ -33,37 +33,37 @@ html .k-listview {
     border: 0;
 }
 
-#wrapper {
+#wrapper{
     margin: 60px auto 0;
     width: 1000px;
     height: auto;
 }
 
 /*header section*/
-h1.logo {
+h1.logo{
     display: inline-block;
     width: 140px;
     height: 32px;
     background: url('images/logo.png') 0 0 no-repeat;
 }
 
-h1 a {
+h1 a{
     display: inline-block;
     width: 100%;
     height: 100%;
 }
 
-#header {
+#header{
     padding-bottom: 40px;
     border-bottom: 1px solid #535353;
 }
 
-#logo-pic {
-    float: left;
+#logo-pic{
+    float:left;
 }
 
 #cart-info {
-    float: right;
+    float:right;
     height: 28px;
     line-height: 28px;
     vertical-align: middle;
@@ -75,42 +75,42 @@ h1 a {
     letter-spacing: 1px;
 }
 
-#cart-info > span {
+#cart-info > span{
     display: inline-block;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(214, 0, 65, 1)), color-stop(100%, rgba(169, 0, 64, 1)));
-    background: -webkit-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -o-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: linear-gradient(to bottom, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
+    background: -webkit-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -o-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: linear-gradient(to bottom,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
     position: relative;
     padding: 0 26px 0 28px;
 }
 
-#cart-info > span:hover {
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(169, 0, 64, 1)), color-stop(100%, rgba(214, 0, 65, 1)));
-    background: -webkit-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -o-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: linear-gradient(to bottom, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+#cart-info > span:hover{
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(169,0,64,1) 0%, rgba(214,0,65,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,0,64,1)), color-stop(100%,rgba(214,0,65,1)));
+    background: -webkit-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -o-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: linear-gradient(to bottom,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
 }
 
-#cart-info span {
+#cart-info span{
     color: #fff;
 }
 
-#cart-info span span {
+#cart-info span span{
     line-height: 26px;
     font-size: 14px;
 }
 
 #cart-info span:before {
-    content: "";
+    content:"";
     display: block;
     width: 0;
     height: 0;
@@ -124,7 +124,7 @@ h1 a {
 }
 
 #cart-info span:after {
-    content: "";
+    content:"";
     display: block;
     width: 8px;
     height: 6px;
@@ -133,9 +133,9 @@ h1 a {
     top: 12px;
 }
 
-#arrow {
+#arrow{
     position: absolute;
-    content: " ";
+    content:" ";
     display: block;
     background: url('images/arrow-reverse.png') no-repeat right top;
     top: 8px;
@@ -144,7 +144,7 @@ h1 a {
     height: 20px;
 }
 
-#shop-list {
+#shop-list{
     background: #000000;
     width: 800px;
     float: left;
@@ -152,7 +152,7 @@ h1 a {
     font-size: 10px;
 }
 
-#shop-list li {
+#shop-list li{
     float: left;
     width: 100px;
 }
@@ -169,14 +169,14 @@ h1 a {
     height: 0px;
 }
 
-.smallImage {
+.smallImage{
     background: url('images/smallImage.jpg') no-repeat;
     position: relative;
     width: 100px;
     height: 100px;
 }
 
-.selected-image-price {
+.selected-image-price{
     color: #ffffff;
     font-size: 11px;
     line-height: 20px;
@@ -184,18 +184,18 @@ h1 a {
 
 }
 
-.button {
+.button{
     color: #ffffff;
     text-transform: uppercase;
 }
 
-h3 {
+h3{
     color: #bababa;
     font-size: 10px;
     text-transform: uppercase;
 }
 
-#shopping-cart {
+#shopping-cart{
     position: relative;
     text-align: right;
     float: right;
@@ -204,21 +204,22 @@ h3 {
     height: 100%;
 }
 
-#shopping-cart h3, #shopping-cart p {
+#shopping-cart h3, #shopping-cart p{
     text-align: left;
 }
 
-#shopping-cart h3 {
+#shopping-cart h3{
     padding-top: 20px;
     padding-left: 14px;
     margin-bottom: 7px;
 }
 
-#shopping-cart div {
+
+#shopping-cart div{
     display: inline-block;
 }
 
-#empty-cart {
+#empty-cart{
     display: inline-block;
     width: 89px;
     height: 28px;
@@ -231,20 +232,20 @@ h3 {
     letter-spacing: 1px;
 }
 
-#empty-cart:hover {
+#empty-cart:hover{
     text-decoration: underline;
 }
 
-#checkout {
+#checkout{
     display: inline-block;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(214, 0, 65, 1)), color-stop(100%, rgba(169, 0, 64, 1)));
-    background: -webkit-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -o-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: linear-gradient(to bottom, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
+    background: -webkit-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -o-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: linear-gradient(to bottom,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
     position: relative;
     padding: 0 18px 0 10px;
     color: #ffffff;
@@ -259,7 +260,7 @@ h3 {
 }
 
 #checkout:before {
-    content: "";
+    content:"";
     display: block;
     width: 0;
     height: 0;
@@ -272,16 +273,16 @@ h3 {
     border-left: 14px solid #1f1f1f;
 }
 
-#checkout:hover {
+#checkout:hover{
 
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(169, 0, 64, 1)), color-stop(100%, rgba(214, 0, 65, 1)));
-    background: -webkit-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -o-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: linear-gradient(to bottom, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(169,0,64,1) 0%, rgba(214,0,65,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,0,64,1)), color-stop(100%,rgba(214,0,65,1)));
+    background: -webkit-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -o-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: linear-gradient(to bottom,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
     color: #ffffff;
 }
 
@@ -308,11 +309,11 @@ h3 {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0,0,0,0);
 }
 
 .view-selected-items:hover:after {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color:  rgba(0,0,0,0.75);
     background-image: url('images/remove-icon.png');
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -327,7 +328,7 @@ h3 {
     width: 200px;
     margin-bottom: 20px;
     padding-bottom: 62px;
-    background: #fff url('images/item-separator.png') repeat-y right top;
+    background: #f5f5f5 url('images/item-separator.png') repeat-y right top;
     text-align: center;
 }
 
@@ -344,7 +345,7 @@ h3 {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0,0,0,0);
 }
 
 .view-details:hover strong {
@@ -352,7 +353,7 @@ h3 {
 }
 
 .view-details:hover:after {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color:  rgba(0,0,0,0.75);
     background-image: url('images/arrow-right.png');
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -398,8 +399,8 @@ h3 {
     border-top: 1px dotted #a6a6a6;
 }
 
-.add-to-cart:before {
-    content: "+ ";
+.add-to-cart:before{
+    content:"+ ";
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -410,7 +411,6 @@ h3 {
     font-weight: bold;
     vertical-align: middle;
 }
-
 .add-to-cart:hover {
     background-color: #d60041;
     color: #fff;
@@ -423,7 +423,7 @@ h3 {
     -o-transition: all .3s;
 }
 
-.total-price {
+.total-price{
     font-size: 30px;
     color: #ffffff;
     margin-bottom: 9px;
@@ -434,7 +434,7 @@ h3 {
     overflow: hidden;
 }
 
-.total-price span {
+.total-price span{
     font-size: 14px;
     vertical-align: text-top;
 }
@@ -456,12 +456,12 @@ h3 {
     padding-right: 6px;
 }
 
-#details {
+#details{
     background-color: #fff;
     height: 200px;
 }
 
-#detail-info {
+#detail-info{
     width: 600px;
     height: 200px;
     display: inline-block;
@@ -475,11 +475,11 @@ h3 {
     background: #000 url('images/nav-prev.png') no-repeat center;
 }
 
-#navigate-prev:hover {
+#navigate-prev:hover{
     background: #d60041 url('images/nav-prev.png') no-repeat center;
 }
 
-#description {
+#description{
     display: inline-block;
     position: relative;
     height: 200px;
@@ -487,12 +487,12 @@ h3 {
     color: #2e2e2e;
 }
 
-.main-image {
+.main-image{
     width: 200px;
     height: 200px;
 }
 
-#description h1 {
+#description h1{
     padding-top: 30px;
     padding-left: 30px;
     padding-bottom: 10px;
@@ -502,14 +502,14 @@ h3 {
     display: inline-block;
 }
 
-#description p {
+#description p{
     max-width: 300px;
     padding-left: 30px;
     padding-bottom: 18px;
     font-size: 12px;
 }
 
-#description p input {
+#description p input{
     border: 1px solid #dadada;
     width: 50px;
     padding-left: 9px;
@@ -523,8 +523,7 @@ p#price-quantity {
     font-size: 30px;
     color: #787878;
 }
-
-#details-total {
+#details-total{
     position: absolute;
     bottom: 0;
     height: 30px;
@@ -544,16 +543,16 @@ p#details-total-price {
     text-transform: uppercase;
 }
 
-p#details-total-price em {
+p#details-total-price em{
     color: #787878;
     font-size: 10px;
-    font-style: normal;
-    font-weight: normal;
+    font-style:normal;
+    font-weight:normal;
     display: inline-block;
     padding-right: 13px;
 }
 
-p#details-total-price span {
+p#details-total-price span{
     font-size: 14px;
     display: inline-block;
     vertical-align: text-top;
@@ -569,14 +568,14 @@ p#details-total-price span {
     font-size: 12px;
     text-align: center;
     text-transform: uppercase;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(214, 0, 65, 1)), color-stop(100%, rgba(169, 0, 64, 1)));
-    background: -webkit-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -o-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: linear-gradient(to bottom, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
+    background: -webkit-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -o-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: linear-gradient(to bottom,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
 }
 
 .buy span {
@@ -585,7 +584,7 @@ p#details-total-price span {
     vertical-align: middle;
 }
 
-.buy:before {
+.buy:before{
     content: "+ ";
     font-size: 14px;
     font-family: Arial, Helvetica, sans-serif;
@@ -594,14 +593,14 @@ p#details-total-price span {
 
 .buy:hover {
     color: #fff;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(169, 0, 64, 1)), color-stop(100%, rgba(214, 0, 65, 1)));
-    background: -webkit-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -o-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: linear-gradient(to bottom, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(169,0,64,1) 0%, rgba(214,0,65,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,0,64,1)), color-stop(100%,rgba(214,0,65,1)));
+    background: -webkit-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -o-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: linear-gradient(to bottom,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
 }
 
 .buy, .buy:hover {
@@ -611,21 +610,22 @@ p#details-total-price span {
     -o-transition: all .3s;
 }
 
-#nutrition-info {
-    display: inline-block;
+#nutrition-info{
+    display:inline-block;
     width: 200px;
     height: 200px;
     font-size: 13px;
     vertical-align: top;
 }
 
-#nutrition-info h2 {
+
+#nutrition-info h2{
     color: #3c3c3c;
     padding: 30px 20px 20px;
     font-size: 13px;
 }
 
-#nutrition-info dl dt {
+#nutrition-info dl dt{
     color: #787878;
     padding-left: 20px;
     float: left;
@@ -635,7 +635,7 @@ p#details-total-price span {
     line-height: 16px;
 }
 
-#nutrition-info dl dd {
+#nutrition-info dl dd{
     color: #2e2e2e;
     font-size: 12px;
     float: left;
@@ -652,39 +652,42 @@ p#details-total-price span {
     background: #000 url('images/nav-next.png') no-repeat center;
 }
 
-#navigate-next:hover {
+#navigate-next:hover{
     background: #d60041 url('images/nav-next.png') no-repeat center;
 }
 
-#details-top-image {
+
+#details-top-image{
     background: url('images/sushi-preview.png') no-repeat top left;
     height: 200px;
 }
 
-#checkout-top-image {
+
+#checkout-top-image{
     background: url('images/sushi-preview.png') no-repeat top left;
     height: 50px;
 }
 
-#checkout-bottom-image {
+#checkout-bottom-image{
     background: url('images/sushi-preview.png') no-repeat bottom left;
     height: 53px;
     margin-bottom: 20px;
 }
 
-#details-bottom-image {
+#details-bottom-image{
     background: url('images/sushi-preview.png') no-repeat bottom left;
     height: 200px;
     margin-bottom: 20px;
 }
 
-#details-checkout {
+#details-checkout{
     background: #fff;
     text-align: right;
     position: relative;
 }
 
-#details-checkout h1 {
+#details-checkout h1
+{
     font-size: 36px;
     color: #2e2e2e;
     padding-top: 50px;
@@ -693,7 +696,7 @@ p#details-total-price span {
     text-align: left;
 }
 
-#details-checkout table {
+#details-checkout table{
     text-align: left;
 }
 
@@ -702,34 +705,34 @@ p#details-total-price span {
     padding-right: 40px;
 }
 
-table {
+table{
     width: 100%;
     padding-left: 100px;
     padding-right: 100px;
     border-spacing: 0;
 }
 
-thead {
+thead{
     font-size: 13px;
     color: #4a4a4a;
     text-transform: uppercase;
 }
 
-thead th {
+thead th{
     font-size: 13px;
     border-bottom: 1px solid #dadada;
 }
 
-table tbody tr td {
+table tbody tr td{
     border-bottom: 1px solid #dadada;
     padding: 0;
 }
 
-table tbody tr {
+table tbody tr{
     padding: 0;
 }
 
-table thead th:first-child {
+table thead th:first-child{
     text-align: left;
     color: #4a4a4a;
     font-size: 13px;
@@ -744,7 +747,7 @@ table thead th:first-child + th + th {
     text-align: right;
 }
 
-table tbody input {
+table tbody input{
     width: 70px;
     border: 1px solid #dadada;
     font-size: 17px;
@@ -762,7 +765,7 @@ table tbody td:first-child + td {
     width: 70px;
 }
 
-table tbody td img {
+table tbody td img{
     display: inline-block;
 }
 
@@ -779,11 +782,11 @@ table tbody td:first-child + td + td {
     width: 200px;
 }
 
-table tbody td:first-child + td + td p {
+table tbody td:first-child + td + td p{
 
 }
 
-.table-price {
+.table-price{
     font-size: 21px;
     color: #2e2e2e;
     padding-left: 20px;
@@ -792,14 +795,14 @@ table tbody td:first-child + td + td p {
     text-transform: uppercase;
 }
 
-.table-price span {
+.table-price span{
     font-size: 10px;
     display: inline-block;
     vertical-align: text-top;
     padding-right: 3px;
 }
 
-#total-checkout {
+#total-checkout{
     font-size: 36px;
     color: #2e2e2e;
     padding-right: 100px;
@@ -810,16 +813,16 @@ table tbody td:first-child + td + td p {
 
 }
 
-#total-checkout span {
-    display: inline-block;
+#total-checkout span{
+    display:inline-block;
     color: #2e2e2e;
 }
 
-#total-checkout em {
+#total-checkout em{
     color: #787878;
     font-size: 10px;
-    font-style: normal;
-    font-weight: normal;
+    font-style:normal;
+    font-weight:normal;
     display: inline-block;
     padding-right: 13px;
 }
@@ -840,7 +843,7 @@ table tbody td:first-child + td + td p {
 }
 
 .cancel-order:hover {
-    text-decoration: underline;
+    text-decoration:underline;
     color: #d60041;
 }
 
@@ -851,7 +854,7 @@ table tbody td:first-child + td + td p {
     -o-transition: all .3s;
 }
 
-.close {
+.close{
     position: absolute;
     content: " ";
     display: block;
@@ -862,9 +865,10 @@ table tbody td:first-child + td + td p {
     height: 38px;
 }
 
-.details-checkout p {
+.details-checkout p{
     float: right;
 }
+
 
 .order-now {
     height: 48px;
@@ -879,14 +883,14 @@ table tbody td:first-child + td + td p {
     vertical-align: middle;
     text-transform: uppercase;
     text-align: center;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(214, 0, 65, 1)), color-stop(100%, rgba(169, 0, 64, 1)));
-    background: -webkit-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -o-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    background: linear-gradient(to bottom, rgba(214, 0, 65, 1) 0%, rgba(169, 0, 64, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(214,0,65,1) 0%, rgba(169,0,64,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(214,0,65,1)), color-stop(100%,rgba(169,0,64,1)));
+    background: -webkit-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -o-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    background: linear-gradient(to bottom,  rgba(214,0,65,1) 0%,rgba(169,0,64,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
 }
 
 .order-now span {
@@ -894,17 +898,16 @@ table tbody td:first-child + td + td p {
     font-weight: bold;
     vertical-align: middle;
 }
-
 .order-now:hover {
     color: #fff;
-    background: rgb(214, 0, 65);
-    background: -moz-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(169, 0, 64, 1)), color-stop(100%, rgba(214, 0, 65, 1)));
-    background: -webkit-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -o-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: -ms-linear-gradient(top, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    background: linear-gradient(to bottom, rgba(169, 0, 64, 1) 0%, rgba(214, 0, 65, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d60041', endColorstr='#a90040', GradientType=0);
+    background: rgb(214,0,65);
+    background: -moz-linear-gradient(top,  rgba(169,0,64,1) 0%, rgba(214,0,65,1) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(169,0,64,1)), color-stop(100%,rgba(214,0,65,1)));
+    background: -webkit-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -o-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: -ms-linear-gradient(top,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    background: linear-gradient(to bottom,  rgba(169,0,64,1) 0%,rgba(214,0,65,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d60041', endColorstr='#a90040',GradientType=0 );
 }
 
 .order-now, .order-now:hover {
@@ -914,20 +917,21 @@ table tbody td:first-child + td + td p {
     -o-transition: all .3s;
 }
 
+
 /*footer section*/
-#footer {
+#footer{
     position: relative;
     border-top: 1px solid #535353;
     font-size: 12px;
     padding-bottom: 60px;
 }
 
-#copyright {
+#copyright{
     float: left;
     color: #ffffff;
 }
 
-#footer span {
+#footer span{
     padding-top: 40px;
 }
 
@@ -940,9 +944,9 @@ table tbody td:first-child + td + td p {
 #shopping-cart:after,
 #main-section:after,
 #footer:after,
-table tbody td:after {
-    content: "";
-    clear: both;
+table tbody td:after{
+    content:"";
+    clear:both;
     display: block;
 }
 

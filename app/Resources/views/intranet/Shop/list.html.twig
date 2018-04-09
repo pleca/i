@@ -65,51 +65,84 @@
 {#<script src="<?php adres_strony(); ?>biblioteki/telerik_2018.1.117/js/cultures/kendo.culture.pl-PL.js"></script>#}
 <script src="{{ asset('telerik/js/cultures/kendo.culture.pl-PL.min.js') }}"></script>
 {#<link rel="stylesheet" href="<?php echo 'https://' . $_SERVER ['HTTP_HOST'] . '/moduly/e-task/css/style.css'; ?>" type="text/css" />#}
+<link rel="stylesheet" href="{{ asset('css/panel/sklep/MojeSushi.css') }}"/>
 <link rel="stylesheet" href="{{ asset('css/panel/sklep/MojeSklep.css') }}"/>
+<script src="{{ asset('js/sklep.js') }}"></script>
 
 
-<div class="container-fluid padding_r_0 padding_l_0 sklepModul">
-    <div class="col-md-12 gdzieJestem "><a href="https://umowy.votum-sa.pl/strona_glowna"><p>Strona główna</p></a>
-    </div>
-    <div class="col-md-2 sklepModulMenu">
-        <div class="panel panel-default ">
-            <div class="panel-heading">MENU</div>
-            <div class="panel-body panel_body_menu">
-                <button id="zakladka_lista_produktow" type="button" class="btn btn-default">Lista produktów</button>
-            </div>
+<script type="text/x-kendo-template" id="item">
+    <li class="products">
+        <a class="view-details" href="">
+            <img class="main-image"
+                 src="https://upload.wikimedia.org/wikipedia/commons/2/27/Square_200x200.svg"
+                 alt="#: ProductName#" title="#: ProductName #"
+            />
+            <strong>#: ProductName #</strong>
+            <span class="price"><span>$</span><span>#: UnitPrice #</span></span>
+        </a>
+        <button class="add-to-cart" data-bind="click: addToCart">Add to cart</button>
+    </li>
+</script>
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <a href="https://umowy.votum-sa.pl/strona_glowna">
+                <p>Strona główna</p>
+            </a>
         </div>
     </div>
-    <div class="col-md-10 sklepModulZawartosc padding_l_0 padding_r_0">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="dodajProduktNowy margin_b_10 padding_0">
-                        <div class="col-md-9">
-                            <div class="panel panel-default add-product-button">
-                                <div class="panel_naglowek"><i class="float_r fa fa-plus dodaj_produkt"
-                                                               aria-hidden="true"></i>
-                                    <div class="clear_b"></div>
+    <div class="row">
+        <div class="col-md-2">
+            <!--        <div class="panel panel-default">-->
+            <!--            <div class="panel-heading">-->
+            MENU
+            <!--            </div>-->
+            <!--            <div class="panel-body panel_body_menu">-->
+            <!--                TO POWODUJE ERROR: "https://umowy.votum-sa.pl/moduly/sklep2/ajax/widoki/widok_undefined 404 (Not Found)"-->
+            <!--                <button class="btn btn-default">Lista produktów</button>-->
+            <!--            </div>-->
+            <!--        </div>-->
+        </div>
+        <div class="col-md-10">
+            <div class="row">
+                <div class="col-md-12 1">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-9 2">
+                                    <div class="dodajProduktNowy margin_b_10 padding_0">
+                                        <div class="panel panel-default add-product-button">
+                                            <div class="panel_naglowek"><i class="float_r fa fa-plus dodaj_produkt"
+                                                                           aria-hidden="true"></i>
+                                                <div class="clear_b"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 3">
+                                    <a id="cart-info" href="#">Koszyk<span><span
+                                                    data-bind="text: cart.contentsCount"></span>0 produktów</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <a id="cart-info" href="#">Koszyk<span><span data-bind="text: cart.contentsCount"></span>0 produktów</span></a>
-                        </div>
-                    </div>
-                    <div class="clear_b"></div>
-                    <div class="col-md-12">
-                        <div class="panel panel-default">
-                            {# LISTA PRODUKTÓW I KOSZYK #}
-                            <div class="layout-products">
-                                <p data-bind="visible: cart.cleared"> Dziękujemy za zakupy!</p>
-                                <!--MIEJSCE DLA PRODUKTÓW W KOSZYKU I ASORTYMENTU-->
-                                <div id="main-section">
-                                    <!--MIEJSCE DLA PRODUKTÓW DODANYCH DO KOSZYKA-->
-                                    <section id="pre-content"></section>
-                                    <!--MIEJSCE DLA ASORTYMENTU-->
-                                    <section id="content">
-                                        <ul id="main"></ul>
-                                    </section>
+                        <div class="clear_b"></div>
+                        <div class="col-md-12 4">
+                            <div class="panel panel-default">
+                                <!--LISTA PRODUKTÓW I KOSZYK-->
+                                <div class="layout-products">
+                                    <p data-bind="visible: cart.cleared"> Dziękujemy za zakupy!</p>
+                                    <!--MIEJSCE DLA PRODUKTÓW W KOSZYKU I ASORTYMENTU-->
+                                    <div id="main-section">
+                                        <!--MIEJSCE DLA PRODUKTÓW DODANYCH DO KOSZYKA-->
+                                        <section id="pre-content"></section>
+                                        <!--MIEJSCE DLA ASORTYMENTU-->
+                                        <section id="content">
+                                            <ul id="main"></ul>
+                                        </section>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -121,137 +154,6 @@
 </div>
 <div class="clear_b"></div>
 
-<script>
-    $(document).ready(function () {
-        var products;
-        // models / data
-        //ODBIERA DANE JSON Z PLIKU menu.json
-        var items = new kendo.data.DataSource({
-            data: products
-            // schema:
-            //     {
-            //         model: {}
-            //     },
-            // transport:
-            //     {
-            //         read:
-            //             {
-            //                 url:  "/data/menu.json",
-            //                 dataType: "json"
-            //             }
-            //     }
-        });
-
-        $("#content").kendoListView({
-            dataSource: items,
-            template: kendo.template($("#template").html())
-        });
-
-
-    });
-
-
-
-
-    products = [{
-        "ProductID": 1,
-        "ProductName": "Chai",
-        "UnitPrice": 18,
-        "UnitsInStock": 39,
-        "Discontinued": false
-    }, {
-        "ProductID": 2,
-        "ProductName": "Chang",
-        "UnitPrice": 19,
-        "UnitsInStock": 17,
-        "Discontinued": false
-    }, {
-        "ProductID": 3,
-        "ProductName": "Aniseed Syrup",
-        "UnitPrice": 10,
-        "UnitsInStock": 13,
-        "Discontinued": false
-    }, {
-        "ProductID": 4,
-        "ProductName": "Chef Anton\u0027s Cajun Seasoning",
-        "UnitPrice": 22,
-        "UnitsInStock": 53,
-        "Discontinued": false
-    }, {
-        "ProductID": 5,
-        "ProductName": "Chef Anton\u0027s Gumbo Mix",
-        "UnitPrice": 21.35,
-        "UnitsInStock": 0,
-        "Discontinued": true
-    }, {
-        "ProductID": 6,
-        "ProductName": "Grandma\u0027s Boysenberry Spread",
-        "UnitPrice": 25,
-        "UnitsInStock": 120,
-        "Discontinued": false
-    }, {
-        "ProductID": 7,
-        "ProductName": "Uncle Bob\u0027s Organic Dried Pears",
-        "UnitPrice": 30,
-        "UnitsInStock": 15,
-        "Discontinued": false
-    }, {
-        "ProductID": 8,
-        "ProductName": "Northwoods Cranberry Sauce",
-        "UnitPrice": 40,
-        "UnitsInStock": 6,
-        "Discontinued": false
-    }, {
-        "ProductID": 9,
-        "ProductName": "Mishi Kobe Niku",
-        "UnitPrice": 97,
-        "UnitsInStock": 29,
-        "Discontinued": true
-    }, {
-        "ProductID": 10,
-        "ProductName": "Ikura",
-        "UnitPrice": 31,
-        "UnitsInStock": 31,
-        "Discontinued": false
-    }, {
-        "ProductID": 11,
-        "ProductName": "Queso Cabrales",
-        "UnitPrice": 21,
-        "UnitsInStock": 22,
-        "Discontinued": false
-    }, {
-        "ProductID": 12,
-        "ProductName": "Queso Manchego La Pastora",
-        "UnitPrice": 38,
-        "UnitsInStock": 86,
-        "Discontinued": false
-    }, {
-        "ProductID": 13,
-        "ProductName": "Konbu",
-        "UnitPrice": 6,
-        "UnitsInStock": 24,
-        "Discontinued": false
-    }, {
-        "ProductID": 14,
-        "ProductName": "Tofu",
-        "UnitPrice": 23.25,
-        "UnitsInStock": 35,
-        "Discontinued": false
-    }, {
-        "ProductID": 15,
-        "ProductName": "Genen Shouyu",
-        "UnitPrice": 15.5,
-        "UnitsInStock": 39,
-        "Discontinued": false
-    }, {
-        "ProductID": 16,
-        "ProductName": "Pavlova",
-        "UnitPrice": 17.45,
-        "UnitsInStock": 29,
-        "Discontinued": false
-    }
-    ];
-</script>
 
 </body>
 {% endblock %}
